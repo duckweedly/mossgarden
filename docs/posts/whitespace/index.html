@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="day">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>关于"留白"，我误解了很多年 — 苔庭</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="stylesheet">
+<style>
+  :root[data-theme="day"]{
+    --bg1:#f4ecd8; --bg2:#e8dcc0; --bg3:#dcd0a8;
+    --paper:#fbf6e9; --paper-edge:#e3d7b8;
+    --ink:#4a3f2f; --ink-soft:#7a6c54; --ink-faint:#a89b7e;
+    --moss:#7a8c4a; --moss-deep:#5d6e34; --leaf:#9cb05c;
+    --bloom:#d98c6a; --gold:#d4a943;
+    --line:rgba(93,110,52,.18); --shadow:rgba(74,63,47,.12);
+    --glow:rgba(212,169,67,.0); --firefly:rgba(212,169,67,0);
+    --sky-top:#dcecc8; --sky-bot:#f4ecd8;
+  }
+  :root[data-theme="night"]{
+    --bg1:#1a2118; --bg2:#141a13; --bg3:#0e130d;
+    --paper:#202a1d; --paper-edge:#2c3826;
+    --ink:#e8e4d4; --ink-soft:#b0ac98; --ink-faint:#6e6c5a;
+    --moss:#8fa85a; --moss-deep:#a8c068; --leaf:#7a9048;
+    --bloom:#e8a07a; --gold:#f0c95a;
+    --line:rgba(143,168,90,.16); --shadow:rgba(0,0,0,.4);
+    --glow:rgba(240,201,90,.5); --firefly:rgba(240,201,90,.9);
+    --sky-top:#0e1810; --sky-bot:#1a2118;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Gowun Batang',serif;
+    color:var(--ink);
+    background:linear-gradient(180deg,var(--sky-top),var(--bg1) 45%,var(--bg2));
+    background-attachment:fixed;
+    min-height:100vh;overflow-x:hidden;
+    transition:background 1.1s cubic-bezier(.4,0,.2,1),color 1.1s ease;
+    position:relative;
+  }
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+    mix-blend-mode:multiply;transition:opacity 1.1s}
+  :root[data-theme="night"] body::before{mix-blend-mode:screen;opacity:.06}
+
+  .fireflies{position:fixed;inset:0;pointer-events:none;z-index:2;opacity:0;transition:opacity 1.4s ease}
+  :root[data-theme="night"] .fireflies{opacity:1}
+  .ff{position:absolute;width:5px;height:5px;border-radius:50%;background:var(--firefly);
+    box-shadow:0 0 8px 2px var(--glow);animation:drift linear infinite}
+  @keyframes drift{
+    0%{transform:translate(0,0);opacity:0}
+    10%{opacity:1}50%{opacity:.5}90%{opacity:1}
+    100%{transform:translate(var(--dx),var(--dy));opacity:0}}
+
+  .orb{position:fixed;top:8%;right:10%;width:90px;height:90px;border-radius:50%;z-index:0;
+    transition:all 1.2s cubic-bezier(.4,0,.2,1)}
+  :root[data-theme="day"] .orb{background:radial-gradient(circle at 35% 35%,#ffe9a8,var(--gold));
+    box-shadow:0 0 60px 20px rgba(212,169,67,.35)}
+  :root[data-theme="night"] .orb{background:radial-gradient(circle at 35% 35%,#fdfbe8,#d8d4b0);
+    box-shadow:0 0 50px 14px rgba(240,236,200,.25);top:9%;right:12%}
+
+  .wrap{max-width:920px;margin:0 auto;padding:0 28px;position:relative;z-index:3}
+
+  nav{display:flex;justify-content:space-between;align-items:center;padding:32px 0 0}
+  .logo{display:flex;align-items:center;gap:11px;font-family:'Fraunces';font-weight:600;
+    font-size:21px;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
+  .logo .sprout{width:30px;height:30px;display:grid;place-items:center}
+  .logo .sprout svg{width:30px;height:30px;overflow:visible}
+  .logo .sprout .stem{stroke:var(--moss-deep);stroke-width:2;fill:none;stroke-linecap:round}
+  .logo .sprout .lf{fill:var(--leaf);transform-origin:center bottom;animation:breathe 4s ease-in-out infinite}
+  .logo .sprout .lf2{animation-delay:.6s}
+  @keyframes breathe{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.08) rotate(2deg)}}
+  .nav-r{display:flex;align-items:center;gap:26px}
+  .nav-r a{font-family:'Fraunces';font-size:15px;color:var(--ink-soft);text-decoration:none;
+    position:relative;transition:color .3s}
+  .nav-r a::after{content:"";position:absolute;left:0;bottom:-3px;width:0;height:1.5px;
+    background:var(--moss);transition:width .35s cubic-bezier(.4,0,.2,1)}
+  .nav-r a:hover{color:var(--ink)}.nav-r a:hover::after{width:100%}
+
+  .toggle{width:62px;height:30px;border-radius:20px;border:1.5px solid var(--line);
+    background:var(--paper);cursor:pointer;position:relative;transition:all .5s;flex-shrink:0}
+  .toggle .knob{position:absolute;top:2px;left:2px;width:24px;height:24px;border-radius:50%;
+    transition:all .5s cubic-bezier(.34,1.4,.6,1);display:grid;place-items:center}
+  :root[data-theme="day"] .toggle .knob{background:var(--gold);transform:translateX(0)}
+  :root[data-theme="night"] .toggle .knob{background:#d8d4b0;transform:translateX(32px)}
+  .toggle .knob svg{width:14px;height:14px}
+
+  /* ===== ARTICLE ===== */
+  .article-header{padding:64px 0 36px}
+  .back{font-family:'Fraunces';font-size:14px;color:var(--ink-soft);text-decoration:none;
+    display:inline-flex;align-items:center;gap:7px;margin-bottom:36px;
+    transition:color .3s;position:relative}
+  .back::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:1px;
+    background:var(--moss);transition:width .3s}
+  .back:hover{color:var(--ink)}.back:hover::after{width:100%}
+  .article-tag{font-family:'Fraunces';font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--moss);margin-bottom:14px}
+  .article-header h1{font-family:'Fraunces';font-weight:300;
+    font-size:clamp(28px,4.5vw,52px);line-height:1.18;letter-spacing:-.025em;
+    color:var(--ink);font-variation-settings:"opsz" 144;margin-bottom:16px}
+  .article-date{font-family:'Fraunces';font-size:13px;color:var(--ink-faint);letter-spacing:.04em}
+
+  .article-body{max-width:64ch;padding:40px 0 70px}
+  .article-body p{font-size:17px;line-height:1.95;color:var(--ink-soft);margin-bottom:1.7em}
+  .article-body h2{font-family:'Fraunces';font-weight:400;font-size:23px;color:var(--ink);
+    margin:2.6em 0 .9em;letter-spacing:-.015em}
+  .article-body h3{font-family:'Fraunces';font-weight:400;font-size:18px;color:var(--ink-soft);
+    margin:2em 0 .7em;letter-spacing:-.01em}
+  .article-body pre{background:var(--paper);border:1px solid var(--paper-edge);
+    border-radius:12px;padding:22px 24px;overflow-x:auto;margin:2em 0;
+    font-size:13.5px;line-height:1.75;box-shadow:0 2px 10px var(--shadow)}
+  .article-body code{font-family:'JetBrains Mono','Fira Code','Courier New',monospace;
+    font-size:.875em;background:var(--bg2);padding:2px 7px;border-radius:5px;color:var(--moss-deep)}
+  .article-body pre code{background:none;padding:0;color:var(--ink-soft);font-size:1em}
+  .article-body blockquote{border-left:3px solid var(--moss);padding-left:22px;
+    margin:2em 0;color:var(--ink-faint);font-style:italic}
+  .article-body blockquote p{margin-bottom:.5em}
+  .article-body a{color:var(--moss-deep);text-decoration:none;border-bottom:1px solid var(--line);
+    transition:border-color .3s}
+  .article-body a:hover{border-color:var(--moss-deep)}
+
+  .post-nav{display:flex;justify-content:space-between;align-items:flex-start;
+    padding:36px 0 80px;border-top:1px solid var(--line);gap:24px}
+  .post-nav a{font-family:'Fraunces';font-size:14px;color:var(--ink-soft);text-decoration:none;
+    max-width:46%;transition:color .3s;line-height:1.5}
+  .post-nav a:hover{color:var(--ink)}
+  .nav-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--moss);margin-bottom:7px}
+  .next-nav{text-align:right;margin-left:auto}
+
+  footer{padding:50px 0 44px;border-top:1px solid var(--line);text-align:center}
+  footer .fq{font-family:'Fraunces';font-style:italic;font-size:clamp(18px,2.8vw,26px);font-weight:300;
+    color:var(--ink);line-height:1.4;max-width:460px;margin:0 auto 24px}
+  .socials{display:flex;justify-content:center;gap:13px;margin-bottom:22px}
+  .socials a{width:46px;height:46px;border-radius:50%;border:1.5px solid var(--line);
+    display:grid;place-items:center;transition:all .4s cubic-bezier(.34,1.3,.6,1);background:var(--paper)}
+  .socials a svg{width:19px;height:19px;fill:var(--ink-soft);transition:fill .35s}
+  .socials a:hover{border-color:var(--moss);transform:translateY(-4px) rotate(-5deg)}
+  .socials a:hover svg{fill:var(--moss-deep)}
+  footer .cp{font-family:'Fraunces';font-size:13px;color:var(--ink-faint);letter-spacing:.04em}
+
+  ::selection{background:var(--leaf);color:var(--paper)}
+  @media(max-width:600px){
+    .nav-r{gap:16px}
+    .post-nav{flex-direction:column;gap:20px}
+    .post-nav a{max-width:100%}
+    .next-nav{margin-left:0;text-align:left}
+  }
+</style>
+</head>
+<body>
+<div class="orb"></div>
+<div class="fireflies" id="fireflies"></div>
+
+<div class="wrap">
+  <nav>
+    <a href="../../" class="logo">
+      <span class="sprout">
+        <svg viewBox="0 0 30 30">
+          <path class="stem" d="M15 28 L15 14"/>
+          <path class="lf" d="M15 16 C9 15 6 10 6 7 C11 7 15 11 15 16Z"/>
+          <path class="lf lf2" d="M15 18 C21 17 24 13 24 10 C19 10 15 13 15 18Z"/>
+        </svg>
+      </span>
+      苔庭
+    </a>
+    <div class="nav-r">
+      <a href="../../#writing">文字</a>
+      <a href="../../#projects">造物</a>
+      <button class="toggle" id="toggle" aria-label="切换昼夜">
+        <span class="knob">
+          <svg id="knob-ic" viewBox="0 0 24 24"></svg>
+        </span>
+      </button>
+    </div>
+  </nav>
+
+  <article>
+    <header class="article-header">
+      <a href="../../" class="back">← 苔庭</a>
+      <div class="article-tag">生活</div>
+      <h1>关于"留白"，我误解了很多年</h1>
+      <div class="article-date">2024 年 04 月 09 日</div>
+    </header>
+
+    <div class="article-body">
+      <p>我第一次认真接触&quot;留白&quot;这个概念，是在学设计的时候。老师拿出一张名片，上面只有名字和一个电话，周围大片空白。&quot;这叫留白，记住了&quot;，然后讲下一个话题。</p>
+<p>我记住了。但我理解错了。</p>
+<p>那之后很长时间，我把留白等同于&quot;少放东西&quot;。一个版面如果空白够多，就说明有留白意识；如果放了很多元素，留白就不够。这是一种很好量化的错误理解——可以测量，可以执行，所以我一直没发现它不对。</p>
+<h2>那次让我困惑的版面</h2>
+<p>直到有一次我在一个页面上减少了大量内容，版面确实变空了，但感觉反而更拥挤了。怎么回事？</p>
+<p>我研究了很久，才意识到问题出在剩下的几个元素上——它们之间的距离没有被设计过，只是随便留着的。空间存在，但不是被放在那里的，它只是剩下来的。</p>
+<p>那种空，和留白不一样。</p>
+<h2>间隙，不是空余</h2>
+<p>日语里有个词「間」（Ma），读作&quot;ま&quot;，意思大概是&quot;间隙&quot;、&quot;余地&quot;、&quot;暂停&quot;。它描述的不是空间本身，而是两件事物之间那个有意识存在的距离。</p>
+<p>音乐里两个音符之间的沉默是 Ma；建筑里走廊转角前的停顿是 Ma；对话里那句话说完之后你没有立刻接的那一秒，也是 Ma。</p>
+<p>留白是 Ma。它是一种主动的设计决策，不是被动的空余。</p>
+<p>这个区别改变了我看东西的方式。一个&quot;空&quot;的版面，如果那个空是剩下的，不是设计的，就不是留白，只是空。反过来，一个元素很多的页面，如果每个元素之间的距离都是被仔细考虑过的，它一样有留白。</p>
+<h2>呼吸，不是空</h2>
+<p>我现在更喜欢管这叫&quot;呼吸&quot;。</p>
+<p>版面需要呼吸，段落需要呼吸，一段对话需要呼吸，一天的计划也需要呼吸。不是为了少，是为了让在场的东西真正被看见。</p>
+<p>一首歌里，沉默和声音一样是音乐；一篇文章里，段落之间的间距和文字本身一样在传达信息；一天里，那段什么都不做的时间和工作一样是生活的一部分。</p>
+<p>误解留白的那些年，我一直在想办法填满。后来才明白，填满和留白其实是同一件事的两面——你要选择放什么，也要选择不放什么，两者都需要决策。</p>
+
+    </div>
+
+    <nav class="post-nav">
+      
+      
+      <a href="../css-daynight/" class="next-nav">
+        <div class="nav-label">下一篇 →</div>
+        <div>用 60 行 CSS 实现昼夜呼吸</div>
+      </a>
+      
+    </nav>
+  </article>
+
+  <footer>
+    <p class="fq">慢工。</p>
+    <div class="socials">
+      <a href="https://github.com/duckweedly" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.5 11.5 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+      <a href="#" aria-label="RSS"><svg viewBox="0 0 24 24"><path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248C1.456 24 0 22.546 0 20.752c0-1.794 1.456-3.248 3.252-3.248 1.795.001 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.062 10.96 4.966 11.022 11.009h4.817c-.062-8.71-7.118-15.758-15.839-15.82zm0-3.368c10.58.046 19.152 8.594 19.183 19.188h4.817c-.03-13.231-10.755-23.954-24-24v4.812z"/></svg></a>
+    </div>
+    <p class="cp">© 2026 苔庭 Mossgarden</p>
+  </footer>
+</div>
+
+<script>
+  const root=document.documentElement;
+  const toggle=document.getElementById('toggle');
+  const knobIc=document.getElementById('knob-ic');
+  const sunPath='<circle cx="12" cy="12" r="5" fill="#4a3f2f"/><g stroke="#4a3f2f" stroke-width="2" stroke-linecap="round"><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></g>';
+  const moonPath='<path d="M21 12.8A9 9 0 1111.2 3 7 7 0 0021 12.8z" fill="#3a3a2a"/>';
+  function setTheme(t){
+    root.setAttribute('data-theme',t);
+    knobIc.innerHTML = t==='day' ? sunPath : moonPath;
+  }
+  setTheme('day');
+  toggle.addEventListener('click',()=>{
+    setTheme(root.getAttribute('data-theme')==='day'?'night':'day');
+  });
+
+  const ffBox=document.getElementById('fireflies');
+  for(let i=0;i<22;i++){
+    const f=document.createElement('div');f.className='ff';
+    f.style.left=(Math.random()*100)+'vw';
+    f.style.top=(Math.random()*100)+'vh';
+    f.style.setProperty('--dx',(Math.random()*200-100)+'px');
+    f.style.setProperty('--dy',(Math.random()*-180-40)+'px');
+    f.style.animationDuration=(8+Math.random()*10)+'s';
+    f.style.animationDelay=(Math.random()*8)+'s';
+    f.style.width=f.style.height=(3+Math.random()*4)+'px';
+    ffBox.appendChild(f);
+  }
+</script>
+</body>
+</html>

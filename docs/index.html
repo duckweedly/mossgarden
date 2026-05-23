@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="day">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>苔庭 · Mossgarden — 一座慢慢生长的数字花园</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="stylesheet">
+<style>
+  /* ============ THEME TOKENS ============ */
+  :root[data-theme="day"]{
+    --bg1:#f4ecd8; --bg2:#e8dcc0; --bg3:#dcd0a8;
+    --paper:#fbf6e9; --paper-edge:#e3d7b8;
+    --ink:#4a3f2f; --ink-soft:#7a6c54; --ink-faint:#a89b7e;
+    --moss:#7a8c4a; --moss-deep:#5d6e34; --leaf:#9cb05c;
+    --bloom:#d98c6a; --bloom-soft:#e8b39a; --gold:#d4a943;
+    --line:rgba(93,110,52,.18); --shadow:rgba(74,63,47,.12);
+    --glow:rgba(212,169,67,.0); --firefly:rgba(212,169,67,0);
+    --sky-top:#dcecc8; --sky-bot:#f4ecd8;
+  }
+  :root[data-theme="night"]{
+    --bg1:#1a2118; --bg2:#141a13; --bg3:#0e130d;
+    --paper:#202a1d; --paper-edge:#2c3826;
+    --ink:#e8e4d4; --ink-soft:#b0ac98; --ink-faint:#6e6c5a;
+    --moss:#8fa85a; --moss-deep:#a8c068; --leaf:#7a9048;
+    --bloom:#e8a07a; --bloom-soft:#c47a58; --gold:#f0c95a;
+    --line:rgba(143,168,90,.16); --shadow:rgba(0,0,0,.4);
+    --glow:rgba(240,201,90,.5); --firefly:rgba(240,201,90,.9);
+    --sky-top:#0e1810; --sky-bot:#1a2118;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Gowun Batang',serif;
+    color:var(--ink);
+    background:linear-gradient(180deg,var(--sky-top),var(--bg1) 45%,var(--bg2));
+    background-attachment:fixed;
+    min-height:100vh;overflow-x:hidden;
+    transition:background 1.1s cubic-bezier(.4,0,.2,1),color 1.1s ease;
+    position:relative;
+  }
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+    mix-blend-mode:multiply;transition:opacity 1.1s}
+  :root[data-theme="night"] body::before{mix-blend-mode:screen;opacity:.06}
+
+  .fireflies{position:fixed;inset:0;pointer-events:none;z-index:2;opacity:0;transition:opacity 1.4s ease}
+  :root[data-theme="night"] .fireflies{opacity:1}
+  .ff{position:absolute;width:5px;height:5px;border-radius:50%;background:var(--firefly);
+    box-shadow:0 0 8px 2px var(--glow);animation:drift linear infinite}
+  @keyframes drift{
+    0%{transform:translate(0,0);opacity:0}
+    10%{opacity:1}50%{opacity:.5}90%{opacity:1}
+    100%{transform:translate(var(--dx),var(--dy));opacity:0}}
+
+  .orb{position:fixed;top:8%;right:10%;width:90px;height:90px;border-radius:50%;z-index:0;
+    transition:all 1.2s cubic-bezier(.4,0,.2,1)}
+  :root[data-theme="day"] .orb{background:radial-gradient(circle at 35% 35%,#ffe9a8,var(--gold));
+    box-shadow:0 0 60px 20px rgba(212,169,67,.35)}
+  :root[data-theme="night"] .orb{background:radial-gradient(circle at 35% 35%,#fdfbe8,#d8d4b0);
+    box-shadow:0 0 50px 14px rgba(240,236,200,.25);top:9%;right:12%}
+
+  .wrap{max-width:920px;margin:0 auto;padding:0 28px;position:relative;z-index:3}
+
+  nav{display:flex;justify-content:space-between;align-items:center;padding:32px 0 0}
+  .logo{display:flex;align-items:center;gap:11px;font-family:'Fraunces';font-weight:600;
+    font-size:21px;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
+  .logo .sprout{width:30px;height:30px;display:grid;place-items:center}
+  .logo .sprout svg{width:30px;height:30px;overflow:visible}
+  .logo .sprout .stem{stroke:var(--moss-deep);stroke-width:2;fill:none;stroke-linecap:round}
+  .logo .sprout .lf{fill:var(--leaf);transform-origin:center bottom;animation:breathe 4s ease-in-out infinite}
+  .logo .sprout .lf2{animation-delay:.6s}
+  @keyframes breathe{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.08) rotate(2deg)}}
+  .nav-r{display:flex;align-items:center;gap:26px}
+  .nav-r a{font-family:'Fraunces';font-size:15px;color:var(--ink-soft);text-decoration:none;
+    position:relative;transition:color .3s}
+  .nav-r a::after{content:"";position:absolute;left:0;bottom:-3px;width:0;height:1.5px;
+    background:var(--moss);transition:width .35s cubic-bezier(.4,0,.2,1)}
+  .nav-r a:hover{color:var(--ink)}.nav-r a:hover::after{width:100%}
+
+  .toggle{width:62px;height:30px;border-radius:20px;border:1.5px solid var(--line);
+    background:var(--paper);cursor:pointer;position:relative;transition:all .5s;flex-shrink:0}
+  .toggle .knob{position:absolute;top:2px;left:2px;width:24px;height:24px;border-radius:50%;
+    transition:all .5s cubic-bezier(.34,1.4,.6,1);display:grid;place-items:center}
+  :root[data-theme="day"] .toggle .knob{background:var(--gold);transform:translateX(0)}
+  :root[data-theme="night"] .toggle .knob{background:#d8d4b0;transform:translateX(32px)}
+  .toggle .knob svg{width:14px;height:14px}
+
+  .hero{padding:90px 0 60px;text-align:center;position:relative}
+  .hero .eyebrow{font-family:'Fraunces';font-size:13px;letter-spacing:.32em;text-transform:uppercase;
+    color:var(--moss-deep);opacity:0;animation:fadeUp 1s .2s forwards}
+  .hero h1{font-family:'Fraunces';font-weight:300;font-size:clamp(40px,7vw,76px);line-height:1.06;
+    letter-spacing:-.03em;margin:22px 0;color:var(--ink);font-variation-settings:"opsz" 144}
+  .hero h1 .em{font-style:italic;color:var(--moss-deep);position:relative}
+  .hero h1 .ln{display:block;overflow:hidden}
+  .hero h1 .ln span{display:inline-block;transform:translateY(110%);
+    animation:lineUp 1.1s cubic-bezier(.16,1,.3,1) forwards}
+  .hero h1 .ln:nth-child(1) span{animation-delay:.35s}
+  .hero h1 .ln:nth-child(2) span{animation-delay:.5s}
+  .hero .lead{max-width:480px;margin:0 auto;font-size:18px;line-height:1.7;color:var(--ink-soft);
+    opacity:0;animation:fadeUp 1s .85s forwards}
+  @keyframes lineUp{to{transform:translateY(0)}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+  .vine{display:block;margin:54px auto 0;width:2px;height:60px;position:relative}
+  .vine::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:2px;height:0;background:var(--moss);border-radius:2px;
+    animation:grow 1.4s 1.2s cubic-bezier(.4,0,.2,1) forwards}
+  @keyframes grow{to{height:60px}}
+  .vine .bud{position:absolute;bottom:-4px;left:50%;transform:translateX(-50%) scale(0);
+    width:14px;height:14px;border-radius:50% 50% 50% 0;background:var(--leaf);rotate:45deg;
+    animation:popBud .5s 2.5s cubic-bezier(.34,1.5,.6,1) forwards}
+  @keyframes popBud{to{transform:translateX(-50%) scale(1)}}
+
+  .sec{padding:80px 0 0}
+  .sec-h{display:flex;align-items:baseline;gap:16px;margin-bottom:40px}
+  .sec-h h2{font-family:'Fraunces';font-weight:400;font-size:30px;letter-spacing:-.02em;color:var(--ink)}
+  .sec-h h2 em{font-style:italic;color:var(--moss-deep)}
+  .sec-h .ct{font-family:'Fraunces';font-size:13px;color:var(--ink-faint);letter-spacing:.05em}
+  .sec-h .rule{flex:1;height:1px;background:var(--line)}
+
+  .post-list{max-width:640px}
+  .post{display:flex;align-items:baseline;gap:18px;
+    padding:22px 0;border-bottom:1px solid var(--line);text-decoration:none;color:inherit;
+    position:relative;transition:padding .45s cubic-bezier(.4,0,.2,1)}
+  .post .pt{display:flex;align-items:baseline;gap:14px;flex:1;min-width:0}
+  .post .ptag{font-family:'Fraunces';font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--moss);flex-shrink:0;width:54px;padding-top:3px}
+  .post h3{font-family:'Fraunces';font-weight:400;font-size:clamp(18px,2.2vw,22px);line-height:1.35;
+    color:var(--ink);transition:color .35s}
+  .post h3 .arr{font-size:15px;color:var(--moss);opacity:0;margin-left:8px;
+    display:inline-block;transform:translateX(-6px);transition:all .4s cubic-bezier(.4,0,.2,1)}
+  .post .yr{font-family:'Fraunces';font-size:13px;color:var(--ink-faint);
+    font-variant-numeric:tabular-nums;flex-shrink:0}
+  .post::before{content:"";position:absolute;left:-22px;top:0;bottom:0;width:3px;background:var(--moss);
+    transform:scaleY(0);transform-origin:top;transition:transform .4s cubic-bezier(.4,0,.2,1);border-radius:3px}
+  .post:hover{padding-left:12px}
+  .post:hover::before{transform:scaleY(1)}
+  .post:hover h3{color:var(--moss-deep)}
+  .post:hover h3 .arr{opacity:1;transform:translateX(0)}
+
+  .proj{background:var(--paper);border:1px solid var(--paper-edge);border-radius:18px;
+    margin-bottom:18px;overflow:hidden;box-shadow:0 4px 18px var(--shadow);
+    transition:box-shadow .45s,transform .45s}
+  .proj:hover{box-shadow:0 10px 30px var(--shadow);transform:translateY(-2px)}
+  .proj-head{padding:28px 30px;cursor:pointer;display:flex;align-items:center;gap:22px;position:relative}
+  .proj-icon{flex-shrink:0;width:56px;height:56px;border-radius:15px;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--leaf),var(--moss));position:relative;overflow:hidden;
+    transition:transform .5s cubic-bezier(.34,1.3,.6,1)}
+  .proj-icon svg{width:30px;height:30px;fill:var(--paper);position:relative;z-index:2}
+  .proj:hover .proj-icon{transform:rotate(-6deg) scale(1.05)}
+  .proj-meta{flex:1}
+  .proj-meta .pk{font-family:'Fraunces';font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--moss);margin-bottom:5px}
+  .proj-meta h3{font-family:'Fraunces';font-weight:500;font-size:24px;color:var(--ink);line-height:1.1}
+  .proj-meta .sub{font-size:14px;color:var(--ink-soft);margin-top:5px}
+  .proj-toggle{flex-shrink:0;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line);
+    display:grid;place-items:center;transition:all .45s cubic-bezier(.34,1.3,.6,1);color:var(--moss-deep)}
+  .proj-toggle svg{width:16px;height:16px;transition:transform .45s cubic-bezier(.34,1.3,.6,1)}
+  .proj.open .proj-toggle{background:var(--moss);border-color:var(--moss);color:var(--paper)}
+  .proj.open .proj-toggle svg{transform:rotate(45deg);stroke:var(--paper)}
+  .proj-body{max-height:0;overflow:hidden;transition:max-height .55s cubic-bezier(.4,0,.2,1)}
+  .proj-body-in{padding:0 30px 30px;border-top:1px dashed var(--line);margin:0 30px;
+    padding-top:24px;opacity:0;transform:translateY(-8px);transition:opacity .5s .1s,transform .5s .1s}
+  .proj.open .proj-body-in{opacity:1;transform:translateY(0)}
+  .proj-body-in p{font-size:15px;line-height:1.8;color:var(--ink-soft);margin-bottom:16px;max-width:62ch}
+  .proj-body-in .stack{display:flex;gap:9px;flex-wrap:wrap;margin-top:6px}
+  .proj-body-in .stack span{font-family:'Fraunces';font-size:12px;color:var(--moss-deep);
+    background:var(--bg1);border:1px solid var(--line);padding:6px 13px;border-radius:20px}
+  .proj-body-in .links{margin-top:20px;display:flex;gap:16px}
+  .proj-body-in .links a{font-family:'Fraunces';font-size:14px;color:var(--moss-deep);text-decoration:none;
+    border-bottom:1.5px solid transparent;transition:border-color .3s;display:inline-flex;align-items:center;gap:5px}
+  .proj-body-in .links a:hover{border-color:var(--moss-deep)}
+
+  footer{margin-top:110px;padding:60px 0 50px;border-top:1px solid var(--line);text-align:center;position:relative}
+  footer .fq{font-family:'Fraunces';font-style:italic;font-size:clamp(22px,3.5vw,34px);font-weight:300;
+    color:var(--ink);line-height:1.4;max-width:560px;margin:0 auto 30px}
+  .socials{display:flex;justify-content:center;gap:13px;margin-bottom:26px}
+  .socials a{width:46px;height:46px;border-radius:50%;border:1.5px solid var(--line);
+    display:grid;place-items:center;transition:all .4s cubic-bezier(.34,1.3,.6,1);background:var(--paper)}
+  .socials a svg{width:19px;height:19px;fill:var(--ink-soft);transition:fill .35s}
+  .socials a:hover{border-color:var(--moss);transform:translateY(-4px) rotate(-5deg)}
+  .socials a:hover svg{fill:var(--moss-deep)}
+  footer .cp{font-family:'Fraunces';font-size:13px;color:var(--ink-faint);letter-spacing:.04em}
+
+  ::selection{background:var(--leaf);color:var(--paper)}
+  @media(max-width:600px){
+    .nav-r{gap:16px}
+    .post{flex-direction:column;gap:6px;align-items:flex-start}
+    .post .ptag{width:auto}
+    .post .yr{order:2}
+  }
+</style>
+</head>
+<body>
+<div class="orb"></div>
+<div class="fireflies" id="fireflies"></div>
+
+<div class="wrap">
+  <nav>
+    <a href="#" class="logo">
+      <span class="sprout">
+        <svg viewBox="0 0 30 30">
+          <path class="stem" d="M15 28 L15 14"/>
+          <path class="lf" d="M15 16 C9 15 6 10 6 7 C11 7 15 11 15 16Z"/>
+          <path class="lf lf2" d="M15 18 C21 17 24 13 24 10 C19 10 15 13 15 18Z"/>
+        </svg>
+      </span>
+      苔庭
+    </a>
+    <div class="nav-r">
+      <a href="#writing">文字</a>
+      <a href="#projects">造物</a>
+      <button class="toggle" id="toggle" aria-label="切换昼夜">
+        <span class="knob">
+          <svg id="knob-ic" viewBox="0 0 24 24"></svg>
+        </span>
+      </button>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">Notes & Work · since 2024</div>
+    <h1>
+      <span class="ln"><span>写一些字，</span></span>
+      <span class="ln"><span>做一些<em class="em">东西</em>。</span></span>
+    </h1>
+    <p class="lead">关于设计、工程，和一些没想清楚的问题。不定期更新。</p>
+    <span class="vine"><span class="bud"></span></span>
+  </header>
+
+  <!-- ===== WRITING ===== -->
+  <section class="sec" id="writing">
+    <div class="sec-h">
+      <h2>最近<em>写下的</em></h2>
+      <span class="rule"></span>
+      <span class="ct"><!-- POST_COUNT -->4 篇<!-- /POST_COUNT --></span>
+    </div>
+
+    <div class="post-list">
+    <!-- BEGIN_POSTS -->
+    <a class="post" href="posts/garden/">
+      <span class="pt"><span class="ptag">随笔</span><h3>为什么我把博客重新种成了一座花园<span class="arr">→</span></h3></span>
+      <span class="yr">05 / 18</span>
+    </a>
+    <a class="post" href="posts/animation/">
+      <span class="pt"><span class="ptag">设计</span><h3>优雅的动画，是让人察觉不到动画<span class="arr">→</span></h3></span>
+      <span class="yr">05 / 02</span>
+    </a>
+    <a class="post" href="posts/css-daynight/">
+      <span class="pt"><span class="ptag">工程</span><h3>用 60 行 CSS 实现昼夜呼吸<span class="arr">→</span></h3></span>
+      <span class="yr">04 / 21</span>
+    </a>
+    <a class="post" href="posts/whitespace/">
+      <span class="pt"><span class="ptag">生活</span><h3>关于"留白"，我误解了很多年<span class="arr">→</span></h3></span>
+      <span class="yr">04 / 09</span>
+    </a>
+    <!-- END_POSTS -->
+    </div>
+  </section>
+
+  <!-- ===== PROJECTS ===== -->
+  <section class="sec" id="projects">
+    <div class="sec-h">
+      <h2>动手<em>造的</em></h2>
+      <span class="rule"></span>
+      <span class="ct">点击展开</span>
+    </div>
+
+    <div class="proj">
+      <div class="proj-head">
+        <div class="proj-icon"><svg viewBox="0 0 24 24"><path d="M12 2C7 4 4 9 4 14c0 4 3 7 7 7 6 0 9-7 9-15-3 1-7 2-9 5-1-3 0-6 1-9z"/></svg></div>
+        <div class="proj-meta">
+          <div class="pk">开源 · 配色工具</div>
+          <h3>Chroma</h3>
+          <div class="sub">一个会"长出"和谐配色的调色板生成器</div>
+        </div>
+        <div class="proj-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
+      </div>
+      <div class="proj-body"><div class="proj-body-in">
+        <p>输入一个种子颜色，Chroma 会基于色彩心理学和无障碍对比度，"生长"出一整套协调的配色方案。支持一键导出成 CSS 变量、Tailwind 配置或设计令牌。</p>
+        <p>最初是为了解决我自己每次配色都纠结半天的问题，后来发现很多人也有同样的烦恼，就开源了。目前有 1.2k star。</p>
+        <div class="stack"><span>React</span><span>Color Theory</span><span>WCAG</span><span>Open Source</span></div>
+        <div class="links"><a href="#">↗ 在线体验</a><a href="#">↗ GitHub</a></div>
+      </div></div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-head">
+        <div class="proj-icon"><svg viewBox="0 0 24 24"><path d="M3 5h18v3H3zM3 11h12v3H3zM3 17h18v3H3z"/></svg></div>
+        <div class="proj-meta">
+          <div class="pk">开源 · 排版库</div>
+          <h3>Typeset.js</h3>
+          <div class="sub">让中文网页排版自动变优雅的小工具</div>
+        </div>
+        <div class="proj-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
+      </div>
+      <div class="proj-body"><div class="proj-body-in">
+        <p>一个轻量（仅 4KB）的中文排版增强库。自动处理标点挤压、中西文混排间距、避免孤行，让任何中文网页读起来都更舒服。无依赖，引入即用。</p>
+        <div class="stack"><span>TypeScript</span><span>Zero-dependency</span><span>i18n</span></div>
+        <div class="links"><a href="#">↗ 文档</a><a href="#">↗ GitHub</a></div>
+      </div></div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-head">
+        <div class="proj-icon"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 6.2L21 9l-5 4.3L17.5 21 12 17l-5.5 4L8 13.3 3 9l6.6-.8z"/></svg></div>
+        <div class="proj-meta">
+          <div class="pk">进行中 · 静态站生成器</div>
+          <h3>Mossgarden</h3>
+          <div class="sub">支撑这座花园的静态站点引擎</div>
+        </div>
+        <div class="proj-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
+      </div>
+      <div class="proj-body"><div class="proj-body-in">
+        <p>本博客背后的引擎。从一篇 Markdown 笔记，到带昼夜切换和有机动画的发布页面，只需要一条命令。内置了双向链接（让笔记之间能"长"在一起）和自动的内容关系图谱。</p>
+        <p>还在打磨中，等稳定了会开源。这是我目前最喜欢的项目——因为它正在长成它自己。</p>
+        <div class="stack"><span>Astro</span><span>Vite</span><span>Markdown</span><span>WIP</span></div>
+        <div class="links"><a href="#">↗ 进度日志</a></div>
+      </div></div>
+    </div>
+  </section>
+
+  <footer>
+    <p class="fq">慢工。<br>没什么特别要说的，<br>东西都在上面了。</p>
+    <div class="socials">
+      <a href="https://github.com/duckweedly" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.5 11.5 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+      <a href="#" aria-label="RSS"><svg viewBox="0 0 24 24"><path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248C1.456 24 0 22.546 0 20.752c0-1.794 1.456-3.248 3.252-3.248 1.795.001 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.062 10.96 4.966 11.022 11.009h4.817c-.062-8.71-7.118-15.758-15.839-15.82zm0-3.368c10.58.046 19.152 8.594 19.183 19.188h4.817c-.03-13.231-10.755-23.954-24-24v4.812z"/></svg></a>
+      <a href="#" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg></a>
+    </div>
+    <p class="cp">© 2026 苔庭 Mossgarden</p>
+  </footer>
+</div>
+
+<script>
+  const root=document.documentElement;
+  const toggle=document.getElementById('toggle');
+  const knobIc=document.getElementById('knob-ic');
+  const sunPath='<circle cx="12" cy="12" r="5" fill="#4a3f2f"/><g stroke="#4a3f2f" stroke-width="2" stroke-linecap="round"><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></g>';
+  const moonPath='<path d="M21 12.8A9 9 0 1111.2 3 7 7 0 0021 12.8z" fill="#3a3a2a"/>';
+  function setTheme(t){
+    root.setAttribute('data-theme',t);
+    knobIc.innerHTML = t==='day' ? sunPath : moonPath;
+  }
+  setTheme('day');
+  toggle.addEventListener('click',()=>{
+    setTheme(root.getAttribute('data-theme')==='day'?'night':'day');
+  });
+
+  const ffBox=document.getElementById('fireflies');
+  for(let i=0;i<22;i++){
+    const f=document.createElement('div');f.className='ff';
+    const x=Math.random()*100, y=Math.random()*100;
+    f.style.left=x+'vw';f.style.top=y+'vh';
+    f.style.setProperty('--dx',(Math.random()*200-100)+'px');
+    f.style.setProperty('--dy',(Math.random()*-180-40)+'px');
+    f.style.animationDuration=(8+Math.random()*10)+'s';
+    f.style.animationDelay=(Math.random()*8)+'s';
+    f.style.width=f.style.height=(3+Math.random()*4)+'px';
+    ffBox.appendChild(f);
+  }
+
+  document.querySelectorAll('.proj-head').forEach(h=>{
+    h.addEventListener('click',()=>{
+      const p=h.parentElement;
+      const body=p.querySelector('.proj-body');
+      const open=p.classList.contains('open');
+      document.querySelectorAll('.proj.open').forEach(o=>{
+        if(o!==p){o.classList.remove('open');o.querySelector('.proj-body').style.maxHeight='0'}
+      });
+      if(open){p.classList.remove('open');body.style.maxHeight='0'}
+      else{p.classList.add('open');body.style.maxHeight=body.scrollHeight+'px'}
+    });
+  });
+
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{if(e.isIntersecting){
+      e.target.style.transition='opacity 1s cubic-bezier(.4,0,.2,1), transform 1s cubic-bezier(.4,0,.2,1)';
+      e.target.style.opacity='1';e.target.style.transform='translateY(0)';io.unobserve(e.target)}})
+  },{threshold:.12});
+  document.querySelectorAll('.post,.proj').forEach((el,i)=>{
+    el.style.opacity='0';el.style.transform='translateY(28px)';
+    el.style.transitionDelay=(i*0.06)+'s';io.observe(el);
+  });
+</script>
+</body>
+</html>
