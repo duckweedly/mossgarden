@@ -3,7 +3,41 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>关于"留白"，我误解了很多年 — 苔庭</title>
+<title>关于&quot;留白&quot;，我误解了很多年 — 随想</title>
+<meta name="description" content="我第一次认真接触&quot;留白&quot;这个概念，是在学设计的时候。老师拿出一张名片，上面只有名字和一个电话，周围大片空白。&quot;这叫留白，记住了&quot;，然后讲下一个话题。 我记住了。但我理解错了。 那之后很长时间，我把留白等同于&quot;少放东西&quot;。一个版面如果空白够多，就说明有留白意识；如果放了很多元素，留">
+<link rel="canonical" href="https://xuean.wiki/posts/whitespace/">
+<link rel="alternate" type="application/rss+xml" title="随想" href="../../feed.xml">
+<meta property="og:title" content="关于&quot;留白&quot;，我误解了很多年 — 随想">
+<meta property="og:description" content="我第一次认真接触&quot;留白&quot;这个概念，是在学设计的时候。老师拿出一张名片，上面只有名字和一个电话，周围大片空白。&quot;这叫留白，记住了&quot;，然后讲下一个话题。 我记住了。但我理解错了。 那之后很长时间，我把留白等同于&quot;少放东西&quot;。一个版面如果空白够多，就说明有留白意识；如果放了很多元素，留">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://xuean.wiki/posts/whitespace/">
+<meta property="og:site_name" content="随想">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#f4ecd8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141a13" media="(prefers-color-scheme: dark)">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "关于&quot;留白&quot;，我误解了很多年",
+  "description": "我第一次认真接触&quot;留白&quot;这个概念，是在学设计的时候。老师拿出一张名片，上面只有名字和一个电话，周围大片空白。&quot;这叫留白，记住了&quot;，然后讲下一个话题。 我记住了。但我理解错了。 那之后很长时间，我把留白等同于&quot;少放东西&quot;。一个版面如果空白够多，就说明有留白意识；如果放了很多元素，留",
+  "url": "https://xuean.wiki/posts/whitespace/",
+  "datePublished": "2024-04-09",
+  "dateModified": "2024-04-09",
+  "inLanguage": "zh-CN",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "随想 · Random Thoughts",
+    "url": "https://xuean.wiki/"
+  }
+}
+</script>
+<script>
+  (() => {
+    const theme = localStorage.getItem('theme');
+    if (theme === 'day' || theme === 'night') document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="stylesheet">
@@ -30,6 +64,9 @@
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
+  .skip-link{position:absolute;left:18px;top:12px;z-index:20;padding:10px 14px;border-radius:999px;background:var(--paper);color:var(--ink);text-decoration:none;transform:translateY(-160%);transition:transform .25s}
+  .skip-link:focus{transform:translateY(0)}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--moss-deep);outline-offset:4px}
   body{
     font-family:'Gowun Batang',serif;
     color:var(--ink);
@@ -45,7 +82,7 @@
   :root[data-theme="night"] body::before{mix-blend-mode:screen;opacity:.06}
 
   .fireflies{position:fixed;inset:0;pointer-events:none;z-index:2;opacity:0;transition:opacity 1.4s ease}
-  :root[data-theme="night"] .fireflies{opacity:1}
+  :root[data-theme="night"] .fireflies{opacity:.45}
   .ff{position:absolute;width:5px;height:5px;border-radius:50%;background:var(--firefly);
     box-shadow:0 0 8px 2px var(--glow);animation:drift linear infinite}
   @keyframes drift{
@@ -65,6 +102,7 @@
   nav{display:flex;justify-content:space-between;align-items:center;padding:32px 0 0}
   .logo{display:flex;align-items:center;gap:11px;font-family:'Fraunces';font-weight:600;
     font-size:21px;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
+  .brand-en{font-size:16px;color:var(--ink-soft);font-weight:500}
   .logo .sprout{width:30px;height:30px;display:grid;place-items:center}
   .logo .sprout svg{width:30px;height:30px;overflow:visible}
   .logo .sprout .stem{stroke:var(--moss-deep);stroke-width:2;fill:none;stroke-linecap:round}
@@ -78,6 +116,8 @@
     background:var(--moss);transition:width .35s cubic-bezier(.4,0,.2,1)}
   .nav-r a:hover{color:var(--ink)}.nav-r a:hover::after{width:100%}
 
+  .lang-toggle{border:1.5px solid var(--line);background:var(--paper);color:var(--ink-soft);border-radius:999px;padding:6px 11px;font-family:'Fraunces';font-size:13px;cursor:pointer;transition:color .3s,border-color .3s}
+  .lang-toggle:hover{color:var(--ink);border-color:var(--moss)}
   .toggle{width:62px;height:30px;border-radius:20px;border:1.5px solid var(--line);
     background:var(--paper);cursor:pointer;position:relative;transition:all .5s;flex-shrink:0}
   .toggle .knob{position:absolute;top:2px;left:2px;width:24px;height:24px;border-radius:50%;
@@ -147,9 +187,14 @@
     .post-nav a{max-width:100%}
     .next-nav{margin-left:0;text-align:left}
   }
+  @media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
+    .fireflies{display:none}
+  }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#content">跳到正文</a>
 <div class="orb"></div>
 <div class="fireflies" id="fireflies"></div>
 
@@ -163,12 +208,13 @@
           <path class="lf lf2" d="M15 18 C21 17 24 13 24 10 C19 10 15 13 15 18Z"/>
         </svg>
       </span>
-      苔庭
+      <span class="brand-zh">随想</span><span class="brand-en">Random Thoughts</span>
     </a>
     <div class="nav-r">
-      <a href="../../#writing">文字</a>
-      <a href="../../#projects">造物</a>
-      <button class="toggle" id="toggle" aria-label="切换昼夜">
+      <a href="../../#writing" data-i18n="navWriting">文字</a>
+      <a href="../../#projects" data-i18n="navProjects">造物</a>
+      <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Switch language">EN</button>
+      <button class="toggle" id="toggle" aria-label="切换昼夜" aria-pressed="false">
         <span class="knob">
           <svg id="knob-ic" viewBox="0 0 24 24"></svg>
         </span>
@@ -176,12 +222,13 @@
     </div>
   </nav>
 
+  <main id="content">
   <article>
     <header class="article-header">
-      <a href="../../" class="back">← 苔庭</a>
+      <a href="../../" class="back">← 随想</a>
       <div class="article-tag">生活</div>
-      <h1>关于"留白"，我误解了很多年</h1>
-      <div class="article-date">2024 年 04 月 09 日</div>
+      <h1>关于&quot;留白&quot;，我误解了很多年</h1>
+      <time class="article-date" datetime="2024-04-09">2024 年 04 月 09 日</time>
     </header>
 
     <div class="article-body">
@@ -215,34 +262,64 @@
       
     </nav>
   </article>
+  </main>
 
   <footer>
     <p class="fq">慢工。</p>
     <div class="socials">
       <a href="https://github.com/duckweedly" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.5 11.5 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
-      <a href="#" aria-label="RSS"><svg viewBox="0 0 24 24"><path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248C1.456 24 0 22.546 0 20.752c0-1.794 1.456-3.248 3.252-3.248 1.795.001 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.062 10.96 4.966 11.022 11.009h4.817c-.062-8.71-7.118-15.758-15.839-15.82zm0-3.368c10.58.046 19.152 8.594 19.183 19.188h4.817c-.03-13.231-10.755-23.954-24-24v4.812z"/></svg></a>
+      <a href="../../feed.xml" aria-label="RSS"><svg viewBox="0 0 24 24"><path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248C1.456 24 0 22.546 0 20.752c0-1.794 1.456-3.248 3.252-3.248 1.795.001 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.062 10.96 4.966 11.022 11.009h4.817c-.062-8.71-7.118-15.758-15.839-15.82zm0-3.368c10.58.046 19.152 8.594 19.183 19.188h4.817c-.03-13.231-10.755-23.954-24-24v4.812z"/></svg></a>
     </div>
-    <p class="cp">© 2026 苔庭 Mossgarden</p>
+    <p class="cp">© 2026 随想 Random Thoughts</p>
   </footer>
 </div>
 
 <script>
   const root=document.documentElement;
   const toggle=document.getElementById('toggle');
+  const langToggle=document.getElementById('lang-toggle');
+  const translations={
+    zh:{navWriting:'文字',navProjects:'造物'},
+    en:{navWriting:'Writing',navProjects:'Making'}
+  };
   const knobIc=document.getElementById('knob-ic');
   const sunPath='<circle cx="12" cy="12" r="5" fill="#4a3f2f"/><g stroke="#4a3f2f" stroke-width="2" stroke-linecap="round"><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></g>';
   const moonPath='<path d="M21 12.8A9 9 0 1111.2 3 7 7 0 0021 12.8z" fill="#3a3a2a"/>';
+  function currentTheme(){
+    const theme = localStorage.getItem('theme');
+    return theme === 'day' || theme === 'night' ? theme : 'day';
+  }
+  function currentLang(){
+    const lang = localStorage.getItem('lang');
+    return lang === 'en' ? 'en' : 'zh';
+  }
+  function setLanguage(lang){
+    const dict=translations[lang];
+    root.setAttribute('lang', lang === 'en' ? 'en' : 'zh');
+    document.querySelectorAll('[data-i18n]').forEach(el=>{el.textContent=dict[el.dataset.i18n]});
+    langToggle.textContent=lang === 'en' ? '中' : 'EN';
+    langToggle.setAttribute('aria-label', lang === 'en' ? '切换到中文' : 'Switch to English');
+    localStorage.setItem('lang',lang);
+  }
   function setTheme(t){
     root.setAttribute('data-theme',t);
+    toggle.setAttribute('aria-pressed', String(t==='night'));
+    toggle.setAttribute('aria-label', t==='night' ? '切换到白昼' : '切换到夜晚');
     knobIc.innerHTML = t==='day' ? sunPath : moonPath;
   }
-  setTheme('day');
+  setLanguage(currentLang());
+  setTheme(currentTheme());
+  langToggle.addEventListener('click',()=>{
+    setLanguage(currentLang()==='en'?'zh':'en');
+  });
   toggle.addEventListener('click',()=>{
-    setTheme(root.getAttribute('data-theme')==='day'?'night':'day');
+    const next = root.getAttribute('data-theme')==='day'?'night':'day';
+    setTheme(next);
+    localStorage.setItem('theme',next);
   });
 
   const ffBox=document.getElementById('fireflies');
-  for(let i=0;i<22;i++){
+  for(let i=0;i<10;i++){
     const f=document.createElement('div');f.className='ff';
     f.style.left=(Math.random()*100)+'vw';
     f.style.top=(Math.random()*100)+'vh';

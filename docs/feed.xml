@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>随想 · Random Thoughts</title>
+    <link>https://xuean.wiki/</link>
+    <description>关于设计、工程，和一些没想清楚的问题。不定期更新。</description>
+    <language>zh-CN</language>
+    <atom:link href="https://xuean.wiki/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>为什么我把博客重新种成了一座花园</title>
+      <link>https://xuean.wiki/posts/garden/</link>
+      <guid>https://xuean.wiki/posts/garden/</guid>
+      <pubDate>Sat, 18 May 2024 00:00:00 GMT</pubDate>
+      <description>去年这时候，我关掉了运行了三年的博客，然后什么都没有写。 不是因为没有想法——恰恰相反。我每周都在草稿箱里堆东西：读完一篇论文的感想、一个产品细节触动我的地方、半夜想到的一个问题。可草稿就是草稿，从来没有变成正式的文章。 后来我意识到，卡住我的不是想法，是那个叫做&quot;发布&quot;的仪式。</description>
+      <content:encoded><![CDATA[<p>去年这时候，我关掉了运行了三年的博客，然后什么都没有写。</p>
+<p>不是因为没有想法——恰恰相反。我每周都在草稿箱里堆东西：读完一篇论文的感想、一个产品细节触动我的地方、半夜想到的一个问题。可草稿就是草稿，从来没有变成正式的文章。</p>
+<p>后来我意识到，卡住我的不是想法，是那个叫做&quot;发布&quot;的仪式。</p>
+<h2>一道隐形的门槛</h2>
+<p>传统博客有一套隐形规则：文章要有始有终，要讲清楚一件事，要足够完整才值得发出去。我写出来的任何东西，在按下&quot;发布&quot;之前都要经过这道审查——它写完了吗？它够好吗？很多时候答案是&quot;还没有&quot;，于是那些想法就消失了。</p>
+<p>不是因为没有时间，是因为&quot;还没有完成&quot;的状态让我说服不了自己发出去。</p>
+<h2>花园不需要完成</h2>
+<p>数字花园的逻辑是反过来的。</p>
+<p>花园里的植物不需要&quot;完成&quot;就存在。一棵幼苗和一棵老树都有资格占据那片土地。你种下一粒种子，不知道它会长成什么样，这本身就是种植的意义。你修剪，你浇水，它慢慢改变形状——但它一直在那儿，一直是活的。</p>
+<p>我开始把自己写的东西想象成这样：不是需要展示的作品，而是需要照料的生长物。某篇笔记今天只有两段话，没关系，下次读到新东西可以继续加。某个想法现在还是问题，也没关系，问题本身就值得在这里。</p>
+<h2>读者换了一批</h2>
+<p>还有一个变化是关于读者的。</p>
+<p>写博客的时候，我想象中的读者是陌生人，他们没有任何上下文，我需要解释每一件事情。这个想象让我把文章越写越长、越写越&quot;完整&quot;——因为怕漏掉什么。</p>
+<p>花园里，读者变成了未来的自己。我不需要解释一切，因为那个人和我共享大量的背景。有时候一句话就够了，因为未来的我知道它指向哪里。</p>
+<p>这个转变让写作轻松了很多。</p>
+<hr>
+<p>不定期更新，是因为花园不是按计划开花的。</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>优雅的动画，是让人察觉不到动画</title>
+      <link>https://xuean.wiki/posts/animation/</link>
+      <guid>https://xuean.wiki/posts/animation/</guid>
+      <pubDate>Thu, 02 May 2024 00:00:00 GMT</pubDate>
+      <description>有一类动画，你看完之后能准确说出它做了什么效果——弹入、旋转、淡出，然后你觉得&quot;嗯，挺好看的&quot;。 还有一类动画，你事后想描述它，却只能说&quot;感觉很自然&quot;。你不记得它做了什么，只记得整个体验是顺滑的。 我越来越觉得，后者才是动画该努力到达的地方。 动画的目的是引导，不是表演 在界面里</description>
+      <content:encoded><![CDATA[<p>有一类动画，你看完之后能准确说出它做了什么效果——弹入、旋转、淡出，然后你觉得&quot;嗯，挺好看的&quot;。</p>
+<p>还有一类动画，你事后想描述它，却只能说&quot;感觉很自然&quot;。你不记得它做了什么，只记得整个体验是顺滑的。</p>
+<p>我越来越觉得，后者才是动画该努力到达的地方。</p>
+<h2>动画的目的是引导，不是表演</h2>
+<p>在界面里，动画存在的理由只有一个：帮助用户理解发生了什么。一个元素出现，用户需要知道它从哪里来；一个操作完成，用户需要确认它发生了。动画是空间和时间之间的桥梁。</p>
+<p>一旦动画开始表演自己，它就失败了。</p>
+<p>你一定见过那种每个元素都要炫技一下的页面：进来旋转，离开消散，hover 时抖三下。每次交互都在提醒你&quot;看，这里有动画&quot;。用完之后，你记住了动画，没记住内容。</p>
+<h2>物理感是信任的基础</h2>
+<p>让动画消隐的最有效方式，是给它物理重量。</p>
+<p>现实世界里没有什么东西会线性运动。树枝被风吹弯后，回弹时会过一点头；球落到地上，会弹起来然后慢慢静止。这些是人类几十年生活经验积累下来的直觉。当界面里的运动符合这个直觉，大脑就不需要额外处理它——它自然地被接受，然后被遗忘。</p>
+<p>这也是为什么弹簧曲线（spring）通常比贝塞尔曲线更自然。贝塞尔曲线是在画一个形状，弹簧曲线在模拟一种物理。</p>
+<h2>时长是最容易被忽视的变量</h2>
+<p>大多数人在设计动画时，把精力放在缓动曲线上，但忘了时长同样关键。</p>
+<p>太快：用户来不及建立空间感，操作变成闪烁。太慢：用户开始等待，动画从背景跳到前景，变成障碍物。</p>
+<p>一个经验法则：导航级别的过渡（页面切换、大块内容出现）用 300–500ms；交互反馈（按钮、hover）用 150–250ms；微小状态变化（颜色、透明度）用 80–150ms。这些不是硬规则，但违背它们时你会感觉到。</p>
+<h2>这个页面里的例子</h2>
+<p>这个博客自己有几处我偏爱的动画：页面载入时那段竖线从上往下生长，最后冒出一个叶芽——它模拟的是植物生长的逻辑，从下往上不对，从上往下才有重力感。夜间模式的萤火虫，每只的运动轨迹、持续时间都不一样，因为自然界没有整齐划一的东西。</p>
+<p>这些动画你大概不会专门记住，但如果把它们去掉，你会觉得这个页面少了什么。那就对了。</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>用 60 行 CSS 实现昼夜呼吸</title>
+      <link>https://xuean.wiki/posts/css-daynight/</link>
+      <guid>https://xuean.wiki/posts/css-daynight/</guid>
+      <pubDate>Sun, 21 Apr 2024 00:00:00 GMT</pubDate>
+      <description>这个博客的昼夜切换，从日出橙到深林绿，背后只有一个 HTML 属性、一组 CSS 变量、和几行 JavaScript。 没有框架，没有状态管理。切换一个属性，颜色就跟着变。 核心思路 用 datatheme 属性作为开关，挂在 &lt;html 元素上： 然后整个页面的所有颜色都用 v</description>
+      <content:encoded><![CDATA[<p>这个博客的昼夜切换，从日出橙到深林绿，背后只有一个 HTML 属性、一组 CSS 变量、和几行 JavaScript。</p>
+<p>没有框架，没有状态管理。切换一个属性，颜色就跟着变。</p>
+<h2>核心思路</h2>
+<p>用 <code>data-theme</code> 属性作为开关，挂在 <code>&lt;html&gt;</code> 元素上：</p>
+<pre><code class="language-css">:root[data-theme=&quot;day&quot;] {
+  --bg:   #f4ecd8;
+  --ink:  #4a3f2f;
+  --moss: #7a8c4a;
+  --gold: #d4a943;
+}
+
+:root[data-theme=&quot;night&quot;] {
+  --bg:   #1a2118;
+  --ink:  #e8e4d4;
+  --moss: #8fa85a;
+  --gold: #f0c95a;
+}
+</code></pre>
+<p>然后整个页面的所有颜色都用 <code>var(--ink)</code>、<code>var(--bg)</code> 这类变量写。切换主题时，只需要改 <code>data-theme</code> 的值，CSS 变量会级联更新到所有地方。</p>
+<h2>过渡动画</h2>
+<p>光有变量还不够，直接切换会闪烁。加一条 <code>transition</code> 让它呼吸：</p>
+<pre><code class="language-css">body {
+  background: var(--bg);
+  color: var(--ink);
+  transition:
+    background 1.1s cubic-bezier(.4, 0, .2, 1),
+    color 1.1s ease;
+}
+</code></pre>
+<p>注意曲线选的是缓入缓出，不是线性。颜色变化本身就是视觉信息，一点缓冲让眼睛有时间适应。1.1 秒是我测试后觉得最&quot;像呼吸&quot;的时长——再快变成切换，再慢变成等待。</p>
+<h2>JavaScript 部分</h2>
+<pre><code class="language-javascript">const root = document.documentElement;
+
+toggle.addEventListener(&#39;click&#39;, () =&gt; {
+  const theme = root.getAttribute(&#39;data-theme&#39;);
+  root.setAttribute(&#39;data-theme&#39;, theme === &#39;day&#39; ? &#39;night&#39; : &#39;day&#39;);
+});
+</code></pre>
+<p>就这几行。不需要 <code>localStorage</code>（这是个阅读型页面，不是应用），不需要监听系统偏好（主题是读者主动选的）。</p>
+<h2>为什么不用 CSS class</h2>
+<p>很多实现用 <code>.dark-mode</code> class 切换，理论上也可以。我用 <code>data-theme</code> 是因为它更语义化——属性名就说清楚了这是什么。而且以后想加第三个主题（比如&quot;黄昏&quot;）也是自然扩展：</p>
+<pre><code class="language-css">:root[data-theme=&quot;dusk&quot;] {
+  --bg:   #2d1f1a;
+  --ink:  #f0e0c8;
+  --moss: #c8906a;
+}
+</code></pre>
+<p>而不是 <code>.dark-mode.dusk-mode</code> 这种奇怪的组合。</p>
+<hr>
+<p>大部分视觉系统的复杂度，都可以用&quot;对的抽象层&quot;压下去。这里的对的抽象层，是 CSS 自定义属性。</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>关于&quot;留白&quot;，我误解了很多年</title>
+      <link>https://xuean.wiki/posts/whitespace/</link>
+      <guid>https://xuean.wiki/posts/whitespace/</guid>
+      <pubDate>Tue, 09 Apr 2024 00:00:00 GMT</pubDate>
+      <description>我第一次认真接触&quot;留白&quot;这个概念，是在学设计的时候。老师拿出一张名片，上面只有名字和一个电话，周围大片空白。&quot;这叫留白，记住了&quot;，然后讲下一个话题。 我记住了。但我理解错了。 那之后很长时间，我把留白等同于&quot;少放东西&quot;。一个版面如果空白够多，就说明有留白意识；如果放了很多元素，留</description>
+      <content:encoded><![CDATA[<p>我第一次认真接触&quot;留白&quot;这个概念，是在学设计的时候。老师拿出一张名片，上面只有名字和一个电话，周围大片空白。&quot;这叫留白，记住了&quot;，然后讲下一个话题。</p>
+<p>我记住了。但我理解错了。</p>
+<p>那之后很长时间，我把留白等同于&quot;少放东西&quot;。一个版面如果空白够多，就说明有留白意识；如果放了很多元素，留白就不够。这是一种很好量化的错误理解——可以测量，可以执行，所以我一直没发现它不对。</p>
+<h2>那次让我困惑的版面</h2>
+<p>直到有一次我在一个页面上减少了大量内容，版面确实变空了，但感觉反而更拥挤了。怎么回事？</p>
+<p>我研究了很久，才意识到问题出在剩下的几个元素上——它们之间的距离没有被设计过，只是随便留着的。空间存在，但不是被放在那里的，它只是剩下来的。</p>
+<p>那种空，和留白不一样。</p>
+<h2>间隙，不是空余</h2>
+<p>日语里有个词「間」（Ma），读作&quot;ま&quot;，意思大概是&quot;间隙&quot;、&quot;余地&quot;、&quot;暂停&quot;。它描述的不是空间本身，而是两件事物之间那个有意识存在的距离。</p>
+<p>音乐里两个音符之间的沉默是 Ma；建筑里走廊转角前的停顿是 Ma；对话里那句话说完之后你没有立刻接的那一秒，也是 Ma。</p>
+<p>留白是 Ma。它是一种主动的设计决策，不是被动的空余。</p>
+<p>这个区别改变了我看东西的方式。一个&quot;空&quot;的版面，如果那个空是剩下的，不是设计的，就不是留白，只是空。反过来，一个元素很多的页面，如果每个元素之间的距离都是被仔细考虑过的，它一样有留白。</p>
+<h2>呼吸，不是空</h2>
+<p>我现在更喜欢管这叫&quot;呼吸&quot;。</p>
+<p>版面需要呼吸，段落需要呼吸，一段对话需要呼吸，一天的计划也需要呼吸。不是为了少，是为了让在场的东西真正被看见。</p>
+<p>一首歌里，沉默和声音一样是音乐；一篇文章里，段落之间的间距和文字本身一样在传达信息；一天里，那段什么都不做的时间和工作一样是生活的一部分。</p>
+<p>误解留白的那些年，我一直在想办法填满。后来才明白，填满和留白其实是同一件事的两面——你要选择放什么，也要选择不放什么，两者都需要决策。</p>
+]]></content:encoded>
+    </item>
+  </channel>
+</rss>

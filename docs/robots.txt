@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://xuean.wiki/sitemap.xml
