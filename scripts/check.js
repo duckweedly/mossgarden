@@ -82,8 +82,23 @@ if (existsSync(join(root, 'docs/assets/site.css'))) {
   const css = read('docs/assets/site.css');
   expect(css.includes('#writing .sec-h'), 'writing section must have a scoped header grid');
   expect(css.includes('#writing .post .pt'), 'writing list must align tags and titles on a scoped grid');
+  expect(css.includes('#writing,#projects'), 'writing and projects sections must share the same content width');
+  expect(css.includes('.proj-head{padding:28px 30px;cursor:pointer;display:grid'), 'project cards must use a grid-aligned header');
   expect(css.includes('.article-page .article-header'), 'article pages must use a scoped header grid');
   expect(css.includes('.article-page .post-nav'), 'article post navigation must align with the article body');
+  expect(css.includes('[data-font="maple"]'), 'site must include Maple font preset');
+  expect(css.includes('[data-font="sarasa"]'), 'site must include Sarasa font preset');
+  expect(css.includes('[data-font="wenkai"]'), 'site must include WenKai font preset');
+}
+
+if (existsSync(join(root, 'docs/assets/site.js'))) {
+  const js = read('docs/assets/site.js');
+  expect(js.includes('setFontPreset'), 'runtime must persist reading font presets');
+}
+
+if (existsSync(join(root, 'docs/index.html'))) {
+  const home = read('docs/index.html');
+  expect(home.includes('font-panel'), 'home must include the font preset panel');
 }
 
 if (failures.length) {

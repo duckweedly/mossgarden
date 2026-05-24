@@ -130,6 +130,7 @@ function applyCommonConfig(html) {
 }
 
 function applySharedAssets(html, prefix) {
+  html = ensureFontPanel(html);
   const assetLinks = [
     `<link rel="icon" href="${prefix}favicon.svg" type="image/svg+xml">`,
     `<link rel="apple-touch-icon" href="${prefix}apple-touch-icon.svg">`,
@@ -156,6 +157,17 @@ function applySharedAssets(html, prefix) {
   if (!html.includes('assets/site.js')) html = html.replace('</body>', `${runtime}\n</body>`);
 
   return html;
+}
+
+function ensureFontPanel(html) {
+  if (html.includes('class="font-panel"')) return html;
+  const panel = `<div class="font-panel" aria-label="字体预设">
+  <button type="button" data-font-choice="default" aria-pressed="true">Aa</button>
+  <button type="button" data-font-choice="maple" aria-pressed="false">Maple</button>
+  <button type="button" data-font-choice="sarasa" aria-pressed="false">Sarasa</button>
+  <button type="button" data-font-choice="wenkai" aria-pressed="false">WenKai</button>
+</div>`;
+  return html.replace('<div class="wrap">', `${panel}\n\n<div class="wrap">`);
 }
 
 function buildProjectsSection(items) {

@@ -3,6 +3,7 @@
   const toggle = document.getElementById('toggle');
   const langToggle = document.getElementById('lang-toggle');
   const knobIc = document.getElementById('knob-ic');
+  const fontButtons = document.querySelectorAll('[data-font-choice]');
   const translations = window.SITE_I18N || {};
   const sunPath = '<circle cx="12" cy="12" r="5" fill="#4a3f2f"/><g stroke="#4a3f2f" stroke-width="2" stroke-linecap="round"><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></g>';
   const moonPath = '<path d="M21 12.8A9 9 0 1111.2 3 7 7 0 0021 12.8z" fill="#3a3a2a"/>';
@@ -15,6 +16,20 @@
   function currentLang() {
     const lang = localStorage.getItem('lang');
     return lang === 'en' ? 'en' : 'zh';
+  }
+
+  function currentFontPreset() {
+    const preset = localStorage.getItem('fontPreset');
+    return preset === 'maple' || preset === 'sarasa' || preset === 'wenkai' ? preset : 'default';
+  }
+
+  function setFontPreset(preset) {
+    if (preset === 'default') root.removeAttribute('data-font');
+    else root.setAttribute('data-font', preset);
+    fontButtons.forEach(button => {
+      button.setAttribute('aria-pressed', String(button.dataset.fontChoice === preset));
+    });
+    localStorage.setItem('fontPreset', preset);
   }
 
   function setLanguage(lang) {
@@ -46,6 +61,11 @@
 
   setLanguage(currentLang());
   setTheme(currentTheme());
+  setFontPreset(currentFontPreset());
+
+  fontButtons.forEach(button => {
+    button.addEventListener('click', () => setFontPreset(button.dataset.fontChoice));
+  });
 
   langToggle?.addEventListener('click', () => {
     setLanguage(currentLang() === 'en' ? 'zh' : 'en');
