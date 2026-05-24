@@ -1,0 +1,25 @@
+{
+  "name": "随想 · Random Thoughts",
+  "short_name": "随想",
+  "description": "关于设计、工程，和一些没想清楚的问题。不定期更新。",
+  "lang": "zh-CN",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f4ecd8",
+  "theme_color": "#7a8c4a",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-touch-icon.svg",
+      "sizes": "180x180",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

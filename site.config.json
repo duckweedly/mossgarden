@@ -1,0 +1,32 @@
+{
+  "siteUrl": "https://xuean.wiki",
+  "domain": "xuean.wiki",
+  "title": "随想 · Random Thoughts",
+  "shortTitle": "随想",
+  "englishTitle": "Random Thoughts",
+  "description": "关于设计、工程，和一些没想清楚的问题。不定期更新。",
+  "copyright": "© 2026 随想 Random Thoughts",
+  "githubUrl": "https://github.com/duckweedly",
+  "language": {
+    "zh": {
+      "navWriting": "文字",
+      "navProjects": "造物",
+      "heroLine1": "写一些字，",
+      "heroLine2": "做一些<em class=\"em\">东西</em>。",
+      "heroLead": "关于设计、工程，和一些没想清楚的问题。不定期更新。",
+      "writingTitle": "最近<em>写下的</em>",
+      "projectsTitle": "动手<em>造的</em>",
+      "footerQuote": "慢工。<br>没什么特别要说的，<br>东西都在上面了。"
+    },
+    "en": {
+      "navWriting": "Writing",
+      "navProjects": "Making",
+      "heroLine1": "Write some thoughts,",
+      "heroLine2": "make a few <em class=\"em\">things</em>.",
+      "heroLead": "Notes on design, engineering, and questions I have not quite figured out yet. Updated irregularly.",
+      "writingTitle": "Recent <em>writing</em>",
+      "projectsTitle": "Things <em>made</em>",
+      "footerQuote": "Slow work.<br>Nothing much to add,<br>everything is above."
+    }
+  }
+}

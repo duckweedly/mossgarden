@@ -2,7 +2,8 @@
   "name": "mossgarden",
   "version": "1.0.0",
   "scripts": {
-    "build": "node build.js"
+    "build": "node build.js",
+    "check": "node scripts/check.js"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",

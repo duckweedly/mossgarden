@@ -1,0 +1,32 @@
+[
+  {
+    "kind": "站点 · 数字花园",
+    "title": "Random Thoughts",
+    "description": "这座站点本身：从 Markdown 笔记生成静态页面、RSS、sitemap 和自定义域名部署。",
+    "details": [
+      "保留手写静态站的轻量感，同时补上主题记忆、语言切换、RSS 全文和基础 SEO。",
+      "后续会继续把文章状态、归档和真实项目资产补齐。"
+    ],
+    "stack": ["Static HTML", "Markdown", "Node.js", "GitHub Pages"]
+  },
+  {
+    "kind": "写作 · 随想",
+    "title": "Notes in Progress",
+    "description": "一些还没完全想清楚的问题，先种下来，再慢慢修剪。",
+    "details": [
+      "目前主要记录设计、工程、排版、动画和个人知识系统。",
+      "比起完整教程，更像是一组持续生长的观察。"
+    ],
+    "stack": ["Design", "Engineering", "Writing"]
+  },
+  {
+    "kind": "进行中 · 工具",
+    "title": "Small Tools",
+    "description": "给自己用的小工具和实验，成熟后再公开整理。",
+    "details": [
+      "这里先保留入口，不放虚假的在线体验或仓库链接。",
+      "等项目真的稳定，再补真实链接和图标。"
+    ],
+    "stack": ["Prototype", "Local-first", "WIP"]
+  }
+]

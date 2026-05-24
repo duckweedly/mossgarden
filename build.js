@@ -1,11 +1,14 @@
-const { readFileSync, writeFileSync, mkdirSync, readdirSync } = require('fs');
+const { copyFileSync, mkdirSync, readFileSync, readdirSync, writeFileSync } = require('fs');
 const { join } = require('path');
 const matter = require('gray-matter');
 const { marked } = require('marked');
 
-const siteUrl = 'https://xuean.wiki';
-const siteTitle = '随想 · Random Thoughts';
-const siteDescription = '关于设计、工程，和一些没想清楚的问题。不定期更新。';
+const config = JSON.parse(readFileSync(join(__dirname, 'site.config.json'), 'utf8'));
+const projects = JSON.parse(readFileSync(join(__dirname, 'src/projects.json'), 'utf8'));
+
+const siteUrl = config.siteUrl.replace(/\/$/, '');
+const siteTitle = config.title;
+const siteDescription = config.description;
 
 const posts = readdirSync(join(__dirname, 'src/posts'))
   .filter(f => f.endsWith('.md'))
@@ -22,6 +25,13 @@ const posts = readdirSync(join(__dirname, 'src/posts'))
     };
   })
   .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+mkdirSync(join(__dirname, 'docs/assets'), { recursive: true });
+copyFileSync(join(__dirname, 'src/assets/site.css'), join(__dirname, 'docs/assets/site.css'));
+copyFileSync(join(__dirname, 'src/assets/site.js'), join(__dirname, 'docs/assets/site.js'));
+writeFileSync(join(__dirname, 'docs/favicon.svg'), buildFavicon());
+writeFileSync(join(__dirname, 'docs/apple-touch-icon.svg'), buildAppleTouchIcon());
+writeFileSync(join(__dirname, 'docs/manifest.webmanifest'), buildManifest());
 
 const postTpl = readFileSync(join(__dirname, 'templates/post.html'), 'utf8');
 
@@ -48,6 +58,11 @@ posts.forEach((post, i) => {
   if (!next) html = html.replace(/<!-- IF_NEXT -->[\s\S]*?<!-- \/IF_NEXT -->/g, '');
   else html = html.replace(/<!-- IF_NEXT -->/g, '').replace(/<!-- \/IF_NEXT -->/g, '');
 
+  html = applyCommonConfig(html)
+    .replace('<body>', '<body class="article-page">')
+    .replace('<div class="fireflies" id="fireflies"></div>', '<div class="fireflies" id="fireflies" data-count="10"></div>');
+  html = applySharedAssets(html, '../../');
+
   mkdirSync(join(__dirname, `docs/posts/${post.slug}`), { recursive: true });
   writeFileSync(join(__dirname, `docs/posts/${post.slug}/index.html`), html);
   console.log(`  → ${post.slug}`);
@@ -63,7 +78,7 @@ const listHtml = posts.map(p =>
   `    </a>`
 ).join('\n');
 
-idx = idx
+idx = updateHomeMetadata(idx)
   .replace(
     /<!-- BEGIN_POSTS -->[\s\S]*?<!-- END_POSTS -->/,
     `<!-- BEGIN_POSTS -->\n${listHtml}\n    <!-- END_POSTS -->`
@@ -71,7 +86,13 @@ idx = idx
   .replace(
     /<!-- POST_COUNT -->.*?<!-- \/POST_COUNT -->/,
     `<!-- POST_COUNT -->${posts.length} 篇<!-- /POST_COUNT -->`
+  )
+  .replace(
+    /<section class="sec" id="projects">[\s\S]*?<\/section>\s*<\/main>/,
+    `${buildProjectsSection(projects)}\n  </main>`
   );
+
+idx = applySharedAssets(applyCommonConfig(idx), '');
 
 writeFileSync(indexPath, idx);
 writeFileSync(join(__dirname, 'docs/feed.xml'), buildFeed(posts));
@@ -79,6 +100,102 @@ writeFileSync(join(__dirname, 'docs/sitemap.xml'), buildSitemap(posts));
 writeFileSync(join(__dirname, 'docs/robots.txt'), buildRobots());
 writeFileSync(join(__dirname, 'docs/404.html'), buildNotFoundPage());
 console.log(`\n✓ built ${posts.length} posts`);
+
+function updateHomeMetadata(html) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: siteTitle,
+    url: `${siteUrl}/`,
+    description: siteDescription
+  };
+
+  return html
+    .replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeHtml(siteTitle)}</title>`)
+    .replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${escapeHtml(siteDescription)}">`)
+    .replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${siteUrl}/">`)
+    .replace(/<link rel="alternate" type="application\/rss\+xml" title="[^"]*" href="feed.xml">/, `<link rel="alternate" type="application/rss+xml" title="${escapeHtml(config.shortTitle)}" href="feed.xml">`)
+    .replace(/<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${escapeHtml(siteTitle)}">`)
+    .replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${escapeHtml(siteDescription)}">`)
+    .replace(/<meta property="og:url" content="[^"]*">/, `<meta property="og:url" content="${siteUrl}/">`)
+    .replace(/<meta property="og:site_name" content="[^"]*">/, `<meta property="og:site_name" content="${escapeHtml(config.shortTitle)}">`)
+    .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, `<script type="application/ld+json">\n${JSON.stringify(jsonLd, null, 2)}\n</script>`);
+}
+
+function applyCommonConfig(html) {
+  return html
+    .replace(/<span class="brand-zh">[^<]*<\/span><span class="brand-en">[^<]*<\/span>/g, `<span class="brand-zh">${escapeHtml(config.shortTitle)}</span><span class="brand-en">${escapeHtml(config.englishTitle)}</span>`)
+    .replace(/href="https:\/\/github\.com\/duckweedly"/g, `href="${escapeHtml(config.githubUrl)}"`)
+    .replace(/<p class="cp">[^<]*<\/p>/g, `<p class="cp">${escapeHtml(config.copyright)}</p>`);
+}
+
+function applySharedAssets(html, prefix) {
+  const assetLinks = [
+    `<link rel="icon" href="${prefix}favicon.svg" type="image/svg+xml">`,
+    `<link rel="apple-touch-icon" href="${prefix}apple-touch-icon.svg">`,
+    `<link rel="manifest" href="${prefix}manifest.webmanifest">`,
+    `<link rel="stylesheet" href="${prefix}assets/site.css">`
+  ].join('\n');
+  const runtime = `<script>\n  window.SITE_I18N = ${JSON.stringify(config.language, null, 2).replace(/\n/g, '\n  ')};\n</script>\n<script src="${prefix}assets/site.js" defer></script>`;
+
+  html = html
+    .replace(/\n<link rel="icon"[^>]*>/g, '')
+    .replace(/\n<link rel="apple-touch-icon"[^>]*>/g, '')
+    .replace(/\n<link rel="manifest"[^>]*>/g, '')
+    .replace(/\n<link rel="stylesheet" href="[^"]*assets\/site\.css">/g, '')
+    .replace(/\n<style>[\s\S]*?<\/style>\n/g, '\n');
+
+  if (/<link href="https:\/\/fonts\.googleapis\.com[^>]+>/.test(html)) {
+    html = html.replace(/(<link href="https:\/\/fonts\.googleapis\.com[^>]+>)/, `$1\n${assetLinks}`);
+  } else {
+    html = html.replace('</head>', `${assetLinks}\n</head>`);
+  }
+
+  html = html.replace(/\n<script>\n\s*window\.SITE_I18N = [\s\S]*?;\n<\/script>\n<script src="[^"]*assets\/site\.js" defer><\/script>\n<\/body>/, `\n${runtime}\n</body>`);
+  html = html.replace(/\n<script>\n\s*const root=document\.documentElement;[\s\S]*?<\/script>\n<\/body>/, `\n${runtime}\n</body>`);
+  if (!html.includes('assets/site.js')) html = html.replace('</body>', `${runtime}\n</body>`);
+
+  return html;
+}
+
+function buildProjectsSection(items) {
+  const rows = items.map((project, index) => {
+    const details = project.details.map(item => `        <p>${escapeHtml(item)}</p>`).join('\n');
+    const stack = project.stack.map(item => `<span>${escapeHtml(item)}</span>`).join('');
+    return `    <div class="proj">\n` +
+      `      <button class="proj-head" type="button" aria-expanded="false">\n` +
+      `        <div class="proj-icon"><svg viewBox="0 0 24 24"><path d="${projectIcon(index)}"/></svg></div>\n` +
+      `        <div class="proj-meta">\n` +
+      `          <div class="pk">${escapeHtml(project.kind)}</div>\n` +
+      `          <h3>${escapeHtml(project.title)}</h3>\n` +
+      `          <div class="sub">${escapeHtml(project.description)}</div>\n` +
+      `        </div>\n` +
+      `        <div class="proj-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>\n` +
+      `      </button>\n` +
+      `      <div class="proj-body"><div class="proj-body-in">\n` +
+      `${details}\n` +
+      `        <div class="stack">${stack}</div>\n` +
+      `      </div></div>\n` +
+      `    </div>`;
+  }).join('\n\n');
+
+  return `  <section class="sec" id="projects">\n` +
+    `    <div class="sec-h">\n` +
+    `      <h2 data-i18n-html="projectsTitle">动手<em>造的</em></h2>\n` +
+    `      <span class="rule"></span>\n` +
+    `      <span class="ct">点击展开</span>\n` +
+    `    </div>\n\n` +
+    `${rows}\n` +
+    `  </section>`;
+}
+
+function projectIcon(index) {
+  return [
+    'M12 2C7 4 4 9 4 14c0 4 3 7 7 7 6 0 9-7 9-15-3 1-7 2-9 5-1-3 0-6 1-9z',
+    'M4 5h16v3H4zM4 11h11v3H4zM4 17h16v3H4z',
+    'M12 2l2.4 6.2L21 9l-5 4.3L17.5 21 12 17l-5.5 4L8 13.3 3 9l6.6-.8z'
+  ][index % 3];
+}
 
 function buildFeed(items) {
   return `<?xml version="1.0" encoding="UTF-8"?>
@@ -125,14 +242,57 @@ Sitemap: ${siteUrl}/sitemap.xml
 `;
 }
 
+function buildManifest() {
+  return `${JSON.stringify({
+    name: siteTitle,
+    short_name: config.shortTitle,
+    description: siteDescription,
+    lang: 'zh-CN',
+    start_url: '/',
+    scope: '/',
+    display: 'standalone',
+    background_color: '#f4ecd8',
+    theme_color: '#7a8c4a',
+    icons: [
+      { src: '/favicon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' },
+      { src: '/apple-touch-icon.svg', sizes: '180x180', type: 'image/svg+xml', purpose: 'any' }
+    ]
+  }, null, 2)}\n`;
+}
+
+function buildFavicon() {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="18" fill="#fbf6e9"/>
+  <path d="M32 54V30" fill="none" stroke="#5d6e34" stroke-width="4" stroke-linecap="round"/>
+  <path d="M32 34C20 32 14 22 14 16C25 16 32 24 32 34Z" fill="#9cb05c"/>
+  <path d="M32 38C44 36 50 27 50 21C39 21 32 28 32 38Z" fill="#7a8c4a"/>
+  <circle cx="32" cy="32" r="30" fill="none" stroke="#e3d7b8" stroke-width="2"/>
+</svg>
+`;
+}
+
+function buildAppleTouchIcon() {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <rect width="180" height="180" rx="42" fill="#fbf6e9"/>
+  <circle cx="90" cy="90" r="72" fill="#f4ecd8" stroke="#e3d7b8" stroke-width="5"/>
+  <path d="M90 142V82" fill="none" stroke="#5d6e34" stroke-width="10" stroke-linecap="round"/>
+  <path d="M90 92C58 88 42 62 42 46C70 46 90 68 90 92Z" fill="#9cb05c"/>
+  <path d="M90 104C122 98 138 74 138 58C110 58 90 80 90 104Z" fill="#7a8c4a"/>
+</svg>
+`;
+}
+
 function buildNotFoundPage() {
   return `<!DOCTYPE html>
 <html lang="zh" data-theme="day">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>页面没有长出来 — 随想</title>
+<title>页面没有长出来 — ${escapeHtml(config.shortTitle)}</title>
 <meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.svg">
+<link rel="manifest" href="/manifest.webmanifest">
 <script>
   (() => {
     const theme = localStorage.getItem('theme');
@@ -155,7 +315,7 @@ function buildNotFoundPage() {
   <div class="code">404</div>
   <h1>这页还没有长出来。</h1>
   <p>也许是旧链接，也许是一颗还没发芽的种子。</p>
-  <a href="/">回到随想</a>
+  <a href="/">回到${escapeHtml(config.shortTitle)}</a>
 </main>
 </body>
 </html>
