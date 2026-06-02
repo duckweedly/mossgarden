@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="day">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我们需要的 FDE，不是驻场救火的人，而是把合同变成交付系统的能力 — 随想</title>
+<meta name="description" content="在设备工程交付公司里，FDE 不该被理解成一个万能救火角色，而应是一种把客户场景、设备配置、供应链、现场和商务串起来的组织能力。">
+<link rel="canonical" href="https://xuean.wiki/posts/tiangong-fde-delivery-system/">
+<link rel="alternate" type="application/rss+xml" title="随想" href="../../feed.xml">
+<meta property="og:title" content="我们需要的 FDE，不是驻场救火的人，而是把合同变成交付系统的能力 — 随想">
+<meta property="og:description" content="在设备工程交付公司里，FDE 不该被理解成一个万能救火角色，而应是一种把客户场景、设备配置、供应链、现场和商务串起来的组织能力。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://xuean.wiki/posts/tiangong-fde-delivery-system/">
+<meta property="og:site_name" content="随想">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#f4ecd8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141a13" media="(prefers-color-scheme: dark)">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "我们需要的 FDE，不是驻场救火的人，而是把合同变成交付系统的能力",
+  "description": "在设备工程交付公司里，FDE 不该被理解成一个万能救火角色，而应是一种把客户场景、设备配置、供应链、现场和商务串起来的组织能力。",
+  "url": "https://xuean.wiki/posts/tiangong-fde-delivery-system/",
+  "datePublished": "2026-05-31",
+  "dateModified": "2026-05-31",
+  "inLanguage": "zh-CN",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "随想 · Random Thoughts",
+    "url": "https://xuean.wiki/"
+  }
+}
+</script>
+<script>
+  (() => {
+    const theme = localStorage.getItem('theme');
+    if (theme === 'day' || theme === 'night') document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="stylesheet">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.svg">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body class="article-page">
+<a class="skip-link" href="#content">跳到正文</a>
+<div class="orb"></div>
+<div class="fireflies" id="fireflies" data-count="10"></div>
+
+<div class="font-panel" aria-label="字体预设">
+  <button type="button" data-font-choice="default" aria-pressed="true">Aa</button>
+  <button type="button" data-font-choice="maple" aria-pressed="false">Maple</button>
+  <button type="button" data-font-choice="sarasa" aria-pressed="false">Sarasa</button>
+  <button type="button" data-font-choice="wenkai" aria-pressed="false">WenKai</button>
+</div>
+
+<div class="wrap">
+  <nav>
+    <a href="../../" class="logo">
+      <span class="sprout">
+        <svg viewBox="0 0 30 30">
+          <path class="stem" d="M15 28 L15 14"/>
+          <path class="lf" d="M15 16 C9 15 6 10 6 7 C11 7 15 11 15 16Z"/>
+          <path class="lf lf2" d="M15 18 C21 17 24 13 24 10 C19 10 15 13 15 18Z"/>
+        </svg>
+      </span>
+      <span class="brand-zh">随想</span><span class="brand-en">Random Thoughts</span>
+    </a>
+    <div class="nav-r">
+      <a href="../../#writing" data-i18n="navWriting">文字</a>
+      <a href="../../#projects" data-i18n="navProjects">造物</a>
+      <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Switch language">EN</button>
+      <button class="toggle" id="toggle" aria-label="切换昼夜" aria-pressed="false">
+        <span class="knob">
+          <svg id="knob-ic" viewBox="0 0 24 24"></svg>
+        </span>
+      </button>
+    </div>
+  </nav>
+
+  <main id="content">
+  <article>
+    <header class="article-header">
+      <a href="../../" class="back">← 随想</a>
+      <div class="article-meta">
+        <div class="article-tag">FDE</div>
+      </div>
+      <h1>我们需要的 FDE，不是驻场救火的人，而是把合同变成交付系统的能力</h1>
+      <time class="article-date" datetime="2026-05-31">2026 年 05 月 31 日</time>
+    </header>
+
+    <div class="article-body">
+      <p>FDE 这个词最近很热，但如果放到我们的业务里，不能照搬硅谷语境。</p>
+<p>对软件公司来说，FDE 可能是把模型、Agent、数据和客户流程接起来的人。对我们来说，更准确的说法应该是：把合同、设计、供应链、现场、商务全部翻译成项目交付系统的能力。</p>
+<p>这不只是懂 AI。</p>
+<p>它首先要懂设备工程交付。</p>
+<p>我们的项目经理、方案工程师、交付负责人、供应链负责人，其实天然就有一部分 FDE 能力。因为他们每天面对的不是抽象需求，而是实物交付：</p>
+<p>客户要什么业务能力。<br>方案配置怎么定。<br>图纸怎么出。<br>BOM 怎么拆。<br>供应商怎么交。<br>生产怎么排。<br>设备怎么发。<br>现场怎么装。<br>KPI 怎么跑。<br>客户怎么验。<br>款怎么收。<br>利润怎么保。</p>
+<p>能把这些线串起来的人，比很多只会讲 AI 的人更接近真正的企业 AI 落地。</p>
+<p>但这里也有一个风险：我们很容易把这种人用成救火队。</p>
+<p>客户现场有问题，去现场。<br>设计和采购对不上，去协调。<br>生产缺料，去催。<br>发货计划变了，去解释。<br>安装调试出问题，去盯。<br>KPI 跑不出来，去想办法。<br>验收卡住，去沟通。<br>回款慢了，去补材料。</p>
+<p>如果只是这样，再强的人也会被项目消耗掉。</p>
+<p>所以我们需要的 FDE，不应该只是“谁都找他”。更准确地说，我们需要把 FDE 能力沉淀成系统能力。</p>
+<p>第一，项目对象定义能力。</p>
+<p>合同签了以后，不能只靠项目经理脑子里知道这个项目是什么。系统里必须有清楚的项目对象：客户、场景、配置、设备数量、格口数量、上包台、扫描方式、定制料箱、现场限制、KPI 指标、验收节点、收款节点。</p>
+<p>这个对象定义不清，后面所有线都会乱。</p>
+<p>设计觉得自己出了方案。<br>采购觉得自己按 BOM 买了。<br>生产觉得自己按计划做了。<br>现场觉得自己按设备安装了。<br>商务觉得自己按合同节点收款。<br>每个人都可能是“对的”，项目却仍然是错的。</p>
+<p>第二，边界定义能力。</p>
+<p>设备工程项目里，边界非常重要。</p>
+<p>什么是标准配置，什么是客户定制。<br>什么变更属于合同范围内，什么要走商务变更。<br>什么替代料可以接受，什么必须重新评审。<br>什么现场条件由客户提供，什么由我们负责。<br>KPI 测试前置条件是什么。<br>验收失败是设备问题、现场条件问题、操作问题，还是业务流程问题。</p>
+<p>这些边界如果不清楚，项目会变成无止境的“再帮客户处理一下”。</p>
+<p>软件项目需求边界不清，会拖进度；设备工程项目边界不清，会同时拖进度、拖成本、拖库存、拖人员、拖回款。</p>
+<p>第三，沉淀能力。</p>
+<p>一个项目救火成功，不等于公司能力提升。</p>
+<p>真正有价值的是把这次项目里的经验沉淀下来：</p>
+<p>某类客户场景适合什么配置。<br>某类项目 BOM 容易漏哪些物料。<br>某类供应商交期风险大。<br>某类现场条件必须提前确认。<br>某类 KPI 验收容易卡在哪里。<br>某类配置变更会影响哪些成本。<br>某类海外项目运输和安装需要提前准备哪些材料。</p>
+<p>这些内容如果只停留在个人经验里，公司下一次还是从零开始。</p>
+<p>所以我会把我们的 FDE 能力分成四层。</p>
+<p>第一层，方案翻译。把客户业务场景翻译成设备配置和交付边界。电商、零售、快递、3C、冷链，每个场景的分拣对象、吞吐要求、准确率、占地、上包方式、格口设计、扫描方式都不同。</p>
+<p>第二层，工程拆解。把方案配置翻译成图纸、BOM、采购、生产、测试和发货计划。这里不能只会讲方案，必须理解配置变化如何影响实物链。</p>
+<p>第三层，现场闭环。把安装调试、KPI、验收问题翻译成可追踪的任务和责任，不让现场问题只停留在微信群和个人经验里。</p>
+<p>第四层，模式沉淀。把项目经验反哺到产品、配置模板、BOM 模板、供应商策略、安装 checklist、验收标准和商务报价模型。</p>
+<p>如果我们要做 AI，最有价值的不是做一个“AI 项目经理”取代人，而是做一个能增强这些 FDE 型人才的系统。</p>
+<p>AI 可以帮项目经理看风险，但不能替项目经理承担承诺。<br>AI 可以帮工程师比对配置和 BOM，但不能替工程师确认最终方案。<br>AI 可以帮供应链识别缺件影响，但不能随便替换物料。<br>AI 可以帮现场总结调试问题，但不能替代安全和验收责任。<br>AI 可以帮商务识别损益异常，但不能替公司决定让利。</p>
+<p>这种边界很重要。</p>
+<p>我们不是要把人拿掉，而是要把人的判断放到系统里，让它可见、可复用、可复盘。</p>
+<p>设备工程公司的核心竞争力，不只是设备本身，也包括项目交付能力。很多客户最后记住的不一定是某个功能参数，而是你能不能按期交付，能不能跑通 KPI，出了问题能不能解决，验收和回款能不能顺利。</p>
+<p>所以我们需要的 FDE，不是驻场救火的人。</p>
+<p>它应该是一种组织能力：把客户场景、设备配置、供应链齐套、现场安装和商务回款串成一个交付系统。</p>
+<p>如果 SCS 能成为这类人的工具，而不是又一个让他们填表的系统，我们的 AI 化才会有真正的根。</p>
+
+    </div>
+
+    <nav class="post-nav">
+      
+      <a href="../tiangong-traceable-project-facts/" class="prev-nav">
+        <div class="nav-label">← 上一篇</div>
+        <div>可信 AI 的底座不是模型，而是配置、BOM、到货、安装、KPI、回款都能追溯</div>
+      </a>
+      
+      
+      <a href="../tiangong-supply-chain-dark-river/" class="next-nav">
+        <div class="nav-label">下一篇 →</div>
+        <div>不能只盯现场，BOM、采购、齐套、生产、发货才是更早暴露风险的地方</div>
+      </a>
+      
+    </nav>
+  </article>
+  </main>
+
+  <footer>
+    <p class="fq">慢工。</p>
+    <div class="socials">
+      <a href="https://github.com/duckweedly" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.5 11.5 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+      <a href="../../feed.xml" aria-label="RSS"><svg viewBox="0 0 24 24"><path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248C1.456 24 0 22.546 0 20.752c0-1.794 1.456-3.248 3.252-3.248 1.795.001 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.062 10.96 4.966 11.022 11.009h4.817c-.062-8.71-7.118-15.758-15.839-15.82zm0-3.368c10.58.046 19.152 8.594 19.183 19.188h4.817c-.03-13.231-10.755-23.954-24-24v4.812z"/></svg></a>
+    </div>
+    <p class="cp">© 2026 随想 Random Thoughts</p>
+  </footer>
+</div>
+
+<script>
+  window.SITE_I18N = {
+    "zh": {
+      "navWriting": "文字",
+      "navProjects": "造物",
+      "heroLine1": "写一些字，",
+      "heroLine2": "做一些<em class=\"em\">东西</em>。",
+      "heroLead": "关于设计、工程，和一些没想清楚的问题。不定期更新。",
+      "writingTitle": "最近<em>写下的</em>",
+      "projectsTitle": "动手<em>造的</em>",
+      "footerQuote": "慢工。<br>没什么特别要说的，<br>东西都在上面了。"
+    },
+    "en": {
+      "navWriting": "Writing",
+      "navProjects": "Making",
+      "heroLine1": "Write some thoughts,",
+      "heroLine2": "make a few <em class=\"em\">things</em>.",
+      "heroLead": "Notes on design, engineering, and questions I have not quite figured out yet. Updated irregularly.",
+      "writingTitle": "Recent <em>writing</em>",
+      "projectsTitle": "Things <em>made</em>",
+      "footerQuote": "Slow work.<br>Nothing much to add,<br>everything is above."
+    }
+  };
+</script>
+<script src="../../assets/site.js" defer></script>
+</body>
+</html>

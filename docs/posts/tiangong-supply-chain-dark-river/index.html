@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="day">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>不能只盯现场，BOM、采购、齐套、生产、发货才是更早暴露风险的地方 — 随想</title>
+<meta name="description" content="现场问题往往不是现场才产生的。对设备工程交付来说，更高杠杆的管理对象，是 BOM、采购、齐套、生产、发货这条前置链路。">
+<link rel="canonical" href="https://xuean.wiki/posts/tiangong-supply-chain-dark-river/">
+<link rel="alternate" type="application/rss+xml" title="随想" href="../../feed.xml">
+<meta property="og:title" content="不能只盯现场，BOM、采购、齐套、生产、发货才是更早暴露风险的地方 — 随想">
+<meta property="og:description" content="现场问题往往不是现场才产生的。对设备工程交付来说，更高杠杆的管理对象，是 BOM、采购、齐套、生产、发货这条前置链路。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://xuean.wiki/posts/tiangong-supply-chain-dark-river/">
+<meta property="og:site_name" content="随想">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#f4ecd8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141a13" media="(prefers-color-scheme: dark)">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "不能只盯现场，BOM、采购、齐套、生产、发货才是更早暴露风险的地方",
+  "description": "现场问题往往不是现场才产生的。对设备工程交付来说，更高杠杆的管理对象，是 BOM、采购、齐套、生产、发货这条前置链路。",
+  "url": "https://xuean.wiki/posts/tiangong-supply-chain-dark-river/",
+  "datePublished": "2026-06-01",
+  "dateModified": "2026-06-01",
+  "inLanguage": "zh-CN",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "随想 · Random Thoughts",
+    "url": "https://xuean.wiki/"
+  }
+}
+</script>
+<script>
+  (() => {
+    const theme = localStorage.getItem('theme');
+    if (theme === 'day' || theme === 'night') document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="stylesheet">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.svg">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body class="article-page">
+<a class="skip-link" href="#content">跳到正文</a>
+<div class="orb"></div>
+<div class="fireflies" id="fireflies" data-count="10"></div>
+
+<div class="font-panel" aria-label="字体预设">
+  <button type="button" data-font-choice="default" aria-pressed="true">Aa</button>
+  <button type="button" data-font-choice="maple" aria-pressed="false">Maple</button>
+  <button type="button" data-font-choice="sarasa" aria-pressed="false">Sarasa</button>
+  <button type="button" data-font-choice="wenkai" aria-pressed="false">WenKai</button>
+</div>
+
+<div class="wrap">
+  <nav>
+    <a href="../../" class="logo">
+      <span class="sprout">
+        <svg viewBox="0 0 30 30">
+          <path class="stem" d="M15 28 L15 14"/>
+          <path class="lf" d="M15 16 C9 15 6 10 6 7 C11 7 15 11 15 16Z"/>
+          <path class="lf lf2" d="M15 18 C21 17 24 13 24 10 C19 10 15 13 15 18Z"/>
+        </svg>
+      </span>
+      <span class="brand-zh">随想</span><span class="brand-en">Random Thoughts</span>
+    </a>
+    <div class="nav-r">
+      <a href="../../#writing" data-i18n="navWriting">文字</a>
+      <a href="../../#projects" data-i18n="navProjects">造物</a>
+      <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Switch language">EN</button>
+      <button class="toggle" id="toggle" aria-label="切换昼夜" aria-pressed="false">
+        <span class="knob">
+          <svg id="knob-ic" viewBox="0 0 24 24"></svg>
+        </span>
+      </button>
+    </div>
+  </nav>
+
+  <main id="content">
+  <article>
+    <header class="article-header">
+      <a href="../../" class="back">← 随想</a>
+      <div class="article-meta">
+        <div class="article-tag">供应链</div>
+      </div>
+      <h1>不能只盯现场，BOM、采购、齐套、生产、发货才是更早暴露风险的地方</h1>
+      <time class="article-date" datetime="2026-06-01">2026 年 06 月 01 日</time>
+    </header>
+
+    <div class="article-body">
+      <p>如果只看项目最后的结果，我们很容易觉得最难的是现场。</p>
+<p>设备要运到客户仓库，要安装，要调试，要跑 KPI，要验收。海外项目还会叠加运输、人工、安装窗口、沟通成本和现场不可控因素。这些当然都难。</p>
+<p>但如果从经营视角往前追一层，很多现场问题并不是现场才产生的。</p>
+<p>它们更早发生在 BOM、采购、到货、齐套、生产、发货这条供应链线上。</p>
+<p>某个关键物料采购晚了，现场就要等。<br>某个定制件版本错了，到现场才发现装不上。<br>某个供应商交期不准，生产只能临时调整。<br>某个图纸变更没有同步到 BOM，采购买回来的不是最新配置。<br>某个项目为了赶发货临时替代物料，但替代影响了调试和验收。<br>部分设备先到了，配套件没到，现场无法完整安装。<br>运输计划和现场窗口没对上，客户仓库腾不出安装条件。</p>
+<p>这些表面上是现场问题，本质上往往是供应链问题在现场爆发。</p>
+<p>所以我们不能只把现场当成救火点。更应该把现场之前的链路做成预警点。</p>
+<p>一个软件模块没写完，可以临时加人加班。一个物料没到，很多时候加班也没有用。图纸错了，也不是改一行代码就能“热修”：要重新确认、采购、加工、运输、安装，时间和成本都会真实发生。</p>
+<p>所以 SCS 的核心不应该只是采购台账，而应该围绕“项目齐套”重构。</p>
+<p>采购不是目的，齐套才是目的。</p>
+<p>项目经理真正关心的不是“采购单有多少张”，而是：</p>
+<p>这个项目能不能按计划发货？<br>如果不能，是哪些物料卡住？<br>这些物料属于长周期件、标准件、定制件，还是变更件？<br>它们影响哪个设备、哪个模块、哪个现场安装节点？<br>有没有可替代方案？<br>替代会影响成本、性能、KPI、验收还是售后？<br>谁有权批准替代？<br>替代后是否回写图纸、BOM、采购、生产和项目损益？</p>
+<p>这才是设备工程公司的供应链智能。</p>
+<p>传统采购系统容易站在采购部门视角看问题：供应商、询价、下单、到货、付款。我们更需要从项目交付视角看采购：这个物料不只是一个采购项，它是某个项目、某个配置、某张图纸、某个设备模块、某次现场交付的一部分。</p>
+<p>如果系统只知道“物料 A 未到货”，价值有限。真正有价值的是系统能继续告诉我们：</p>
+<p>物料 A 未到货，会影响项目 X 的第 2 批发货。<br>它对应某台设备的某个模块。<br>如果晚 3 天，会压缩生产装配窗口。<br>如果晚 7 天，会影响客户现场安装计划。<br>如果替代，需要工程、采购、商务共同确认。<br>如果不替代，项目可能延期，并影响某个收款节点。</p>
+<p>这就是 SCS 应该做的事。</p>
+<p>AI 在这里也不是万能采购员。它不应该直接替人改供应商、改物料、改交付承诺。但它可以成为供应链线上的风险放大器和决策助手。</p>
+<p>它可以基于历史项目识别哪些物料经常成为瓶颈。<br>它可以在方案配置变更时提示 BOM 是否需要重算。<br>它可以比对图纸版本、配置清单和采购清单是否一致。<br>它可以把供应商交期、历史准交率、当前库存、生产排期放在一起，生成项目齐套风险。<br>它可以提醒项目经理：这个项目表面上采购进度正常，但某几个关键件会拖住整机发货。<br>它可以总结供应链会议纪要，并把行动项落到具体物料、负责人和时间。<br>它可以帮助商务看到：某个采购变更是否正在侵蚀项目利润。</p>
+<p>这里最重要的是“影响链”。</p>
+<p>设备工程公司怕的不是单点异常，而是不知道异常会影响哪里。</p>
+<p>一个采购延期，如果不影响项目发货，它只是采购问题。<br>一个采购延期，如果影响生产装配，它就是生产问题。<br>一个采购延期，如果影响现场安装，它就是客户交付问题。<br>一个采购延期，如果影响验收节点，它就是回款问题。<br>一个采购延期，如果导致加急采购、替代料、现场等待、二次进场，它就是利润问题。</p>
+<p>这就是为什么供应链线必须和设计线、现场线、商务线连起来。</p>
+<p>BOM 不能只属于工程。<br>采购不能只属于采购。<br>到货不能只属于仓库。<br>生产不能只属于生产。<br>发货不能只属于物流。<br>它们都属于项目。</p>
+<p>我会把 SCS 第一阶段的供应链指标压到四个：</p>
+<p>第一，项目齐套率。不是仓库总体库存，而是某个项目、某批发货、某次安装所需物料是否齐。</p>
+<p>第二，关键件风险。哪些物料影响路径最长，哪些供应商风险最大，哪些变更最可能导致延期。</p>
+<p>第三，变更影响范围。配置一改，影响哪些 BOM、采购单、库存、生产计划、现场节点和商务成本。</p>
+<p>第四，供应链对损益的影响。延期、替代、加急、返工、二次发货、现场等待，最终都要回到项目利润。</p>
+<p>如果这四个指标跑起来，SCS 就不是一个后台软件，而是项目交付的雷达。</p>
+<p>我们的设备方案本身就有大量组合：格口、上包台、扫描方式、拓展模块、定制料箱、现场布局。配置越多，越不能只靠人脑记忆和 Excel 追踪。</p>
+<p>因为每一个配置背后，都是 BOM、供应商、生产、运输、现场和验收。</p>
+<p>AI 真正有价值的地方，不是让它写一篇采购总结，而是让它帮我们看见：哪些项目会因为供应链链路不清而翻车。</p>
+<p>少一次缺件。<br>少一次现场等待。<br>少一次加急采购。<br>少一次图纸版本错用。<br>少一次发货后才发现配套不齐。<br>少一次项目经理靠群消息到处追。<br>少一次利润被隐性损耗吃掉。</p>
+<p>这比任何“智能问答”都更接近我们的核心经营。</p>
+
+    </div>
+
+    <nav class="post-nav">
+      
+      <a href="../tiangong-fde-delivery-system/" class="prev-nav">
+        <div class="nav-label">← 上一篇</div>
+        <div>我们需要的 FDE，不是驻场救火的人，而是把合同变成交付系统的能力</div>
+      </a>
+      
+      
+      <a href="../tiangong-ai-project-delivery-chain/" class="next-nav">
+        <div class="nav-label">下一篇 →</div>
+        <div>我们做 AI，不该先从聊天框开始，而该先从项目交付链开始</div>
+      </a>
+      
+    </nav>
+  </article>
+  </main>
+
+  <footer>
+    <p class="fq">慢工。</p>
+    <div class="socials">
+      <a href="https://github.com/duckweedly" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.5 11.5 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+      <a href="../../feed.xml" aria-label="RSS"><svg viewBox="0 0 24 24"><path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248C1.456 24 0 22.546 0 20.752c0-1.794 1.456-3.248 3.252-3.248 1.795.001 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.062 10.96 4.966 11.022 11.009h4.817c-.062-8.71-7.118-15.758-15.839-15.82zm0-3.368c10.58.046 19.152 8.594 19.183 19.188h4.817c-.03-13.231-10.755-23.954-24-24v4.812z"/></svg></a>
+    </div>
+    <p class="cp">© 2026 随想 Random Thoughts</p>
+  </footer>
+</div>
+
+<script>
+  window.SITE_I18N = {
+    "zh": {
+      "navWriting": "文字",
+      "navProjects": "造物",
+      "heroLine1": "写一些字，",
+      "heroLine2": "做一些<em class=\"em\">东西</em>。",
+      "heroLead": "关于设计、工程，和一些没想清楚的问题。不定期更新。",
+      "writingTitle": "最近<em>写下的</em>",
+      "projectsTitle": "动手<em>造的</em>",
+      "footerQuote": "慢工。<br>没什么特别要说的，<br>东西都在上面了。"
+    },
+    "en": {
+      "navWriting": "Writing",
+      "navProjects": "Making",
+      "heroLine1": "Write some thoughts,",
+      "heroLine2": "make a few <em class=\"em\">things</em>.",
+      "heroLead": "Notes on design, engineering, and questions I have not quite figured out yet. Updated irregularly.",
+      "writingTitle": "Recent <em>writing</em>",
+      "projectsTitle": "Things <em>made</em>",
+      "footerQuote": "Slow work.<br>Nothing much to add,<br>everything is above."
+    }
+  };
+</script>
+<script src="../../assets/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="day">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我们做 AI，不该先从聊天框开始，而该先从项目交付链开始 — 随想</title>
+<meta name="description" content="对设备工程交付公司来说，AI 的第一步不是多一个聊天入口，而是让合同到回款的项目事实链先被系统化看见。">
+<link rel="canonical" href="https://xuean.wiki/posts/tiangong-ai-project-delivery-chain/">
+<link rel="alternate" type="application/rss+xml" title="随想" href="../../feed.xml">
+<meta property="og:title" content="我们做 AI，不该先从聊天框开始，而该先从项目交付链开始 — 随想">
+<meta property="og:description" content="对设备工程交付公司来说，AI 的第一步不是多一个聊天入口，而是让合同到回款的项目事实链先被系统化看见。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://xuean.wiki/posts/tiangong-ai-project-delivery-chain/">
+<meta property="og:site_name" content="随想">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#f4ecd8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141a13" media="(prefers-color-scheme: dark)">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "我们做 AI，不该先从聊天框开始，而该先从项目交付链开始",
+  "description": "对设备工程交付公司来说，AI 的第一步不是多一个聊天入口，而是让合同到回款的项目事实链先被系统化看见。",
+  "url": "https://xuean.wiki/posts/tiangong-ai-project-delivery-chain/",
+  "datePublished": "2026-06-02",
+  "dateModified": "2026-06-02",
+  "inLanguage": "zh-CN",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "随想 · Random Thoughts",
+    "url": "https://xuean.wiki/"
+  }
+}
+</script>
+<script>
+  (() => {
+    const theme = localStorage.getItem('theme');
+    if (theme === 'day' || theme === 'night') document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="stylesheet">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.svg">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body class="article-page">
+<a class="skip-link" href="#content">跳到正文</a>
+<div class="orb"></div>
+<div class="fireflies" id="fireflies" data-count="10"></div>
+
+<div class="font-panel" aria-label="字体预设">
+  <button type="button" data-font-choice="default" aria-pressed="true">Aa</button>
+  <button type="button" data-font-choice="maple" aria-pressed="false">Maple</button>
+  <button type="button" data-font-choice="sarasa" aria-pressed="false">Sarasa</button>
+  <button type="button" data-font-choice="wenkai" aria-pressed="false">WenKai</button>
+</div>
+
+<div class="wrap">
+  <nav>
+    <a href="../../" class="logo">
+      <span class="sprout">
+        <svg viewBox="0 0 30 30">
+          <path class="stem" d="M15 28 L15 14"/>
+          <path class="lf" d="M15 16 C9 15 6 10 6 7 C11 7 15 11 15 16Z"/>
+          <path class="lf lf2" d="M15 18 C21 17 24 13 24 10 C19 10 15 13 15 18Z"/>
+        </svg>
+      </span>
+      <span class="brand-zh">随想</span><span class="brand-en">Random Thoughts</span>
+    </a>
+    <div class="nav-r">
+      <a href="../../#writing" data-i18n="navWriting">文字</a>
+      <a href="../../#projects" data-i18n="navProjects">造物</a>
+      <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Switch language">EN</button>
+      <button class="toggle" id="toggle" aria-label="切换昼夜" aria-pressed="false">
+        <span class="knob">
+          <svg id="knob-ic" viewBox="0 0 24 24"></svg>
+        </span>
+      </button>
+    </div>
+  </nav>
+
+  <main id="content">
+  <article>
+    <header class="article-header">
+      <a href="../../" class="back">← 随想</a>
+      <div class="article-meta">
+        <div class="article-tag">企业AI</div>
+      </div>
+      <h1>我们做 AI，不该先从聊天框开始，而该先从项目交付链开始</h1>
+      <time class="article-date" datetime="2026-06-02">2026 年 06 月 02 日</time>
+    </header>
+
+    <div class="article-body">
+      <p>这两天我一直在重新想一个问题：如果我们谈企业 AI，到底是在谈一个“更聪明的工具”，还是在谈一套能改变项目交付方式的能力？</p>
+<p>如果是软件公司，大家很自然会从知识库、RAG、Copilot、Agent、工作流这些词开始。但放到我们自己的业务里，这套顺序很容易跑偏。</p>
+<p>我们不是一家纯 IT 软件公司。</p>
+<p>我们交付的不是一个网页，也不是一套后台系统，更不是“上线即可交付”的 SaaS。我们的业务更接近仓储物流自动化设备交付：方案设计、设备配置、图纸、BOM、采购、生产、发货、现场安装、调试、KPI、验收、回款，任何一个环节出问题，都会变成真实成本。</p>
+<p>所以，AI 化的第一步不应该是“先做一个能聊天的机器人”。</p>
+<p>聊天框可以做，知识库也可以做，但它们不是第一矛盾。第一矛盾是：一个项目从合同签订到最终验收回款，中间每一步到底有没有被系统化地看见。</p>
+<p>对我们来说，一个项目至少有四条线：</p>
+<p>设计线：方案、配置、图纸、变更。<br>供应链线：BOM、采购、到货、齐套、生产、发货。<br>现场线：安装、调试、KPI、验收、问题闭环。<br>商务线：收款节点、开票、回款、成本和损益。</p>
+<p>这四条线不是并行写在 PPT 上就结束了。它们每天都在互相影响。</p>
+<p>配置一改，BOM 可能要重算。<br>BOM 一变，采购周期可能变。<br>采购晚到，生产排期会变。<br>生产延期，发货计划会变。<br>发货晚了，现场安装窗口会变。<br>现场延误，KPI 测试和验收节点会变。<br>验收推迟，开票、回款和项目利润都会被影响。</p>
+<p>这就是设备工程交付和纯软件交付的根本不同。</p>
+<p>软件项目也怕需求变，但设备工程项目更怕“实物状态没有被看见”。一个零件晚到，一个定制件返修，一张图纸版本错用，一个现场安装条件不满足，都可能让纸面利润变成真实损耗。</p>
+<p>所以我们谈 AI，不能先问“AI 能回答什么”，而要先问“AI 能不能帮我们提前看见项目链条哪里要断”。</p>
+<p>我会把第一阶段定义成：项目可见性。</p>
+<p>不是炫酷大屏，而是系统真正能回答这些问题：</p>
+<p>这个合同现在处于什么阶段？<br>设计配置是否冻结？<br>当前图纸版本是不是最新？<br>BOM 是否已经完整拆出？<br>哪些物料已采购，哪些还没下单？<br>哪些长周期件会影响生产？<br>哪些到货异常会影响发货？<br>生产装配是否按项目计划推进？<br>现场安装需要的设备、人员、工具、备件是否齐套？<br>KPI 验收条件是否已经确认？<br>收款节点和交付节点有没有对齐？<br>这个项目的真实损益有没有被看见？</p>
+<p>这些问题表面上不像 AI 问题，但它们决定 AI 能不能落地。</p>
+<p>如果这些问题没有被系统回答，AI 接进去很容易变成另一个“聪明但不落地”的工具。它可能能写周报、总结会议纪要、生成方案描述，但项目该延期还是延期，BOM 该错还是错，到货该没人盯还是没人盯，现场该救火还是救火。</p>
+<p>我们要警惕一种软件公司式 AI 幻觉：以为只要把知识库、聊天框、Agent 做出来，公司就 AI 化了。</p>
+<p>不是。</p>
+<p>对我们这样的设备工程交付公司来说，AI 化的第一张门票不是知识问答，而是项目主数据。</p>
+<p>项目对象要清楚。<br>配置对象要清楚。<br>BOM 对象要清楚。<br>采购对象要清楚。<br>到货对象要清楚。<br>生产对象要清楚。<br>发货对象要清楚。<br>现场任务对象要清楚。<br>验收对象要清楚。<br>收款对象要清楚。</p>
+<p>没有这些对象，AI 没有地方落脚，只能漂在聊天框里。</p>
+<p>更准确地说，AI 的价值不在于替人“拍脑袋”，而在于基于项目链路做辅助判断：</p>
+<p>提醒哪些物料会拖累发货。<br>发现哪些配置和 BOM 不一致。<br>总结哪些项目反复因为同类物料延期。<br>提示现场安装前置条件是否缺失。<br>把会议纪要里的变更同步到配置、BOM、采购和商务影响。<br>帮助项目经理生成真实的项目风险报告，而不是格式正确但没有用的周报。</p>
+<p>这才是我们需要的 AI。</p>
+<p>它不是先长成一个聊天框，而是先长成一条能看懂“合同 -&gt; 设计 -&gt; BOM -&gt; 采购 -&gt; 生产 -&gt; 发货 -&gt; 现场 -&gt; 验收 -&gt; 回款”的项目系统。</p>
+<p>等这条链路跑起来，聊天框才有意义。</p>
+<p>因为那时候用户问“这个项目为什么可能延期”，AI 才不是在猜。它能看到设计是否冻结，BOM 是否齐套，采购是否到货，生产是否排期，现场是否具备安装条件，验收节点是否被影响。</p>
+<p>没有项目链路的 AI，只是会说话。</p>
+<p>有项目链路的 AI，才可能真正进入我们的业务。</p>
+
+    </div>
+
+    <nav class="post-nav">
+      
+      <a href="../tiangong-supply-chain-dark-river/" class="prev-nav">
+        <div class="nav-label">← 上一篇</div>
+        <div>不能只盯现场，BOM、采购、齐套、生产、发货才是更早暴露风险的地方</div>
+      </a>
+      
+      
+    </nav>
+  </article>
+  </main>
+
+  <footer>
+    <p class="fq">慢工。</p>
+    <div class="socials">
+      <a href="https://github.com/duckweedly" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.5 11.5 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+      <a href="../../feed.xml" aria-label="RSS"><svg viewBox="0 0 24 24"><path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248C1.456 24 0 22.546 0 20.752c0-1.794 1.456-3.248 3.252-3.248 1.795.001 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.062 10.96 4.966 11.022 11.009h4.817c-.062-8.71-7.118-15.758-15.839-15.82zm0-3.368c10.58.046 19.152 8.594 19.183 19.188h4.817c-.03-13.231-10.755-23.954-24-24v4.812z"/></svg></a>
+    </div>
+    <p class="cp">© 2026 随想 Random Thoughts</p>
+  </footer>
+</div>
+
+<script>
+  window.SITE_I18N = {
+    "zh": {
+      "navWriting": "文字",
+      "navProjects": "造物",
+      "heroLine1": "写一些字，",
+      "heroLine2": "做一些<em class=\"em\">东西</em>。",
+      "heroLead": "关于设计、工程，和一些没想清楚的问题。不定期更新。",
+      "writingTitle": "最近<em>写下的</em>",
+      "projectsTitle": "动手<em>造的</em>",
+      "footerQuote": "慢工。<br>没什么特别要说的，<br>东西都在上面了。"
+    },
+    "en": {
+      "navWriting": "Writing",
+      "navProjects": "Making",
+      "heroLine1": "Write some thoughts,",
+      "heroLine2": "make a few <em class=\"em\">things</em>.",
+      "heroLead": "Notes on design, engineering, and questions I have not quite figured out yet. Updated irregularly.",
+      "writingTitle": "Recent <em>writing</em>",
+      "projectsTitle": "Things <em>made</em>",
+      "footerQuote": "Slow work.<br>Nothing much to add,<br>everything is above."
+    }
+  };
+</script>
+<script src="../../assets/site.js" defer></script>
+</body>
+</html>

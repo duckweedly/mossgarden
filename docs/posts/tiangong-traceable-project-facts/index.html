@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="day">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>可信 AI 的底座不是模型，而是配置、BOM、到货、安装、KPI、回款都能追溯 — 随想</title>
+<meta name="description" content="对设备工程交付公司来说，可信 AI 不能只停在答案引用，而要落到项目事实链：配置、BOM、到货、安装、KPI、验收、回款都能追溯。">
+<link rel="canonical" href="https://xuean.wiki/posts/tiangong-traceable-project-facts/">
+<link rel="alternate" type="application/rss+xml" title="随想" href="../../feed.xml">
+<meta property="og:title" content="可信 AI 的底座不是模型，而是配置、BOM、到货、安装、KPI、回款都能追溯 — 随想">
+<meta property="og:description" content="对设备工程交付公司来说，可信 AI 不能只停在答案引用，而要落到项目事实链：配置、BOM、到货、安装、KPI、验收、回款都能追溯。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://xuean.wiki/posts/tiangong-traceable-project-facts/">
+<meta property="og:site_name" content="随想">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#f4ecd8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141a13" media="(prefers-color-scheme: dark)">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "可信 AI 的底座不是模型，而是配置、BOM、到货、安装、KPI、回款都能追溯",
+  "description": "对设备工程交付公司来说，可信 AI 不能只停在答案引用，而要落到项目事实链：配置、BOM、到货、安装、KPI、验收、回款都能追溯。",
+  "url": "https://xuean.wiki/posts/tiangong-traceable-project-facts/",
+  "datePublished": "2026-05-30",
+  "dateModified": "2026-05-30",
+  "inLanguage": "zh-CN",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "随想 · Random Thoughts",
+    "url": "https://xuean.wiki/"
+  }
+}
+</script>
+<script>
+  (() => {
+    const theme = localStorage.getItem('theme');
+    if (theme === 'day' || theme === 'night') document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="stylesheet">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.svg">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body class="article-page">
+<a class="skip-link" href="#content">跳到正文</a>
+<div class="orb"></div>
+<div class="fireflies" id="fireflies" data-count="10"></div>
+
+<div class="font-panel" aria-label="字体预设">
+  <button type="button" data-font-choice="default" aria-pressed="true">Aa</button>
+  <button type="button" data-font-choice="maple" aria-pressed="false">Maple</button>
+  <button type="button" data-font-choice="sarasa" aria-pressed="false">Sarasa</button>
+  <button type="button" data-font-choice="wenkai" aria-pressed="false">WenKai</button>
+</div>
+
+<div class="wrap">
+  <nav>
+    <a href="../../" class="logo">
+      <span class="sprout">
+        <svg viewBox="0 0 30 30">
+          <path class="stem" d="M15 28 L15 14"/>
+          <path class="lf" d="M15 16 C9 15 6 10 6 7 C11 7 15 11 15 16Z"/>
+          <path class="lf lf2" d="M15 18 C21 17 24 13 24 10 C19 10 15 13 15 18Z"/>
+        </svg>
+      </span>
+      <span class="brand-zh">随想</span><span class="brand-en">Random Thoughts</span>
+    </a>
+    <div class="nav-r">
+      <a href="../../#writing" data-i18n="navWriting">文字</a>
+      <a href="../../#projects" data-i18n="navProjects">造物</a>
+      <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Switch language">EN</button>
+      <button class="toggle" id="toggle" aria-label="切换昼夜" aria-pressed="false">
+        <span class="knob">
+          <svg id="knob-ic" viewBox="0 0 24 24"></svg>
+        </span>
+      </button>
+    </div>
+  </nav>
+
+  <main id="content">
+  <article>
+    <header class="article-header">
+      <a href="../../" class="back">← 随想</a>
+      <div class="article-meta">
+        <div class="article-tag">可信链路</div>
+      </div>
+      <h1>可信 AI 的底座不是模型，而是配置、BOM、到货、安装、KPI、回款都能追溯</h1>
+      <time class="article-date" datetime="2026-05-30">2026 年 05 月 30 日</time>
+    </header>
+
+    <div class="article-body">
+      <p>我之前写 AI 产品可信链路时，用过几个词：source、state、citation、action log。</p>
+<p>这些词在软件产品里有用，但如果直接拿到我们内部，可能会显得太 IT。对设备工程交付公司来说，可信链路不能只停在“答案有没有引用”。它必须落到更硬的东西上。</p>
+<p>我们的 source，不只是文档来源，而是合同、方案、配置清单、图纸、BOM、采购单、供应商承诺、到货记录、生产记录、发货单、现场安装日志、调试记录、KPI 测试数据、验收单、发票、回款记录。</p>
+<p>我们的 state，不只是“处理中/已完成”，而是设计是否冻结、BOM 是否齐套、采购是否下单、物料是否到货、生产是否开工、设备是否发货、现场是否具备安装条件、调试是否完成、KPI 是否达标、验收是否通过、款项是否回收。</p>
+<p>我们的 citation，不只是“这句话来自哪份资料”，而是“这个判断依据哪张图纸、哪个 BOM 版本、哪条合同条款、哪个供应商交期、哪次现场测试、哪份验收记录”。</p>
+<p>我们的 action log，也不只是 AI 调了哪个工具，而是“谁改了配置，谁确认了 BOM，谁批准了替代料，谁变更了交期，谁确认了发货，谁记录了现场问题，谁确认了 KPI，谁触发了开票”。</p>
+<p>这才是设备工程公司的真实链路。</p>
+<p>如果这条链路做不起来，AI 再聪明也不敢用。因为设备工程里的很多判断会产生真实成本。</p>
+<p>一个配置判断错了，可能买错物料。<br>一个 BOM 版本错了，可能生产错设备。<br>一个到货状态不清，可能现场缺件。<br>一个安装前置条件没确认，可能人员白跑。<br>一个 KPI 口径不清，可能验收扯皮。<br>一个收款节点漏跟，可能现金流被拖。</p>
+<p>所以 SCS 不应该只做“信息登记”，而应该做“项目证据链”。</p>
+<p>每一个项目状态，都应该能回答三个问题：</p>
+<p>现在为什么是这个状态？<br>依据是什么？<br>下一步谁负责？</p>
+<p>比如“BOM 已齐套”。</p>
+<p>这句话不能只是一个勾选框。系统应该能看到：齐套依据是哪版配置清单、哪版图纸、哪些 BOM 行、哪些库存、哪些采购到货、哪些替代料批准记录。如果后来项目出问题，能追溯当时为什么认为齐套。</p>
+<p>比如“可发货”。</p>
+<p>这也不能只是物流说一句可以发。它应该同时检查：设备是否生产完成，配套件是否齐，包装是否完成，海外项目是否准备好运输和清关材料，现场安装窗口是否确认，客户收货条件是否满足，商务节点是否允许发货。</p>
+<p>比如“现场可安装”。</p>
+<p>这不是项目经理一句话。它应该包含：设备到货、现场空间、电源网络、地面条件、客户人员、施工许可、安装工具、备件、工程师排班、风险事项。</p>
+<p>比如“KPI 可测试”。</p>
+<p>它应该包含：测试口径、样本类型、吞吐量要求、准确率要求、异常处理方式、客户见证人、测试时间、测试记录。</p>
+<p>这些状态一旦有证据链，AI 才能真正发挥作用。</p>
+<p>AI 可以在项目周会上自动总结风险，但它必须引用具体物料、具体采购单、具体图纸版本、具体现场日志。AI 可以回答“这个项目为什么延期”，但它必须能指向：设计变更、供应商延期、生产排期、现场条件、客户验收口径里的哪一个。AI 可以建议“这个项目要重点盯”，但它必须说清楚，是因为关键件未到、发货窗口临近、回款节点绑定验收，还是项目毛利被加急成本侵蚀。</p>
+<p>没有证据的 AI，只是会写。</p>
+<p>有证据链的 AI，才是项目管理能力。</p>
+<p>我觉得 SCS 可以从四个看板开始，但每个看板都不能只是展示，而要能追溯。</p>
+<p>第一，设计配置看板。</p>
+<p>显示每个项目的方案、配置、图纸状态。重点不是“图纸上传了没”，而是配置是否冻结，变更是否影响 BOM，图纸版本是否和采购、生产一致。</p>
+<p>第二，供应链齐套看板。</p>
+<p>显示项目级 BOM、采购、到货、生产、发货状态。重点不是采购台账，而是某个项目、某批发货、某次现场安装所需物料是否齐套，哪些物料会影响关键路径。</p>
+<p>第三，现场交付看板。</p>
+<p>显示安装、调试、KPI、验收状态。重点不是记录现场日志，而是把现场问题和设计、供应链、客户条件、验收口径关联起来。</p>
+<p>第四，商务损益看板。</p>
+<p>显示收款节点、开票、回款、成本变化、项目毛利。重点不是财务报表，而是让项目过程里的变更、延期、加急、返工、二次进场都能回到损益。</p>
+<p>这四个看板连起来，我们才真正拥有项目链路。</p>
+<p>这时候 AI 才适合进来。</p>
+<p>AI 可以做项目风险解释。<br>AI 可以做配置-BOM 变更影响分析。<br>AI 可以做采购齐套预警。<br>AI 可以做现场问题归因。<br>AI 可以做验收资料自动整理。<br>AI 可以做项目复盘，总结哪些损耗来自设计、供应链、现场还是商务。</p>
+<p>但所有这些都建立在真实链路之上。</p>
+<p>我们的 AI 产品不是为了让内部多一个聊天窗口，而是为了让项目经理、工程、采购、生产、现场、商务看到同一条项目事实链。</p>
+<p>这条链路一旦跑通，公司很多管理问题会变得更清楚：</p>
+<p>到底是设计变更太多，还是采购响应慢？<br>到底是供应商交期不准，还是 BOM 拆解不完整？<br>到底是生产排期问题，还是项目齐套问题？<br>到底是现场条件没确认，还是设备交付质量问题？<br>到底是验收口径不清，还是 KPI 没跑出来？<br>到底是项目本身报价低，还是过程损耗吃掉了利润？</p>
+<p>这才是我们应该追求的 AI 化。</p>
+<p>不是让 AI 替公司说话，而是让公司第一次真正看清：一个设备工程项目，从合同到回款，中间每一步到底发生了什么。</p>
+<p>对我们来说，可信 AI 的底座不是模型，而是项目事实链。</p>
+<p>配置、BOM、采购、到货、生产、发货、安装、KPI、验收、回款。</p>
+<p>这十个词，比任何 Agent 口号都重要。</p>
+
+    </div>
+
+    <nav class="post-nav">
+      
+      
+      <a href="../tiangong-fde-delivery-system/" class="next-nav">
+        <div class="nav-label">下一篇 →</div>
+        <div>我们需要的 FDE，不是驻场救火的人，而是把合同变成交付系统的能力</div>
+      </a>
+      
+    </nav>
+  </article>
+  </main>
+
+  <footer>
+    <p class="fq">慢工。</p>
+    <div class="socials">
+      <a href="https://github.com/duckweedly" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.5 11.5 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+      <a href="../../feed.xml" aria-label="RSS"><svg viewBox="0 0 24 24"><path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248C1.456 24 0 22.546 0 20.752c0-1.794 1.456-3.248 3.252-3.248 1.795.001 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.062 10.96 4.966 11.022 11.009h4.817c-.062-8.71-7.118-15.758-15.839-15.82zm0-3.368c10.58.046 19.152 8.594 19.183 19.188h4.817c-.03-13.231-10.755-23.954-24-24v4.812z"/></svg></a>
+    </div>
+    <p class="cp">© 2026 随想 Random Thoughts</p>
+  </footer>
+</div>
+
+<script>
+  window.SITE_I18N = {
+    "zh": {
+      "navWriting": "文字",
+      "navProjects": "造物",
+      "heroLine1": "写一些字，",
+      "heroLine2": "做一些<em class=\"em\">东西</em>。",
+      "heroLead": "关于设计、工程，和一些没想清楚的问题。不定期更新。",
+      "writingTitle": "最近<em>写下的</em>",
+      "projectsTitle": "动手<em>造的</em>",
+      "footerQuote": "慢工。<br>没什么特别要说的，<br>东西都在上面了。"
+    },
+    "en": {
+      "navWriting": "Writing",
+      "navProjects": "Making",
+      "heroLine1": "Write some thoughts,",
+      "heroLine2": "make a few <em class=\"em\">things</em>.",
+      "heroLead": "Notes on design, engineering, and questions I have not quite figured out yet. Updated irregularly.",
+      "writingTitle": "Recent <em>writing</em>",
+      "projectsTitle": "Things <em>made</em>",
+      "footerQuote": "Slow work.<br>Nothing much to add,<br>everything is above."
+    }
+  };
+</script>
+<script src="../../assets/site.js" defer></script>
+</body>
+</html>
