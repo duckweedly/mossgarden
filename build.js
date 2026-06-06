@@ -58,9 +58,7 @@ posts.forEach((post, i) => {
   if (!next) html = html.replace(/<!-- IF_NEXT -->[\s\S]*?<!-- \/IF_NEXT -->/g, '');
   else html = html.replace(/<!-- IF_NEXT -->/g, '').replace(/<!-- \/IF_NEXT -->/g, '');
 
-  html = applyCommonConfig(html)
-    .replace('<body>', '<body class="article-page">')
-    .replace('<div class="fireflies" id="fireflies"></div>', '<div class="fireflies" id="fireflies" data-count="10"></div>');
+  html = applyCommonConfig(html);
   html = applySharedAssets(html, '../../');
 
   mkdirSync(join(__dirname, `docs/posts/${post.slug}`), { recursive: true });
@@ -72,24 +70,25 @@ const indexPath = join(__dirname, 'docs/index.html');
 let idx = readFileSync(indexPath, 'utf8');
 
 const listHtml = posts.map(p =>
-  `    <a class="post" href="posts/${p.slug}/">\n` +
-  `      <span class="pt"><span class="ptag">${escapeHtml(p.tag)}</span><h3>${escapeHtml(p.title)}<span class="arr">→</span></h3></span>\n` +
-  `      <span class="yr">${fmtShort(p.date)}</span>\n` +
-  `    </a>`
+  `      <a class="feed-item" href="posts/${p.slug}/">\n` +
+  `        <div class="fmeta"><span class="ftag">${escapeHtml(p.tag)}</span><span>${fmtShort(p.date)}</span></div>\n` +
+  `        <h3 class="ftitle">${escapeHtml(p.title)}</h3>\n` +
+  `        <p class="fexcerpt">${escapeHtml(p.description)}</p>\n` +
+  `      </a>`
 ).join('\n');
 
 idx = updateHomeMetadata(idx)
   .replace(
     /<!-- BEGIN_POSTS -->[\s\S]*?<!-- END_POSTS -->/,
-    `<!-- BEGIN_POSTS -->\n${listHtml}\n    <!-- END_POSTS -->`
+    `<!-- BEGIN_POSTS -->\n${listHtml}\n      <!-- END_POSTS -->`
   )
   .replace(
     /<!-- POST_COUNT -->.*?<!-- \/POST_COUNT -->/,
     `<!-- POST_COUNT -->${posts.length} 篇<!-- /POST_COUNT -->`
   )
   .replace(
-    /<section class="sec" id="projects">[\s\S]*?<\/section>\s*<\/main>/,
-    `${buildProjectsSection(projects)}\n  </main>`
+    /<!-- BEGIN_PROJECTS -->[\s\S]*?<!-- END_PROJECTS -->/,
+    `<!-- BEGIN_PROJECTS -->\n${buildProjectsSection(projects)}\n      <!-- END_PROJECTS -->`
   );
 
 idx = applySharedAssets(applyCommonConfig(idx), '');
@@ -130,7 +129,6 @@ function applyCommonConfig(html) {
 }
 
 function applySharedAssets(html, prefix) {
-  html = ensureFontPanel(html);
   const assetLinks = [
     `<link rel="icon" href="${prefix}favicon.svg" type="image/svg+xml">`,
     `<link rel="apple-touch-icon" href="${prefix}apple-touch-icon.svg">`,
@@ -159,54 +157,19 @@ function applySharedAssets(html, prefix) {
   return html;
 }
 
-function ensureFontPanel(html) {
-  if (html.includes('class="font-panel"')) return html;
-  const panel = `<div class="font-panel" aria-label="字体预设">
-  <button type="button" data-font-choice="default" aria-pressed="true">Aa</button>
-  <button type="button" data-font-choice="maple" aria-pressed="false">Maple</button>
-  <button type="button" data-font-choice="sarasa" aria-pressed="false">Sarasa</button>
-  <button type="button" data-font-choice="wenkai" aria-pressed="false">WenKai</button>
-</div>`;
-  return html.replace('<div class="wrap">', `${panel}\n\n<div class="wrap">`);
-}
-
 function buildProjectsSection(items) {
-  const rows = items.map((project, index) => {
+  const rows = items.map(project => {
     const details = project.details.map(item => `        <p>${escapeHtml(item)}</p>`).join('\n');
     const stack = project.stack.map(item => `<span>${escapeHtml(item)}</span>`).join('');
-    return `    <div class="proj">\n` +
-      `      <button class="proj-head" type="button" aria-expanded="false">\n` +
-      `        <div class="proj-icon"><svg viewBox="0 0 24 24"><path d="${projectIcon(index)}"/></svg></div>\n` +
-      `        <div class="proj-meta">\n` +
-      `          <div class="pk">${escapeHtml(project.kind)}</div>\n` +
-      `          <h3>${escapeHtml(project.title)}</h3>\n` +
-      `          <div class="sub">${escapeHtml(project.description)}</div>\n` +
-      `        </div>\n` +
-      `        <div class="proj-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>\n` +
-      `      </button>\n` +
-      `      <div class="proj-body"><div class="proj-body-in">\n` +
+    return `      <article class="project-card">\n` +
+      `        <div class="project-head"><span class="project-kind">${escapeHtml(project.kind)}</span><h3 class="project-name">${escapeHtml(project.title)}</h3></div>\n` +
+      `        <p class="project-desc">${escapeHtml(project.description)}</p>\n` +
       `${details}\n` +
       `        <div class="stack">${stack}</div>\n` +
-      `      </div></div>\n` +
-      `    </div>`;
+      `      </article>`;
   }).join('\n\n');
 
-  return `  <section class="sec" id="projects">\n` +
-    `    <div class="sec-h">\n` +
-    `      <h2 data-i18n-html="projectsTitle">动手<em>造的</em></h2>\n` +
-    `      <span class="rule"></span>\n` +
-    `      <span class="ct">点击展开</span>\n` +
-    `    </div>\n\n` +
-    `${rows}\n` +
-    `  </section>`;
-}
-
-function projectIcon(index) {
-  return [
-    'M12 2C7 4 4 9 4 14c0 4 3 7 7 7 6 0 9-7 9-15-3 1-7 2-9 5-1-3 0-6 1-9z',
-    'M4 5h16v3H4zM4 11h11v3H4zM4 17h16v3H4z',
-    'M12 2l2.4 6.2L21 9l-5 4.3L17.5 21 12 17l-5.5 4L8 13.3 3 9l6.6-.8z'
-  ][index % 3];
+  return rows;
 }
 
 function buildFeed(items) {
@@ -263,8 +226,8 @@ function buildManifest() {
     start_url: '/',
     scope: '/',
     display: 'standalone',
-    background_color: '#f4ecd8',
-    theme_color: '#7a8c4a',
+    background_color: '#070b09',
+    theme_color: '#6ee7a0',
     icons: [
       { src: '/favicon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' },
       { src: '/apple-touch-icon.svg', sizes: '180x180', type: 'image/svg+xml', purpose: 'any' }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh" data-theme="day">
+<html lang="zh" data-theme="night">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,8 +13,8 @@
 <meta property="og:url" content="https://xuean.wiki/posts/tiangong-fde-delivery-system/">
 <meta property="og:site_name" content="随想">
 <meta name="twitter:card" content="summary">
-<meta name="theme-color" content="#f4ecd8" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#141a13" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#070b09" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f0e4" media="(prefers-color-scheme: light)">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -40,7 +40,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../../apple-touch-icon.svg">
 <link rel="manifest" href="../../manifest.webmanifest">
@@ -48,53 +48,42 @@
 </head>
 <body class="article-page">
 <a class="skip-link" href="#content">跳到正文</a>
+<div class="bg"></div>
 <div class="orb"></div>
-<div class="fireflies" id="fireflies" data-count="10"></div>
+<div class="fireflies" id="fireflies" data-count="8"></div>
 
-<div class="font-panel" aria-label="字体预设">
-  <button type="button" data-font-choice="default" aria-pressed="true">Aa</button>
-  <button type="button" data-font-choice="maple" aria-pressed="false">Maple</button>
-  <button type="button" data-font-choice="sarasa" aria-pressed="false">Sarasa</button>
-  <button type="button" data-font-choice="wenkai" aria-pressed="false">WenKai</button>
-</div>
-
-<div class="wrap">
-  <nav>
-    <a href="../../" class="logo">
-      <span class="sprout">
-        <svg viewBox="0 0 30 30">
-          <path class="stem" d="M15 28 L15 14"/>
-          <path class="lf" d="M15 16 C9 15 6 10 6 7 C11 7 15 11 15 16Z"/>
-          <path class="lf lf2" d="M15 18 C21 17 24 13 24 10 C19 10 15 13 15 18Z"/>
-        </svg>
-      </span>
-      <span class="brand-zh">随想</span><span class="brand-en">Random Thoughts</span>
+<div class="layout">
+  <header class="topbar">
+    <a href="../../" class="brand" title="回到随想">
+      <span class="sprout" data-sprout></span>
+      <span class="brand-text"><span class="brand-name">随想</span><span class="brand-sub">Random Thoughts</span></span>
     </a>
-    <div class="nav-r">
-      <a href="../../#writing" data-i18n="navWriting">文字</a>
-      <a href="../../#projects" data-i18n="navProjects">造物</a>
-      <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Switch language">EN</button>
-      <button class="toggle" id="toggle" aria-label="切换昼夜" aria-pressed="false">
-        <span class="knob">
-          <svg id="knob-ic" viewBox="0 0 24 24"></svg>
-        </span>
-      </button>
+    <div class="top-actions">
+      <nav class="nav-links" aria-label="站点导航">
+        <a href="../../#writing" data-i18n="navWriting">文字</a>
+        <a href="../../#projects" data-i18n="navProjects">造物</a>
+      </nav>
+      <button class="pill lang-toggle" id="lang-toggle" type="button" aria-label="Switch language">EN</button>
+      <button class="pill theme-toggle" id="theme-toggle" type="button" aria-label="切换主题" aria-pressed="false"><span class="knob"></span></button>
     </div>
-  </nav>
+  </header>
 
-  <main id="content">
-  <article>
-    <header class="article-header">
-      <a href="../../" class="back">← 随想</a>
-      <div class="article-meta">
-        <div class="article-tag">FDE</div>
-      </div>
-      <h1>我们需要的 FDE，不是驻场救火的人，而是把合同变成交付系统的能力</h1>
-      <time class="article-date" datetime="2026-05-31">2026 年 05 月 31 日</time>
-    </header>
+  <main class="article-shell" id="content">
+    <article>
+      <header class="article-header">
+        <a class="back" href="../../">← 随想</a>
+        <div class="article-meta">
+          <div class="article-tag">FDE</div>
+          <div class="article-date">2026 年 05 月 31 日</div>
+        </div>
+        <div class="article-title-wrap">
+          <h1>我们需要的 FDE，不是驻场救火的人，而是把合同变成交付系统的能力</h1>
+          <p class="article-description">在设备工程交付公司里，FDE 不该被理解成一个万能救火角色，而应是一种把客户场景、设备配置、供应链、现场和商务串起来的组织能力。</p>
+        </div>
+      </header>
 
-    <div class="article-body">
-      <p>FDE 这个词最近很热，但如果放到我们的业务里，不能照搬硅谷语境。</p>
+      <div class="article-body">
+<p>FDE 这个词最近很热，但如果放到我们的业务里，不能照搬硅谷语境。</p>
 <p>对软件公司来说，FDE 可能是把模型、Agent、数据和客户流程接起来的人。对我们来说，更准确的说法应该是：把合同、设计、供应链、现场、商务全部翻译成项目交付系统的能力。</p>
 <p>这不只是懂 AI。</p>
 <p>它首先要懂设备工程交付。</p>
@@ -133,56 +122,59 @@
 <p>它应该是一种组织能力：把客户场景、设备配置、供应链齐套、现场安装和商务回款串成一个交付系统。</p>
 <p>如果 SCS 能成为这类人的工具，而不是又一个让他们填表的系统，我们的 AI 化才会有真正的根。</p>
 
+      </div>
+    </article>
+
+    <div class="article-end" aria-hidden="true">
+      <span class="rule"></span>
+      <span class="sprout" data-sprout></span>
+      <span class="rule"></span>
     </div>
 
-    <nav class="post-nav">
+    <nav class="post-nav" aria-label="文章导航">
       
       <a href="../tiangong-traceable-project-facts/" class="prev-nav">
-        <div class="nav-label">← 上一篇</div>
+        <div class="nav-label">上一篇</div>
         <div>可信 AI 的底座不是模型，而是配置、BOM、到货、安装、KPI、回款都能追溯</div>
       </a>
       
       
       <a href="../tiangong-supply-chain-dark-river/" class="next-nav">
-        <div class="nav-label">下一篇 →</div>
+        <div class="nav-label">下一篇</div>
         <div>不能只盯现场，BOM、采购、齐套、生产、发货才是更早暴露风险的地方</div>
       </a>
       
     </nav>
-  </article>
   </main>
-
-  <footer>
-    <p class="fq">慢工。</p>
-    <div class="socials">
-      <a href="https://github.com/duckweedly" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.5 11.5 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
-      <a href="../../feed.xml" aria-label="RSS"><svg viewBox="0 0 24 24"><path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248C1.456 24 0 22.546 0 20.752c0-1.794 1.456-3.248 3.252-3.248 1.795.001 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.062 10.96 4.966 11.022 11.009h4.817c-.062-8.71-7.118-15.758-15.839-15.82zm0-3.368c10.58.046 19.152 8.594 19.183 19.188h4.817c-.03-13.231-10.755-23.954-24-24v4.812z"/></svg></a>
-    </div>
-    <p class="cp">© 2026 随想 Random Thoughts</p>
-  </footer>
 </div>
+
+<footer class="site-footer">
+  <p class="cp">© 2026 随想 Random Thoughts</p>
+  <div class="socials">
+    <a href="https://github.com/duckweedly" aria-label="GitHub">GitHub</a>
+    <a href="../../feed.xml" aria-label="RSS">RSS</a>
+  </div>
+</footer>
 
 <script>
   window.SITE_I18N = {
     "zh": {
       "navWriting": "文字",
       "navProjects": "造物",
-      "heroLine1": "写一些字，",
-      "heroLine2": "做一些<em class=\"em\">东西</em>。",
-      "heroLead": "关于设计、工程，和一些没想清楚的问题。不定期更新。",
-      "writingTitle": "最近<em>写下的</em>",
-      "projectsTitle": "动手<em>造的</em>",
-      "footerQuote": "慢工。<br>没什么特别要说的，<br>东西都在上面了。"
+      "heroTitle": "你好，我是「随想」。",
+      "heroLead": "雪安把一部分自己，放进了这个对话框。问我点什么，或者从这里开始。",
+      "promptWriting": "我最近写了哪些文章",
+      "promptProjects": "最近在做什么",
+      "promptAbout": "介绍下你自己"
     },
     "en": {
       "navWriting": "Writing",
       "navProjects": "Making",
-      "heroLine1": "Write some thoughts,",
-      "heroLine2": "make a few <em class=\"em\">things</em>.",
-      "heroLead": "Notes on design, engineering, and questions I have not quite figured out yet. Updated irregularly.",
-      "writingTitle": "Recent <em>writing</em>",
-      "projectsTitle": "Things <em>made</em>",
-      "footerQuote": "Slow work.<br>Nothing much to add,<br>everything is above."
+      "heroTitle": "Hi, I am Random Thoughts.",
+      "heroLead": "A conversational garden for notes, small tools, and questions still growing.",
+      "promptWriting": "What have you written lately?",
+      "promptProjects": "What are you making?",
+      "promptAbout": "Tell me about yourself"
     }
   };
 </script>

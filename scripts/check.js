@@ -51,6 +51,10 @@ if (existsSync(join(root, 'docs/index.html'))) {
   expect(home.includes('rel="icon"'), 'home must link favicon');
   expect(home.includes('rel="stylesheet" href="assets/site.css"'), 'home must use extracted stylesheet');
   expect(home.includes('src="assets/site.js"'), 'home must use extracted runtime script');
+  expect(home.includes('class="hero-prompt"'), 'home must include conversational prompt buttons');
+  expect(home.includes('id="panel"'), 'home must include the preview panel');
+  expect(home.includes('id="writing-template"'), 'home must include the writing panel template');
+  expect(home.includes('id="projects-template"'), 'home must include the projects panel template');
 }
 
 for (const file of walk(docs).filter(path => path.endsWith('.html'))) {
@@ -80,25 +84,21 @@ if (existsSync(join(root, 'docs/manifest.webmanifest'))) {
 
 if (existsSync(join(root, 'docs/assets/site.css'))) {
   const css = read('docs/assets/site.css');
-  expect(css.includes('#writing .sec-h'), 'writing section must have a scoped header grid');
-  expect(css.includes('#writing .post .pt'), 'writing list must align tags and titles on a scoped grid');
-  expect(css.includes('#writing,#projects'), 'writing and projects sections must share the same content width');
-  expect(css.includes('.proj-head{padding:28px 30px;cursor:pointer;display:grid'), 'project cards must use a grid-aligned header');
-  expect(css.includes('.article-page .article-header'), 'article pages must use a scoped header grid');
-  expect(css.includes('.article-page .post-nav'), 'article post navigation must align with the article body');
-  expect(css.includes('[data-font="maple"]'), 'site must include Maple font preset');
-  expect(css.includes('[data-font="sarasa"]'), 'site must include Sarasa font preset');
-  expect(css.includes('[data-font="wenkai"]'), 'site must include WenKai font preset');
+  expect(css.includes('--bg-panel'), 'theme must include a panel surface token');
+  expect(css.includes('.hero-prompt'), 'home must style conversational prompt rows');
+  expect(css.includes('.input-bar'), 'home must style the composer input');
+  expect(css.includes('.panel.open'), 'preview panel must have an open state');
+  expect(css.includes('.feed-item'), 'writing feed items must be styled');
+  expect(css.includes('.project-card'), 'project panel cards must be styled');
+  expect(css.includes('.article-shell'), 'article pages must use the new reading shell');
+  expect(css.includes('@media (max-width: 980px)'), 'layout must include responsive panel behavior');
 }
 
 if (existsSync(join(root, 'docs/assets/site.js'))) {
   const js = read('docs/assets/site.js');
-  expect(js.includes('setFontPreset'), 'runtime must persist reading font presets');
-}
-
-if (existsSync(join(root, 'docs/index.html'))) {
-  const home = read('docs/index.html');
-  expect(home.includes('font-panel'), 'home must include the font preset panel');
+  expect(js.includes('openPanel'), 'runtime must open the preview panel');
+  expect(js.includes('routeQuery'), 'runtime must route composer prompts');
+  expect(js.includes('data-sprout'), 'runtime must hydrate sprout marks');
 }
 
 if (failures.length) {

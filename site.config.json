@@ -11,22 +11,20 @@
     "zh": {
       "navWriting": "文字",
       "navProjects": "造物",
-      "heroLine1": "写一些字，",
-      "heroLine2": "做一些<em class=\"em\">东西</em>。",
-      "heroLead": "关于设计、工程，和一些没想清楚的问题。不定期更新。",
-      "writingTitle": "最近<em>写下的</em>",
-      "projectsTitle": "动手<em>造的</em>",
-      "footerQuote": "慢工。<br>没什么特别要说的，<br>东西都在上面了。"
+      "heroTitle": "你好，我是「随想」。",
+      "heroLead": "雪安把一部分自己，放进了这个对话框。问我点什么，或者从这里开始。",
+      "promptWriting": "我最近写了哪些文章",
+      "promptProjects": "最近在做什么",
+      "promptAbout": "介绍下你自己"
     },
     "en": {
       "navWriting": "Writing",
       "navProjects": "Making",
-      "heroLine1": "Write some thoughts,",
-      "heroLine2": "make a few <em class=\"em\">things</em>.",
-      "heroLead": "Notes on design, engineering, and questions I have not quite figured out yet. Updated irregularly.",
-      "writingTitle": "Recent <em>writing</em>",
-      "projectsTitle": "Things <em>made</em>",
-      "footerQuote": "Slow work.<br>Nothing much to add,<br>everything is above."
+      "heroTitle": "Hi, I am Random Thoughts.",
+      "heroLead": "A conversational garden for notes, small tools, and questions still growing.",
+      "promptWriting": "What have you written lately?",
+      "promptProjects": "What are you making?",
+      "promptAbout": "Tell me about yourself"
     }
   }
 }
