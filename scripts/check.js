@@ -115,6 +115,12 @@ for (const file of walk(docs).filter(path => path.endsWith('.html'))) {
   expect(!html.includes('苔庭') && !html.includes('Mossgarden'), `${file} contains old brand`);
   expect(!html.includes('href="#"'), `${file} contains placeholder hash link`);
   expect(!/{{[a-z_]+}}/i.test(html), `${file} contains unresolved template token`);
+  if (file.includes('/docs/posts/')) {
+    expect(html.includes('<header class="site-header">'), `${file} must use the shared yinyang header`);
+    expect(!html.includes('<header class="topbar">'), `${file} must not use the old article topbar`);
+    expect(!html.includes('>Home</a>') && !html.includes('>Dark</button>'), `${file} must not render old article nav labels`);
+    expect(html.includes('<span class="article-tag post-tags">tegene</span>'), `${file} must render the english post tag`);
+  }
 }
 
 if (existsSync(join(root, 'docs/feed.xml'))) {
