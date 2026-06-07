@@ -392,6 +392,7 @@ article,
 }
 
 .project-tile {
+  width: 100%;
   min-height: auto;
   border: 2px solid var(--text-color);
   border-radius: 8px;
@@ -436,28 +437,25 @@ article,
   width: 180px;
   height: 180px;
   margin: 0 120px 80px auto;
-  border: 2px solid var(--text-color);
   border-radius: 50%;
   display: grid;
   place-items: center;
-  color: var(--bg-color);
-  background:
-    radial-gradient(circle at 35% 30%, var(--secondary-text), transparent 34%),
-    linear-gradient(135deg, var(--text-color), var(--border-color));
-  font-size: 30px;
+  color: var(--text-color);
+  background: var(--bg-color);
+  font-size: 1.2rem;
   font-weight: 800;
 }
 
 .about-copy {
   max-width: 100%;
-  font-family: Arial, "Helvetica Neue", sans-serif;
+  font-family: var(--body-font);
 }
 
 .about-copy p {
-  margin: 0 0 34px;
+  margin: 0 0 28px;
   color: var(--text-color);
-  font-size: 1.8rem;
-  line-height: 1.35;
+  font-size: 1.2rem;
+  line-height: 1.7;
 }
 
 .about-copy a {
@@ -838,7 +836,7 @@ article,
   }
 
   .about-copy p {
-    font-size: 1.55rem;
+    font-size: 1.2rem;
   }
 
   .text-row {

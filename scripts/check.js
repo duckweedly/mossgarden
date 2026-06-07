@@ -149,6 +149,7 @@ if (existsSync(join(root, 'docs/assets/site.css'))) {
   expect(css.includes('.article-shell'), 'article pages must use the new reading shell');
   expect(css.includes('.series-detail'), 'theme must style split series detail pages');
   expect(css.includes('.project-tile'), 'theme must style rounded project cards');
+  expect(/\.project-tile\s*\{[^}]*width:\s*100%;/s.test(css), 'project cards must fill their grid column');
   expect(!css.includes('grid-template-columns: repeat(3'), 'project cards must not use the rough three-column layout');
   expect(css.includes('.about-portrait'), 'theme must style the about portrait');
   expect(css.includes('@media (max-width: 640px)'), 'layout must include responsive archive behavior');
