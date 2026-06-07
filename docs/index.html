@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>随想 · Random Thoughts</title>
-<meta name="description" content="关于设计、工程，和一些没想清楚的问题。不定期更新。">
+<meta name="description" content="个人文章、学习专栏和项目记录。">
 <link rel="canonical" href="https://xuean.wiki/">
 <link rel="alternate" type="application/rss+xml" title="随想" href="feed.xml">
 <meta property="og:title" content="随想 · Random Thoughts">
-<meta property="og:description" content="关于设计、工程，和一些没想清楚的问题。不定期更新。">
+<meta property="og:description" content="个人文章、学习专栏和项目记录。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://xuean.wiki/">
 <meta property="og:site_name" content="随想">
@@ -21,7 +21,7 @@
   "@type": "WebSite",
   "name": "随想 · Random Thoughts",
   "url": "https://xuean.wiki/",
-  "description": "关于设计、工程，和一些没想清楚的问题。不定期更新。"
+  "description": "个人文章、学习专栏和项目记录。"
 }
 </script>
 <script>
@@ -40,20 +40,20 @@
 </head>
 <body class="home-page">
 <header class="site-header">
-  <div class="header-title"><a href="./">随想</a></div>
-  <div class="header-subtitle">Random Thoughts</div>
-  <nav class="header-items" aria-label="站点导航">
-    <a class="header-item" href="feed.xml">RSS</a>
-    <a class="header-item" href="https://github.com/duckweedly">GitHub</a>
-    <button class="theme-toggle header-item" id="theme-toggle" type="button">Dark</button>
+  <div class="header-brand">
+    <div class="header-title"><a href="./">Random Thoughts</a></div>
+    <button class="theme-toggle theme-icon" id="theme-toggle" type="button" aria-label="切换主题">🌙</button>
+  </div>
+  <nav class="header-nav" aria-label="站点导航">
+    <div class="nav-group nav-primary">
+      <a class="header-item" href="series/">Series</a>
+      <a class="header-item" href="projects/">Project</a>
+      <a class="header-item" href="about/">About</a>
+    </div>
   </nav>
 </header>
 
 <main class="site-wrap home-main" id="content">
-  <section class="home-intro" aria-label="简介">
-    <p>关于设计、工程，和一些没想清楚的问题。不定期更新。</p>
-  </section>
-
   <section id="posts-list" class="posts-list" aria-label="文章列表">
 <!-- BEGIN_POSTS -->
     <section class="posts-year" aria-labelledby="year-2026">

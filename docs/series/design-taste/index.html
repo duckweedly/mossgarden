@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>产品、界面和审美练习 — 随想 · Random Thoughts</title>
+<meta name="description" content="从具体界面、参考产品和真实使用感里打磨判断。">
+<link rel="canonical" href="https://xuean.wiki/series/design-taste/">
+<meta property="og:title" content="产品、界面和审美练习 — 随想 · Random Thoughts">
+<meta property="og:description" content="从具体界面、参考产品和真实使用感里打磨判断。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://xuean.wiki/series/design-taste/">
+<meta property="og:site_name" content="随想">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)">
+<script>
+  (() => {
+    const theme = localStorage.getItem('theme');
+    if (theme === 'dark' || theme === 'night') document.documentElement.setAttribute('data-theme', 'dark');
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Bungee+Shade&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.svg">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body class="section-page-body">
+<header class="site-header">
+  <div class="header-brand">
+    <div class="header-title"><a href="../../">Random Thoughts</a></div>
+    <button class="theme-toggle theme-icon" id="theme-toggle" type="button" aria-label="切换主题">🌙</button>
+  </div>
+  <nav class="header-nav" aria-label="站点导航">
+    <div class="nav-group nav-primary">
+      <a class="header-item" href="../../series/">Series</a>
+      <a class="header-item" href="../../projects/">Project</a>
+      <a class="header-item" href="../../about/">About</a>
+    </div>
+  </nav>
+</header>
+
+<main class="series-detail site-wrap section-page" id="content">
+  <aside class="series-toc" aria-label="系列目录">
+    <div class="toc-title">Series</div>
+    <a href="../ai-engineering/">AI Engineering</a>
+    <a href="../system-design/">System Design</a>
+    <a href="../design-taste/" aria-current="page">Design Taste</a>
+  </aside>
+  <section class="series-files" aria-label="文件">
+    <h1 class="section-title">Design Taste</h1>
+    <p class="section-lead">从具体界面、参考产品和真实使用感里打磨判断。</p>
+    <article class="file-row">
+      <h2>极简页面里的密度和留白</h2>
+      <span>UI · Mock</span>
+    </article>
+    <article class="file-row">
+      <h2>设置页的信息架构练习</h2>
+      <span>Product · Mock</span>
+    </article>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p class="cp">© 2026 随想 Random Thoughts</p>
+  <div class="socials">
+    <a href="https://github.com/duckweedly" aria-label="GitHub">GitHub</a>
+    <a href="../../feed.xml" aria-label="RSS">RSS</a>
+  </div>
+</footer>
+<script>
+  window.SITE_I18N = {
+    "zh": {
+      "navWriting": "文字",
+      "navProjects": "造物",
+      "heroTitle": "你好，我是「随想」。",
+      "heroLead": "雪安把一部分自己，放进了这个对话框。问我点什么，或者从这里开始。",
+      "promptWriting": "我最近写了哪些文章",
+      "promptProjects": "最近在做什么",
+      "promptAbout": "介绍下你自己"
+    },
+    "en": {
+      "navWriting": "Writing",
+      "navProjects": "Making",
+      "heroTitle": "Hi, I am Random Thoughts.",
+      "heroLead": "A conversational garden for notes, small tools, and questions still growing.",
+      "promptWriting": "What have you written lately?",
+      "promptProjects": "What are you making?",
+      "promptAbout": "Tell me about yourself"
+    }
+  };
+</script>
+<script src="../../assets/site.js" defer></script>
+</body>
+</html>

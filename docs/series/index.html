@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Series — 随想 · Random Thoughts</title>
+<meta name="description" content="学习专栏列表。">
+<link rel="canonical" href="https://xuean.wiki/series/">
+<meta property="og:title" content="Series — 随想 · Random Thoughts">
+<meta property="og:description" content="学习专栏列表。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://xuean.wiki/series/">
+<meta property="og:site_name" content="随想">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)">
+<script>
+  (() => {
+    const theme = localStorage.getItem('theme');
+    if (theme === 'dark' || theme === 'night') document.documentElement.setAttribute('data-theme', 'dark');
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Bungee+Shade&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../apple-touch-icon.svg">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body class="section-page-body">
+<header class="site-header">
+  <div class="header-brand">
+    <div class="header-title"><a href="../">Random Thoughts</a></div>
+    <button class="theme-toggle theme-icon" id="theme-toggle" type="button" aria-label="切换主题">🌙</button>
+  </div>
+  <nav class="header-nav" aria-label="站点导航">
+    <div class="nav-group nav-primary">
+      <a class="header-item" href="../series/">Series</a>
+      <a class="header-item" href="../projects/">Project</a>
+      <a class="header-item" href="../about/">About</a>
+    </div>
+  </nav>
+</header>
+
+<main class="site-wrap section-page" id="content">
+  <h1 class="section-title">Series</h1>
+  <div class="series-list">
+    <a class="series-row" href="ai-engineering/">
+      <span class="text-kicker">AI Engineering</span>
+      <span>
+        <strong>企业 AI、RAG、Agent 和交付系统</strong>
+        <em>把模型能力放回真实业务链路里看：项目、知识、数据、流程和组织。</em>
+      </span>
+      <span class="text-status">Series</span>
+    </a>
+    <a class="series-row" href="system-design/">
+      <span class="text-kicker">System Design</span>
+      <span>
+        <strong>系统设计与工程判断</strong>
+        <em>记录架构边界、数据对象、权限、集成和可运维性的取舍。</em>
+      </span>
+      <span class="text-status">Notes</span>
+    </a>
+    <a class="series-row" href="design-taste/">
+      <span class="text-kicker">Design Taste</span>
+      <span>
+        <strong>产品、界面和审美练习</strong>
+        <em>从具体界面、参考产品和真实使用感里打磨判断。</em>
+      </span>
+      <span class="text-status">Study</span>
+    </a>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <p class="cp">© 2026 随想 Random Thoughts</p>
+  <div class="socials">
+    <a href="https://github.com/duckweedly" aria-label="GitHub">GitHub</a>
+    <a href="../feed.xml" aria-label="RSS">RSS</a>
+  </div>
+</footer>
+<script>
+  window.SITE_I18N = {
+    "zh": {
+      "navWriting": "文字",
+      "navProjects": "造物",
+      "heroTitle": "你好，我是「随想」。",
+      "heroLead": "雪安把一部分自己，放进了这个对话框。问我点什么，或者从这里开始。",
+      "promptWriting": "我最近写了哪些文章",
+      "promptProjects": "最近在做什么",
+      "promptAbout": "介绍下你自己"
+    },
+    "en": {
+      "navWriting": "Writing",
+      "navProjects": "Making",
+      "heroTitle": "Hi, I am Random Thoughts.",
+      "heroLead": "A conversational garden for notes, small tools, and questions still growing.",
+      "promptWriting": "What have you written lately?",
+      "promptProjects": "What are you making?",
+      "promptAbout": "Tell me about yourself"
+    }
+  };
+</script>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

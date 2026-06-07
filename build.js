@@ -88,6 +88,7 @@ idx = updateHomeMetadata(idx)
 idx = applySharedAssets(applyCommonConfig(idx), '');
 
 writeFileSync(indexPath, idx);
+writeStaticPages();
 writeFileSync(join(__dirname, 'docs/feed.xml'), buildFeed(posts));
 writeFileSync(join(__dirname, 'docs/sitemap.xml'), buildSitemap(posts));
 writeFileSync(join(__dirname, 'docs/robots.txt'), buildRobots());
@@ -190,6 +191,201 @@ function buildPostsList(items) {
   }).join('\n\n');
 }
 
+function writeStaticPages() {
+  const seriesItems = [
+    {
+      slug: 'ai-engineering',
+      kicker: 'AI Engineering',
+      title: '企业 AI、RAG、Agent 和交付系统',
+      desc: '把模型能力放回真实业务链路里看：项目、知识、数据、流程和组织。',
+      status: 'Series',
+      files: [
+        { title: '企业 AI 的第一步不是聊天框', meta: 'Project chain · Draft' },
+        { title: 'RAG 如何接入真实交付事实', meta: 'Knowledge · Mock' },
+        { title: 'Agent 什么时候该进业务流程', meta: 'Workflow · Mock' }
+      ]
+    },
+    {
+      slug: 'system-design',
+      kicker: 'System Design',
+      title: '系统设计与工程判断',
+      desc: '记录架构边界、数据对象、权限、集成和可运维性的取舍。',
+      status: 'Notes',
+      files: [
+        { title: '对象边界先于功能页面', meta: 'Architecture · Mock' },
+        { title: '权限不是按钮显隐', meta: 'RBAC · Mock' }
+      ]
+    },
+    {
+      slug: 'design-taste',
+      kicker: 'Design Taste',
+      title: '产品、界面和审美练习',
+      desc: '从具体界面、参考产品和真实使用感里打磨判断。',
+      status: 'Study',
+      files: [
+        { title: '极简页面里的密度和留白', meta: 'UI · Mock' },
+        { title: '设置页的信息架构练习', meta: 'Product · Mock' }
+      ]
+    }
+  ];
+
+  const projectItems = projects.map(project => ({
+    kicker: project.kind,
+    title: project.title,
+    desc: project.description,
+    status: project.stack[0] || 'Project'
+  }));
+
+  writePage('series', buildSeriesPage(seriesItems), '../');
+  writePage('projects', buildProjectsPage(projectItems), '../');
+  writePage('about', buildAboutPage(), '../');
+  seriesItems.forEach(series => {
+    writePage(`series/${series.slug}`, buildSeriesDetailPage(series, seriesItems), '../../');
+  });
+}
+
+function writePage(slug, html, prefix) {
+  mkdirSync(join(__dirname, `docs/${slug}`), { recursive: true });
+  writeFileSync(join(__dirname, `docs/${slug}/index.html`), applySharedAssets(html, prefix));
+}
+
+function buildPageShell({ title, description, slug, prefix = '../', bodyClass = 'section-page-body', content }) {
+  return `<!DOCTYPE html>
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${escapeHtml(title)} — ${escapeHtml(siteTitle)}</title>
+<meta name="description" content="${escapeHtml(description)}">
+<link rel="canonical" href="${siteUrl}/${slug}/">
+<meta property="og:title" content="${escapeHtml(title)} — ${escapeHtml(siteTitle)}">
+<meta property="og:description" content="${escapeHtml(description)}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="${siteUrl}/${slug}/">
+<meta property="og:site_name" content="${escapeHtml(config.shortTitle)}">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)">
+<script>
+  (() => {
+    const theme = localStorage.getItem('theme');
+    if (theme === 'dark' || theme === 'night') document.documentElement.setAttribute('data-theme', 'dark');
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Bungee+Shade&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="${escapeHtml(bodyClass)}">
+<header class="site-header">
+  <div class="header-brand">
+    <div class="header-title"><a href="${prefix}">Random Thoughts</a></div>
+    <button class="theme-toggle theme-icon" id="theme-toggle" type="button" aria-label="切换主题">🌙</button>
+  </div>
+  <nav class="header-nav" aria-label="站点导航">
+    <div class="nav-group nav-primary">
+      <a class="header-item" href="${prefix}series/">Series</a>
+      <a class="header-item" href="${prefix}projects/">Project</a>
+      <a class="header-item" href="${prefix}about/">About</a>
+    </div>
+  </nav>
+</header>
+
+${content}
+
+<footer class="site-footer">
+  <p class="cp">${escapeHtml(config.copyright)}</p>
+  <div class="socials">
+    <a href="${escapeHtml(config.githubUrl)}" aria-label="GitHub">GitHub</a>
+    <a href="${prefix}feed.xml" aria-label="RSS">RSS</a>
+  </div>
+</footer>
+</body>
+</html>
+`;
+}
+
+function buildSeriesPage(items) {
+  return buildPageShell({
+    title: 'Series',
+    description: '学习专栏列表。',
+    slug: 'series',
+    content: `<main class="site-wrap section-page" id="content">
+  <h1 class="section-title">Series</h1>
+  <div class="series-list">
+${items.map(item => `    <a class="series-row" href="${item.slug}/">
+      <span class="text-kicker">${escapeHtml(item.kicker)}</span>
+      <span>
+        <strong>${escapeHtml(item.title)}</strong>
+        <em>${escapeHtml(item.desc)}</em>
+      </span>
+      <span class="text-status">${escapeHtml(item.status)}</span>
+    </a>`).join('\n')}
+  </div>
+</main>`
+  });
+}
+
+function buildSeriesDetailPage(series, allSeries) {
+  return buildPageShell({
+    title: series.title,
+    description: series.desc,
+    slug: `series/${series.slug}`,
+    prefix: '../../',
+    content: `<main class="series-detail site-wrap section-page" id="content">
+  <aside class="series-toc" aria-label="系列目录">
+    <div class="toc-title">Series</div>
+${allSeries.map(item => `    <a href="../${item.slug}/"${item.slug === series.slug ? ' aria-current="page"' : ''}>${escapeHtml(item.kicker)}</a>`).join('\n')}
+  </aside>
+  <section class="series-files" aria-label="文件">
+    <h1 class="section-title">${escapeHtml(series.kicker)}</h1>
+    <p class="section-lead">${escapeHtml(series.desc)}</p>
+${series.files.map(file => `    <article class="file-row">
+      <h2>${escapeHtml(file.title)}</h2>
+      <span>${escapeHtml(file.meta)}</span>
+    </article>`).join('\n')}
+  </section>
+</main>`
+  });
+}
+
+function buildProjectsPage(items) {
+  return buildPageShell({
+    title: 'Project',
+    description: '自己做的项目。',
+    slug: 'projects',
+    content: `<main class="site-wrap section-page" id="content">
+  <h1 class="section-title">Project</h1>
+  <div class="project-grid">
+${items.map(item => `    <article class="project-tile">
+      <div class="project-kicker">${escapeHtml(item.kicker)}</div>
+      <h2>${escapeHtml(item.title)}</h2>
+      <p>${escapeHtml(item.desc)}</p>
+      <span>${escapeHtml(item.status)}</span>
+    </article>`).join('\n')}
+  </div>
+</main>`
+  });
+}
+
+function buildAboutPage() {
+  return buildPageShell({
+    title: 'About',
+    description: '关于雪安。',
+    slug: 'about',
+    bodyClass: 'about-page-body',
+    content: `<main class="site-wrap about-page" id="content">
+  <div class="about-portrait" aria-hidden="true">雪安</div>
+  <section class="about-copy">
+    <p>Hi, folks, I'm Xuean.</p>
+    <p>I live in Hangzhou and work on product, engineering, and AI delivery systems.</p>
+    <p>I am also a <a href="../">Blogger</a>, <a href="../series/">Learner</a>, and <a href="../projects/">Maker</a>.</p>
+    <p><a href="../projects/">Here</a> are some projects I have made.</p>
+  </section>
+</main>`
+  });
+}
+
 function buildFeed(items) {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
@@ -215,6 +411,9 @@ ${items.map(post => `    <item>
 function buildSitemap(items) {
   const urls = [
     { loc: `${siteUrl}/`, lastmod: items[0]?.isoDate || fmtIso(new Date()) },
+    { loc: `${siteUrl}/series/`, lastmod: items[0]?.isoDate || fmtIso(new Date()) },
+    { loc: `${siteUrl}/projects/`, lastmod: items[0]?.isoDate || fmtIso(new Date()) },
+    { loc: `${siteUrl}/about/`, lastmod: items[0]?.isoDate || fmtIso(new Date()) },
     ...items.map(post => ({ loc: post.url, lastmod: post.isoDate }))
   ];
 
