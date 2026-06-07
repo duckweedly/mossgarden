@@ -297,10 +297,6 @@ ${content}
 
 <footer class="site-footer">
   <p class="cp">${escapeHtml(config.copyright)}</p>
-  <div class="socials">
-    <a href="${escapeHtml(config.githubUrl)}" aria-label="GitHub">GitHub</a>
-    <a href="${prefix}feed.xml" aria-label="RSS">RSS</a>
-  </div>
 </footer>
 </body>
 </html>
