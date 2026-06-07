@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh" data-theme="night">
+<html lang="zh" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,8 +13,8 @@
 <meta property="og:url" content="https://xuean.wiki/posts/tiangong-traceable-project-facts/">
 <meta property="og:site_name" content="随想">
 <meta name="twitter:card" content="summary">
-<meta name="theme-color" content="#070b09" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#f4f0e4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -35,54 +35,46 @@
 <script>
   (() => {
     const theme = localStorage.getItem('theme');
-    if (theme === 'day' || theme === 'night') document.documentElement.setAttribute('data-theme', theme);
+    if (theme === 'dark' || theme === 'night') document.documentElement.setAttribute('data-theme', 'dark');
   })();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Bungee+Shade&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../../apple-touch-icon.svg">
 <link rel="manifest" href="../../manifest.webmanifest">
 <link rel="stylesheet" href="../../assets/site.css">
 </head>
-<body class="article-page">
-<a class="skip-link" href="#content">跳到正文</a>
-<div class="bg"></div>
-<div class="orb"></div>
-<div class="fireflies" id="fireflies" data-count="8"></div>
+<body class="article-page Chinese">
+<header class="topbar">
+  <a href="../../" class="brand" title="回到随想">
+    <span class="brand-text"><span class="brand-zh brand-name">随想</span><span class="brand-en brand-sub">Random Thoughts</span></span>
+  </a>
+  <div class="top-actions">
+    <nav class="nav-links" aria-label="站点导航">
+      <a href="../../">Home</a>
+      <a href="../../feed.xml">RSS</a>
+    </nav>
+    <button class="theme-toggle" id="theme-toggle" type="button">Dark</button>
+  </div>
+</header>
 
-<div class="layout">
-  <header class="topbar">
-    <a href="../../" class="brand" title="回到随想">
-      <span class="sprout" data-sprout></span>
-      <span class="brand-text"><span class="brand-name">随想</span><span class="brand-sub">Random Thoughts</span></span>
-    </a>
-    <div class="top-actions">
-      <nav class="nav-links" aria-label="站点导航">
-        <a href="../../#writing" data-i18n="navWriting">文字</a>
-        <a href="../../#projects" data-i18n="navProjects">造物</a>
-      </nav>
-      <button class="pill lang-toggle" id="lang-toggle" type="button" aria-label="Switch language">EN</button>
-      <button class="pill theme-toggle" id="theme-toggle" type="button" aria-label="切换主题" aria-pressed="false"><span class="knob"></span></button>
-    </div>
-  </header>
+<main class="article-shell" id="content">
+  <article>
+    <header class="article-header post-header">
+      <a class="back" href="../../">← Back</a>
+      <div class="article-meta">
+        <span class="article-tag post-tags">可信链路</span>
+        <span class="article-date post-date">2026 年 05 月 30 日</span>
+      </div>
+      <div class="article-title-wrap">
+        <h1 class="post-title">可信 AI 的底座不是模型，而是配置、BOM、到货、安装、KPI、回款都能追溯</h1>
+        <p class="article-description">对设备工程交付公司来说，可信 AI 不能只停在答案引用，而要落到项目事实链：配置、BOM、到货、安装、KPI、验收、回款都能追溯。</p>
+      </div>
+    </header>
 
-  <main class="article-shell" id="content">
-    <article>
-      <header class="article-header">
-        <a class="back" href="../../">← 随想</a>
-        <div class="article-meta">
-          <div class="article-tag">可信链路</div>
-          <div class="article-date">2026 年 05 月 30 日</div>
-        </div>
-        <div class="article-title-wrap">
-          <h1>可信 AI 的底座不是模型，而是配置、BOM、到货、安装、KPI、回款都能追溯</h1>
-          <p class="article-description">对设备工程交付公司来说，可信 AI 不能只停在答案引用，而要落到项目事实链：配置、BOM、到货、安装、KPI、验收、回款都能追溯。</p>
-        </div>
-      </header>
-
-      <div class="article-body">
+    <div class="article-body markdown-body post-content">
 <p>我之前写 AI 产品可信链路时，用过几个词：source、state、citation、action log。</p>
 <p>这些词在软件产品里有用，但如果直接拿到我们内部，可能会显得太 IT。对设备工程交付公司来说，可信链路不能只停在“答案有没有引用”。它必须落到更硬的东西上。</p>
 <p>我们的 source，不只是文档来源，而是合同、方案、配置清单、图纸、BOM、采购单、供应商承诺、到货记录、生产记录、发货单、现场安装日志、调试记录、KPI 测试数据、验收单、发票、回款记录。</p>
@@ -129,26 +121,19 @@
 <p>配置、BOM、采购、到货、生产、发货、安装、KPI、验收、回款。</p>
 <p>这十个词，比任何 Agent 口号都重要。</p>
 
-      </div>
-    </article>
-
-    <div class="article-end" aria-hidden="true">
-      <span class="rule"></span>
-      <span class="sprout" data-sprout></span>
-      <span class="rule"></span>
     </div>
+  </article>
 
-    <nav class="post-nav" aria-label="文章导航">
-      
-      
-      <a href="../tiangong-fde-delivery-system/" class="next-nav">
-        <div class="nav-label">下一篇</div>
-        <div>我们需要的 FDE，不是驻场救火的人，而是把合同变成交付系统的能力</div>
-      </a>
-      
-    </nav>
-  </main>
-</div>
+  <nav class="post-nav" aria-label="文章导航">
+    
+    
+    <a href="../tiangong-fde-delivery-system/" class="next-nav">
+      <div class="nav-label">下一篇</div>
+      <div>我们需要的 FDE，不是驻场救火的人，而是把合同变成交付系统的能力</div>
+    </a>
+    
+  </nav>
+</main>
 
 <footer class="site-footer">
   <p class="cp">© 2026 随想 Random Thoughts</p>

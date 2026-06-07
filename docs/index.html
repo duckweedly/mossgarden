@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh" data-theme="night">
+<html lang="zh" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,8 +13,8 @@
 <meta property="og:url" content="https://xuean.wiki/">
 <meta property="og:site_name" content="随想">
 <meta name="twitter:card" content="summary">
-<meta name="theme-color" content="#070b09" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#f4f0e4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -27,162 +27,63 @@
 <script>
   (() => {
     const theme = localStorage.getItem('theme');
-    if (theme === 'day' || theme === 'night') document.documentElement.setAttribute('data-theme', theme);
+    if (theme === 'dark' || theme === 'night') document.documentElement.setAttribute('data-theme', 'dark');
   })();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Bungee+Shade&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.svg">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body class="home-page">
-<a class="skip-link" href="#content">跳到正文</a>
-<div class="bg"></div>
-<div class="orb"></div>
-<div class="fireflies" id="fireflies" data-count="16"></div>
+<header class="site-header">
+  <div class="header-title"><a href="./">随想</a></div>
+  <div class="header-subtitle">Random Thoughts</div>
+  <nav class="header-items" aria-label="站点导航">
+    <a class="header-item" href="feed.xml">RSS</a>
+    <a class="header-item" href="https://github.com/duckweedly">GitHub</a>
+    <button class="theme-toggle header-item" id="theme-toggle" type="button">Dark</button>
+  </nav>
+</header>
 
-<div class="layout">
-  <main class="app" id="app" data-mode="idle">
-    <header class="topbar app-pad">
-      <a class="brand" href="./" title="重新开始">
-        <span class="sprout" data-sprout></span>
-        <span class="brand-text"><span class="brand-zh brand-name">随想</span><span class="brand-en brand-sub">Random Thoughts</span></span>
-      </a>
-      <div class="top-actions">
-        <nav class="nav-links" aria-label="站点导航">
-          <a href="#writing" data-panel="writing" data-i18n="navWriting">文字</a>
-          <a href="#projects" data-panel="projects" data-i18n="navProjects">造物</a>
-        </nav>
-        <button class="pill lang-toggle" id="lang-toggle" type="button" aria-label="Switch language">EN</button>
-        <button class="pill theme-toggle" id="theme-toggle" type="button" aria-label="切换主题" aria-pressed="false"><span class="knob"></span></button>
+<main class="site-wrap home-main" id="content">
+  <section class="home-intro" aria-label="简介">
+    <p>关于设计、工程，和一些没想清楚的问题。不定期更新。</p>
+  </section>
+
+  <section id="posts-list" class="posts-list" aria-label="文章列表">
+<!-- BEGIN_POSTS -->
+    <section class="posts-year" aria-labelledby="year-2026">
+      <h1 class="site-date-catalog" id="year-2026">2026</h1>
+      <div class="posts-line">
+        <span class="posts-date">Jun 02</span>
+        <span class="posts-title"><a href="posts/tiangong-ai-project-delivery-chain/">我们做 AI，不该先从聊天框开始，而该先从项目交付链开始</a></span>
+        <span class="posts-categories"><span class="posts-category">企业AI</span></span>
       </div>
-    </header>
-
-    <div class="stage" id="content">
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-mark" data-sprout></div>
-        <h1 class="hero-greet" id="hero-title" data-i18n="heroTitle">你好，我是「随想」。</h1>
-        <p class="hero-sub" data-i18n="heroLead">雪安把一部分自己，放进了这个对话框。问我点什么，或者从这里开始。</p>
-        <div class="hero-prompts" aria-label="探索入口">
-          <button class="hero-prompt" type="button" data-panel="writing">
-            <span class="hp-num">1</span><span class="hp-label" data-i18n="promptWriting">我最近写了哪些文章</span><span class="hp-arrow">→</span>
-          </button>
-          <button class="hero-prompt" type="button" data-panel="projects">
-            <span class="hp-num">2</span><span class="hp-label" data-i18n="promptProjects">最近在做什么</span><span class="hp-arrow">→</span>
-          </button>
-          <button class="hero-prompt" type="button" data-panel="about">
-            <span class="hp-num">3</span><span class="hp-label" data-i18n="promptAbout">介绍下你自己</span><span class="hp-arrow">→</span>
-          </button>
-        </div>
-      </section>
-
-      <section class="chat" aria-live="polite">
-        <div class="chat-inner" id="chat-inner"></div>
-      </section>
-    </div>
-
-    <footer class="composer">
-      <div class="composer-inner">
-        <div class="chips">
-          <button class="chip" type="button" data-query="文章">文章</button>
-          <button class="chip" type="button" data-query="项目">项目</button>
-          <button class="chip" type="button" data-query="介绍">介绍</button>
-        </div>
-        <div class="input-bar">
-          <textarea id="textarea" rows="1" placeholder="随便问点什么…" autocomplete="off"></textarea>
-          <button class="send-btn" id="send-btn" type="button" aria-label="send" disabled>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
-          </button>
-        </div>
-        <div class="composer-foot">
-          <button class="reset-btn" id="reset-btn" type="button">重新开始</button>
-        </div>
+      <div class="posts-line">
+        <span class="posts-date">Jun 01</span>
+        <span class="posts-title"><a href="posts/tiangong-supply-chain-dark-river/">不能只盯现场，BOM、采购、齐套、生产、发货才是更早暴露风险的地方</a></span>
+        <span class="posts-categories"><span class="posts-category">供应链</span></span>
       </div>
-    </footer>
-  </main>
-
-  <aside class="panel" id="panel" aria-hidden="true">
-    <div class="panel-top">
-      <button class="panel-back" id="panel-back" type="button">返回</button>
-      <div class="panel-kicker"><span class="pk-cn" id="panel-title">最近写下的</span><span class="pk-en" id="panel-sub">Writing</span></div>
-      <button class="panel-close" id="panel-close" type="button" aria-label="close">×</button>
-    </div>
-    <div class="panel-scroll" id="panel-scroll"></div>
-  </aside>
-</div>
-
-<div class="scrim" id="scrim"></div>
-
-<template id="writing-template">
-  <section id="writing" class="feed-list" aria-label="最近文章">
-      <!-- BEGIN_POSTS -->
-      <a class="feed-item" href="posts/tiangong-ai-project-delivery-chain/">
-        <div class="fmeta"><span class="ftag">企业AI</span><span>06 / 02</span></div>
-        <h3 class="ftitle">我们做 AI，不该先从聊天框开始，而该先从项目交付链开始</h3>
-        <p class="fexcerpt">对设备工程交付公司来说，AI 的第一步不是多一个聊天入口，而是让合同到回款的项目事实链先被系统化看见。</p>
-      </a>
-      <a class="feed-item" href="posts/tiangong-supply-chain-dark-river/">
-        <div class="fmeta"><span class="ftag">供应链</span><span>06 / 01</span></div>
-        <h3 class="ftitle">不能只盯现场，BOM、采购、齐套、生产、发货才是更早暴露风险的地方</h3>
-        <p class="fexcerpt">现场问题往往不是现场才产生的。对设备工程交付来说，更高杠杆的管理对象，是 BOM、采购、齐套、生产、发货这条前置链路。</p>
-      </a>
-      <a class="feed-item" href="posts/tiangong-fde-delivery-system/">
-        <div class="fmeta"><span class="ftag">FDE</span><span>05 / 31</span></div>
-        <h3 class="ftitle">我们需要的 FDE，不是驻场救火的人，而是把合同变成交付系统的能力</h3>
-        <p class="fexcerpt">在设备工程交付公司里，FDE 不该被理解成一个万能救火角色，而应是一种把客户场景、设备配置、供应链、现场和商务串起来的组织能力。</p>
-      </a>
-      <a class="feed-item" href="posts/tiangong-traceable-project-facts/">
-        <div class="fmeta"><span class="ftag">可信链路</span><span>05 / 30</span></div>
-        <h3 class="ftitle">可信 AI 的底座不是模型，而是配置、BOM、到货、安装、KPI、回款都能追溯</h3>
-        <p class="fexcerpt">对设备工程交付公司来说，可信 AI 不能只停在答案引用，而要落到项目事实链：配置、BOM、到货、安装、KPI、验收、回款都能追溯。</p>
-      </a>
+      <div class="posts-line">
+        <span class="posts-date">May 31</span>
+        <span class="posts-title"><a href="posts/tiangong-fde-delivery-system/">我们需要的 FDE，不是驻场救火的人，而是把合同变成交付系统的能力</a></span>
+        <span class="posts-categories"><span class="posts-category">FDE</span></span>
+      </div>
+      <div class="posts-line">
+        <span class="posts-date">May 30</span>
+        <span class="posts-title"><a href="posts/tiangong-traceable-project-facts/">可信 AI 的底座不是模型，而是配置、BOM、到货、安装、KPI、回款都能追溯</a></span>
+        <span class="posts-categories"><span class="posts-category">可信链路</span></span>
+      </div>
+    </section>
       <!-- END_POSTS -->
   </section>
-</template>
 
-<template id="projects-template">
-  <section id="projects" class="project-list" aria-label="项目">
-      <!-- BEGIN_PROJECTS -->
-      <article class="project-card">
-        <div class="project-head"><span class="project-kind">站点 · 数字花园</span><h3 class="project-name">Random Thoughts</h3></div>
-        <p class="project-desc">这座站点本身：从 Markdown 笔记生成静态页面、RSS、sitemap 和自定义域名部署。</p>
-        <p>保留手写静态站的轻量感，同时补上主题记忆、语言切换、RSS 全文和基础 SEO。</p>
-        <p>后续会继续把文章状态、归档和真实项目资产补齐。</p>
-        <div class="stack"><span>Static HTML</span><span>Markdown</span><span>Node.js</span><span>GitHub Pages</span></div>
-      </article>
-
-      <article class="project-card">
-        <div class="project-head"><span class="project-kind">写作 · 随想</span><h3 class="project-name">Notes in Progress</h3></div>
-        <p class="project-desc">一些还没完全想清楚的问题，先种下来，再慢慢修剪。</p>
-        <p>目前主要记录设计、工程、排版、动画和个人知识系统。</p>
-        <p>比起完整教程，更像是一组持续生长的观察。</p>
-        <div class="stack"><span>Design</span><span>Engineering</span><span>Writing</span></div>
-      </article>
-
-      <article class="project-card">
-        <div class="project-head"><span class="project-kind">进行中 · 工具</span><h3 class="project-name">Small Tools</h3></div>
-        <p class="project-desc">给自己用的小工具和实验，成熟后再公开整理。</p>
-        <p>这里先保留入口，不放虚假的在线体验或仓库链接。</p>
-        <p>等项目真的稳定，再补真实链接和图标。</p>
-        <div class="stack"><span>Prototype</span><span>Local-first</span><span>WIP</span></div>
-      </article>
-      <!-- END_PROJECTS -->
-  </section>
-</template>
-
-<template id="about-template">
-  <div class="about-copy">
-    <p>这里不是传统归档页，更像一个可以交谈的数字花园。文章是一些还在生长的问题，项目是把想法落到手上的小东西。</p>
-    <p>你可以从三条入口开始，也可以直接问。问不到的地方，就当它还没长出来。</p>
-    <div class="signoff-links">
-      <a href="https://github.com/duckweedly">GitHub</a>
-      <a href="feed.xml">RSS</a>
-    </div>
-  </div>
-</template>
+  <!-- BEGIN_PROJECTS --><!-- END_PROJECTS -->
+</main>
 
 <footer class="site-footer">
   <p class="cp">© 2026 随想 Random Thoughts</p>

@@ -51,10 +51,10 @@ if (existsSync(join(root, 'docs/index.html'))) {
   expect(home.includes('rel="icon"'), 'home must link favicon');
   expect(home.includes('rel="stylesheet" href="assets/site.css"'), 'home must use extracted stylesheet');
   expect(home.includes('src="assets/site.js"'), 'home must use extracted runtime script');
-  expect(home.includes('class="hero-prompt"'), 'home must include conversational prompt buttons');
-  expect(home.includes('id="panel"'), 'home must include the preview panel');
-  expect(home.includes('id="writing-template"'), 'home must include the writing panel template');
-  expect(home.includes('id="projects-template"'), 'home must include the projects panel template');
+  expect(home.includes('class="site-date-catalog"'), 'home must include year archive headings');
+  expect(home.includes('class="posts-line"'), 'home must include yinyang-style post rows');
+  expect(home.includes('class="posts-category"'), 'home must include bordered category labels');
+  expect(!home.includes('id="panel"'), 'home must not include the old preview panel');
 }
 
 for (const file of walk(docs).filter(path => path.endsWith('.html'))) {
@@ -84,21 +84,19 @@ if (existsSync(join(root, 'docs/manifest.webmanifest'))) {
 
 if (existsSync(join(root, 'docs/assets/site.css'))) {
   const css = read('docs/assets/site.css');
-  expect(css.includes('--bg-panel'), 'theme must include a panel surface token');
-  expect(css.includes('.hero-prompt'), 'home must style conversational prompt rows');
-  expect(css.includes('.input-bar'), 'home must style the composer input');
-  expect(css.includes('.panel.open'), 'preview panel must have an open state');
-  expect(css.includes('.feed-item'), 'writing feed items must be styled');
-  expect(css.includes('.project-card'), 'project panel cards must be styled');
+  expect(css.includes('--bg-color'), 'theme must include yinyang background token');
+  expect(css.includes('Bungee Shade'), 'theme must include yinyang title font');
+  expect(css.includes('.posts-line'), 'home must style yinyang post rows');
+  expect(css.includes('.posts-category'), 'home must style bordered category labels');
   expect(css.includes('.article-shell'), 'article pages must use the new reading shell');
-  expect(css.includes('@media (max-width: 980px)'), 'layout must include responsive panel behavior');
+  expect(css.includes('@media (max-width: 640px)'), 'layout must include responsive archive behavior');
 }
 
 if (existsSync(join(root, 'docs/assets/site.js'))) {
   const js = read('docs/assets/site.js');
-  expect(js.includes('openPanel'), 'runtime must open the preview panel');
-  expect(js.includes('routeQuery'), 'runtime must route composer prompts');
-  expect(js.includes('data-sprout'), 'runtime must hydrate sprout marks');
+  expect(js.includes('setTheme'), 'runtime must keep theme toggle working');
+  expect(!js.includes('openPanel'), 'runtime must not include old preview panel behavior');
+  expect(!js.includes('routeQuery'), 'runtime must not include old composer routing');
 }
 
 if (failures.length) {

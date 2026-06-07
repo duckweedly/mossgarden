@@ -69,13 +69,7 @@ posts.forEach((post, i) => {
 const indexPath = join(__dirname, 'docs/index.html');
 let idx = readFileSync(indexPath, 'utf8');
 
-const listHtml = posts.map(p =>
-  `      <a class="feed-item" href="posts/${p.slug}/">\n` +
-  `        <div class="fmeta"><span class="ftag">${escapeHtml(p.tag)}</span><span>${fmtShort(p.date)}</span></div>\n` +
-  `        <h3 class="ftitle">${escapeHtml(p.title)}</h3>\n` +
-  `        <p class="fexcerpt">${escapeHtml(p.description)}</p>\n` +
-  `      </a>`
-).join('\n');
+const listHtml = buildPostsList(posts);
 
 idx = updateHomeMetadata(idx)
   .replace(
@@ -88,7 +82,7 @@ idx = updateHomeMetadata(idx)
   )
   .replace(
     /<!-- BEGIN_PROJECTS -->[\s\S]*?<!-- END_PROJECTS -->/,
-    `<!-- BEGIN_PROJECTS -->\n${buildProjectsSection(projects)}\n      <!-- END_PROJECTS -->`
+    `<!-- BEGIN_PROJECTS --><!-- END_PROJECTS -->`
   );
 
 idx = applySharedAssets(applyCommonConfig(idx), '');
@@ -172,6 +166,30 @@ function buildProjectsSection(items) {
   return rows;
 }
 
+function buildPostsList(items) {
+  const groups = new Map();
+  items.forEach(post => {
+    const year = new Date(post.date).getFullYear();
+    if (!groups.has(year)) groups.set(year, []);
+    groups.get(year).push(post);
+  });
+
+  return Array.from(groups.entries()).map(([year, yearPosts]) => {
+    const rows = yearPosts.map(post =>
+      `      <div class="posts-line">\n` +
+      `        <span class="posts-date">${fmtArchiveDate(post.date)}</span>\n` +
+      `        <span class="posts-title"><a href="posts/${post.slug}/">${escapeHtml(post.title)}</a></span>\n` +
+      `        <span class="posts-categories"><span class="posts-category">${escapeHtml(post.tag)}</span></span>\n` +
+      `      </div>`
+    ).join('\n');
+
+    return `    <section class="posts-year" aria-labelledby="year-${year}">\n` +
+      `      <h1 class="site-date-catalog" id="year-${year}">${year}</h1>\n` +
+      `${rows}\n` +
+      `    </section>`;
+  }).join('\n\n');
+}
+
 function buildFeed(items) {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
@@ -226,8 +244,8 @@ function buildManifest() {
     start_url: '/',
     scope: '/',
     display: 'standalone',
-    background_color: '#070b09',
-    theme_color: '#6ee7a0',
+    background_color: '#ffffff',
+    theme_color: '#000000',
     icons: [
       { src: '/favicon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' },
       { src: '/apple-touch-icon.svg', sizes: '180x180', type: 'image/svg+xml', purpose: 'any' }
@@ -237,29 +255,25 @@ function buildManifest() {
 
 function buildFavicon() {
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="18" fill="#fbf6e9"/>
-  <path d="M32 54V30" fill="none" stroke="#5d6e34" stroke-width="4" stroke-linecap="round"/>
-  <path d="M32 34C20 32 14 22 14 16C25 16 32 24 32 34Z" fill="#9cb05c"/>
-  <path d="M32 38C44 36 50 27 50 21C39 21 32 28 32 38Z" fill="#7a8c4a"/>
-  <circle cx="32" cy="32" r="30" fill="none" stroke="#e3d7b8" stroke-width="2"/>
+  <rect width="64" height="64" fill="#fff"/>
+  <text x="32" y="42" text-anchor="middle" font-family="Georgia, serif" font-size="34" font-weight="700" fill="#000">R</text>
+  <rect x="6" y="6" width="52" height="52" fill="none" stroke="#482936" stroke-width="3"/>
 </svg>
 `;
 }
 
 function buildAppleTouchIcon() {
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
-  <rect width="180" height="180" rx="42" fill="#fbf6e9"/>
-  <circle cx="90" cy="90" r="72" fill="#f4ecd8" stroke="#e3d7b8" stroke-width="5"/>
-  <path d="M90 142V82" fill="none" stroke="#5d6e34" stroke-width="10" stroke-linecap="round"/>
-  <path d="M90 92C58 88 42 62 42 46C70 46 90 68 90 92Z" fill="#9cb05c"/>
-  <path d="M90 104C122 98 138 74 138 58C110 58 90 80 90 104Z" fill="#7a8c4a"/>
+  <rect width="180" height="180" fill="#fff"/>
+  <text x="90" y="117" text-anchor="middle" font-family="Georgia, serif" font-size="96" font-weight="700" fill="#000">R</text>
+  <rect x="18" y="18" width="144" height="144" fill="none" stroke="#482936" stroke-width="8"/>
 </svg>
 `;
 }
 
 function buildNotFoundPage() {
   return `<!DOCTYPE html>
-<html lang="zh" data-theme="day">
+<html lang="zh" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -271,25 +285,26 @@ function buildNotFoundPage() {
 <script>
   (() => {
     const theme = localStorage.getItem('theme');
-    if (theme === 'day' || theme === 'night') document.documentElement.setAttribute('data-theme', theme);
+    if (theme === 'dark' || theme === 'night') document.documentElement.setAttribute('data-theme', 'dark');
   })();
 </script>
 <style>
-  :root[data-theme="day"]{--bg:#f4ecd8;--paper:#fbf6e9;--ink:#4a3f2f;--soft:#7a6c54;--moss:#5d6e34;--line:rgba(93,110,52,.18)}
-  :root[data-theme="night"]{--bg:#141a13;--paper:#202a1d;--ink:#e8e4d4;--soft:#b0ac98;--moss:#a8c068;--line:rgba(143,168,90,.16)}
-  *{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--bg);color:var(--ink);font-family:Georgia,'Times New Roman',serif;padding:28px}
-  main{max-width:560px;background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:42px 36px;text-align:center}
-  .code{font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--moss);margin-bottom:18px}
-  h1{font-size:clamp(32px,8vw,56px);font-weight:400;letter-spacing:-.04em;line-height:1.05;margin:0 0 18px}
-  p{font-size:17px;line-height:1.8;color:var(--soft);margin:0 0 28px}
-  a{color:var(--moss);text-decoration:none;border-bottom:1px solid var(--line)}
+  :root{--bg:#fff;--ink:#000;--soft:#666;--border:#482936}
+  :root[data-theme="dark"]{--bg:#1a1a1a;--ink:#e0e0e0;--soft:#aaa;--border:#8b5a7a}
+  *{box-sizing:border-box}body{margin:0 20px;min-height:100vh;background:var(--bg);color:var(--ink);font-family:Georgia,'Times New Roman',serif}
+  main{max-width:800px;margin:0 auto;padding-top:32px}
+  main::after{content:"";display:block;width:100%;margin:10px 0 42px;border-width:2px;border-color:var(--border);border-style:solid none none}
+  .code{font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--soft);margin-bottom:18px}
+  h1{font-size:2rem;font-weight:600;line-height:1.35;margin:0 0 18px}
+  p{font-size:18px;line-height:1.8;color:var(--soft);margin:0 0 28px}
+  a{color:var(--ink);text-decoration:none}a:hover{font-weight:600;text-decoration:underline}
 </style>
 </head>
 <body>
 <main>
   <div class="code">404</div>
-  <h1>这页还没有长出来。</h1>
-  <p>也许是旧链接，也许是一颗还没发芽的种子。</p>
+  <h1>Not Found</h1>
+  <p>这个链接暂时没有对应的页面。</p>
   <a href="/">回到${escapeHtml(config.shortTitle)}</a>
 </main>
 </body>
@@ -324,6 +339,11 @@ function fmtShort(d) {
   const m = String(dt.getMonth() + 1).padStart(2, '0');
   const day = String(dt.getDate()).padStart(2, '0');
   return `${m} / ${day}`;
+}
+
+function fmtArchiveDate(d) {
+  const dt = new Date(d);
+  return dt.toLocaleDateString('en-US', { month: 'short', day: '2-digit', timeZone: 'UTC' });
 }
 
 function fmtIso(d) {

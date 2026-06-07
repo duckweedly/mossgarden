@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh" data-theme="night">
+<html lang="zh" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,8 +13,8 @@
 <meta property="og:url" content="https://xuean.wiki/posts/tiangong-fde-delivery-system/">
 <meta property="og:site_name" content="随想">
 <meta name="twitter:card" content="summary">
-<meta name="theme-color" content="#070b09" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#f4f0e4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -35,54 +35,46 @@
 <script>
   (() => {
     const theme = localStorage.getItem('theme');
-    if (theme === 'day' || theme === 'night') document.documentElement.setAttribute('data-theme', theme);
+    if (theme === 'dark' || theme === 'night') document.documentElement.setAttribute('data-theme', 'dark');
   })();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Bungee+Shade&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../../apple-touch-icon.svg">
 <link rel="manifest" href="../../manifest.webmanifest">
 <link rel="stylesheet" href="../../assets/site.css">
 </head>
-<body class="article-page">
-<a class="skip-link" href="#content">跳到正文</a>
-<div class="bg"></div>
-<div class="orb"></div>
-<div class="fireflies" id="fireflies" data-count="8"></div>
+<body class="article-page Chinese">
+<header class="topbar">
+  <a href="../../" class="brand" title="回到随想">
+    <span class="brand-text"><span class="brand-zh brand-name">随想</span><span class="brand-en brand-sub">Random Thoughts</span></span>
+  </a>
+  <div class="top-actions">
+    <nav class="nav-links" aria-label="站点导航">
+      <a href="../../">Home</a>
+      <a href="../../feed.xml">RSS</a>
+    </nav>
+    <button class="theme-toggle" id="theme-toggle" type="button">Dark</button>
+  </div>
+</header>
 
-<div class="layout">
-  <header class="topbar">
-    <a href="../../" class="brand" title="回到随想">
-      <span class="sprout" data-sprout></span>
-      <span class="brand-text"><span class="brand-name">随想</span><span class="brand-sub">Random Thoughts</span></span>
-    </a>
-    <div class="top-actions">
-      <nav class="nav-links" aria-label="站点导航">
-        <a href="../../#writing" data-i18n="navWriting">文字</a>
-        <a href="../../#projects" data-i18n="navProjects">造物</a>
-      </nav>
-      <button class="pill lang-toggle" id="lang-toggle" type="button" aria-label="Switch language">EN</button>
-      <button class="pill theme-toggle" id="theme-toggle" type="button" aria-label="切换主题" aria-pressed="false"><span class="knob"></span></button>
-    </div>
-  </header>
+<main class="article-shell" id="content">
+  <article>
+    <header class="article-header post-header">
+      <a class="back" href="../../">← Back</a>
+      <div class="article-meta">
+        <span class="article-tag post-tags">FDE</span>
+        <span class="article-date post-date">2026 年 05 月 31 日</span>
+      </div>
+      <div class="article-title-wrap">
+        <h1 class="post-title">我们需要的 FDE，不是驻场救火的人，而是把合同变成交付系统的能力</h1>
+        <p class="article-description">在设备工程交付公司里，FDE 不该被理解成一个万能救火角色，而应是一种把客户场景、设备配置、供应链、现场和商务串起来的组织能力。</p>
+      </div>
+    </header>
 
-  <main class="article-shell" id="content">
-    <article>
-      <header class="article-header">
-        <a class="back" href="../../">← 随想</a>
-        <div class="article-meta">
-          <div class="article-tag">FDE</div>
-          <div class="article-date">2026 年 05 月 31 日</div>
-        </div>
-        <div class="article-title-wrap">
-          <h1>我们需要的 FDE，不是驻场救火的人，而是把合同变成交付系统的能力</h1>
-          <p class="article-description">在设备工程交付公司里，FDE 不该被理解成一个万能救火角色，而应是一种把客户场景、设备配置、供应链、现场和商务串起来的组织能力。</p>
-        </div>
-      </header>
-
-      <div class="article-body">
+    <div class="article-body markdown-body post-content">
 <p>FDE 这个词最近很热，但如果放到我们的业务里，不能照搬硅谷语境。</p>
 <p>对软件公司来说，FDE 可能是把模型、Agent、数据和客户流程接起来的人。对我们来说，更准确的说法应该是：把合同、设计、供应链、现场、商务全部翻译成项目交付系统的能力。</p>
 <p>这不只是懂 AI。</p>
@@ -122,31 +114,24 @@
 <p>它应该是一种组织能力：把客户场景、设备配置、供应链齐套、现场安装和商务回款串成一个交付系统。</p>
 <p>如果 SCS 能成为这类人的工具，而不是又一个让他们填表的系统，我们的 AI 化才会有真正的根。</p>
 
-      </div>
-    </article>
-
-    <div class="article-end" aria-hidden="true">
-      <span class="rule"></span>
-      <span class="sprout" data-sprout></span>
-      <span class="rule"></span>
     </div>
+  </article>
 
-    <nav class="post-nav" aria-label="文章导航">
-      
-      <a href="../tiangong-traceable-project-facts/" class="prev-nav">
-        <div class="nav-label">上一篇</div>
-        <div>可信 AI 的底座不是模型，而是配置、BOM、到货、安装、KPI、回款都能追溯</div>
-      </a>
-      
-      
-      <a href="../tiangong-supply-chain-dark-river/" class="next-nav">
-        <div class="nav-label">下一篇</div>
-        <div>不能只盯现场，BOM、采购、齐套、生产、发货才是更早暴露风险的地方</div>
-      </a>
-      
-    </nav>
-  </main>
-</div>
+  <nav class="post-nav" aria-label="文章导航">
+    
+    <a href="../tiangong-traceable-project-facts/" class="prev-nav">
+      <div class="nav-label">上一篇</div>
+      <div>可信 AI 的底座不是模型，而是配置、BOM、到货、安装、KPI、回款都能追溯</div>
+    </a>
+    
+    
+    <a href="../tiangong-supply-chain-dark-river/" class="next-nav">
+      <div class="nav-label">下一篇</div>
+      <div>不能只盯现场，BOM、采购、齐套、生产、发货才是更早暴露风险的地方</div>
+    </a>
+    
+  </nav>
+</main>
 
 <footer class="site-footer">
   <p class="cp">© 2026 随想 Random Thoughts</p>

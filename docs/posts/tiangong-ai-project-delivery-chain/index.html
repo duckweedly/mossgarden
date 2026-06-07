@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh" data-theme="night">
+<html lang="zh" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,8 +13,8 @@
 <meta property="og:url" content="https://xuean.wiki/posts/tiangong-ai-project-delivery-chain/">
 <meta property="og:site_name" content="随想">
 <meta name="twitter:card" content="summary">
-<meta name="theme-color" content="#070b09" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#f4f0e4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -35,54 +35,46 @@
 <script>
   (() => {
     const theme = localStorage.getItem('theme');
-    if (theme === 'day' || theme === 'night') document.documentElement.setAttribute('data-theme', theme);
+    if (theme === 'dark' || theme === 'night') document.documentElement.setAttribute('data-theme', 'dark');
   })();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Bungee+Shade&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../../apple-touch-icon.svg">
 <link rel="manifest" href="../../manifest.webmanifest">
 <link rel="stylesheet" href="../../assets/site.css">
 </head>
-<body class="article-page">
-<a class="skip-link" href="#content">跳到正文</a>
-<div class="bg"></div>
-<div class="orb"></div>
-<div class="fireflies" id="fireflies" data-count="8"></div>
+<body class="article-page Chinese">
+<header class="topbar">
+  <a href="../../" class="brand" title="回到随想">
+    <span class="brand-text"><span class="brand-zh brand-name">随想</span><span class="brand-en brand-sub">Random Thoughts</span></span>
+  </a>
+  <div class="top-actions">
+    <nav class="nav-links" aria-label="站点导航">
+      <a href="../../">Home</a>
+      <a href="../../feed.xml">RSS</a>
+    </nav>
+    <button class="theme-toggle" id="theme-toggle" type="button">Dark</button>
+  </div>
+</header>
 
-<div class="layout">
-  <header class="topbar">
-    <a href="../../" class="brand" title="回到随想">
-      <span class="sprout" data-sprout></span>
-      <span class="brand-text"><span class="brand-name">随想</span><span class="brand-sub">Random Thoughts</span></span>
-    </a>
-    <div class="top-actions">
-      <nav class="nav-links" aria-label="站点导航">
-        <a href="../../#writing" data-i18n="navWriting">文字</a>
-        <a href="../../#projects" data-i18n="navProjects">造物</a>
-      </nav>
-      <button class="pill lang-toggle" id="lang-toggle" type="button" aria-label="Switch language">EN</button>
-      <button class="pill theme-toggle" id="theme-toggle" type="button" aria-label="切换主题" aria-pressed="false"><span class="knob"></span></button>
-    </div>
-  </header>
+<main class="article-shell" id="content">
+  <article>
+    <header class="article-header post-header">
+      <a class="back" href="../../">← Back</a>
+      <div class="article-meta">
+        <span class="article-tag post-tags">企业AI</span>
+        <span class="article-date post-date">2026 年 06 月 02 日</span>
+      </div>
+      <div class="article-title-wrap">
+        <h1 class="post-title">我们做 AI，不该先从聊天框开始，而该先从项目交付链开始</h1>
+        <p class="article-description">对设备工程交付公司来说，AI 的第一步不是多一个聊天入口，而是让合同到回款的项目事实链先被系统化看见。</p>
+      </div>
+    </header>
 
-  <main class="article-shell" id="content">
-    <article>
-      <header class="article-header">
-        <a class="back" href="../../">← 随想</a>
-        <div class="article-meta">
-          <div class="article-tag">企业AI</div>
-          <div class="article-date">2026 年 06 月 02 日</div>
-        </div>
-        <div class="article-title-wrap">
-          <h1>我们做 AI，不该先从聊天框开始，而该先从项目交付链开始</h1>
-          <p class="article-description">对设备工程交付公司来说，AI 的第一步不是多一个聊天入口，而是让合同到回款的项目事实链先被系统化看见。</p>
-        </div>
-      </header>
-
-      <div class="article-body">
+    <div class="article-body markdown-body post-content">
 <p>这两天我一直在重新想一个问题：如果我们谈企业 AI，到底是在谈一个“更聪明的工具”，还是在谈一套能改变项目交付方式的能力？</p>
 <p>如果是软件公司，大家很自然会从知识库、RAG、Copilot、Agent、工作流这些词开始。但放到我们自己的业务里，这套顺序很容易跑偏。</p>
 <p>我们不是一家纯 IT 软件公司。</p>
@@ -115,26 +107,19 @@
 <p>没有项目链路的 AI，只是会说话。</p>
 <p>有项目链路的 AI，才可能真正进入我们的业务。</p>
 
-      </div>
-    </article>
-
-    <div class="article-end" aria-hidden="true">
-      <span class="rule"></span>
-      <span class="sprout" data-sprout></span>
-      <span class="rule"></span>
     </div>
+  </article>
 
-    <nav class="post-nav" aria-label="文章导航">
-      
-      <a href="../tiangong-supply-chain-dark-river/" class="prev-nav">
-        <div class="nav-label">上一篇</div>
-        <div>不能只盯现场，BOM、采购、齐套、生产、发货才是更早暴露风险的地方</div>
-      </a>
-      
-      
-    </nav>
-  </main>
-</div>
+  <nav class="post-nav" aria-label="文章导航">
+    
+    <a href="../tiangong-supply-chain-dark-river/" class="prev-nav">
+      <div class="nav-label">上一篇</div>
+      <div>不能只盯现场，BOM、采购、齐套、生产、发货才是更早暴露风险的地方</div>
+    </a>
+    
+    
+  </nav>
+</main>
 
 <footer class="site-footer">
   <p class="cp">© 2026 随想 Random Thoughts</p>

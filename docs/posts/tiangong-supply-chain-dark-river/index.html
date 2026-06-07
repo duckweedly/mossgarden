@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh" data-theme="night">
+<html lang="zh" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,8 +13,8 @@
 <meta property="og:url" content="https://xuean.wiki/posts/tiangong-supply-chain-dark-river/">
 <meta property="og:site_name" content="随想">
 <meta name="twitter:card" content="summary">
-<meta name="theme-color" content="#070b09" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#f4f0e4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -35,54 +35,46 @@
 <script>
   (() => {
     const theme = localStorage.getItem('theme');
-    if (theme === 'day' || theme === 'night') document.documentElement.setAttribute('data-theme', theme);
+    if (theme === 'dark' || theme === 'night') document.documentElement.setAttribute('data-theme', 'dark');
   })();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Bungee+Shade&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../../apple-touch-icon.svg">
 <link rel="manifest" href="../../manifest.webmanifest">
 <link rel="stylesheet" href="../../assets/site.css">
 </head>
-<body class="article-page">
-<a class="skip-link" href="#content">跳到正文</a>
-<div class="bg"></div>
-<div class="orb"></div>
-<div class="fireflies" id="fireflies" data-count="8"></div>
+<body class="article-page Chinese">
+<header class="topbar">
+  <a href="../../" class="brand" title="回到随想">
+    <span class="brand-text"><span class="brand-zh brand-name">随想</span><span class="brand-en brand-sub">Random Thoughts</span></span>
+  </a>
+  <div class="top-actions">
+    <nav class="nav-links" aria-label="站点导航">
+      <a href="../../">Home</a>
+      <a href="../../feed.xml">RSS</a>
+    </nav>
+    <button class="theme-toggle" id="theme-toggle" type="button">Dark</button>
+  </div>
+</header>
 
-<div class="layout">
-  <header class="topbar">
-    <a href="../../" class="brand" title="回到随想">
-      <span class="sprout" data-sprout></span>
-      <span class="brand-text"><span class="brand-name">随想</span><span class="brand-sub">Random Thoughts</span></span>
-    </a>
-    <div class="top-actions">
-      <nav class="nav-links" aria-label="站点导航">
-        <a href="../../#writing" data-i18n="navWriting">文字</a>
-        <a href="../../#projects" data-i18n="navProjects">造物</a>
-      </nav>
-      <button class="pill lang-toggle" id="lang-toggle" type="button" aria-label="Switch language">EN</button>
-      <button class="pill theme-toggle" id="theme-toggle" type="button" aria-label="切换主题" aria-pressed="false"><span class="knob"></span></button>
-    </div>
-  </header>
+<main class="article-shell" id="content">
+  <article>
+    <header class="article-header post-header">
+      <a class="back" href="../../">← Back</a>
+      <div class="article-meta">
+        <span class="article-tag post-tags">供应链</span>
+        <span class="article-date post-date">2026 年 06 月 01 日</span>
+      </div>
+      <div class="article-title-wrap">
+        <h1 class="post-title">不能只盯现场，BOM、采购、齐套、生产、发货才是更早暴露风险的地方</h1>
+        <p class="article-description">现场问题往往不是现场才产生的。对设备工程交付来说，更高杠杆的管理对象，是 BOM、采购、齐套、生产、发货这条前置链路。</p>
+      </div>
+    </header>
 
-  <main class="article-shell" id="content">
-    <article>
-      <header class="article-header">
-        <a class="back" href="../../">← 随想</a>
-        <div class="article-meta">
-          <div class="article-tag">供应链</div>
-          <div class="article-date">2026 年 06 月 01 日</div>
-        </div>
-        <div class="article-title-wrap">
-          <h1>不能只盯现场，BOM、采购、齐套、生产、发货才是更早暴露风险的地方</h1>
-          <p class="article-description">现场问题往往不是现场才产生的。对设备工程交付来说，更高杠杆的管理对象，是 BOM、采购、齐套、生产、发货这条前置链路。</p>
-        </div>
-      </header>
-
-      <div class="article-body">
+    <div class="article-body markdown-body post-content">
 <p>如果只看项目最后的结果，我们很容易觉得最难的是现场。</p>
 <p>设备要运到客户仓库，要安装，要调试，要跑 KPI，要验收。海外项目还会叠加运输、人工、安装窗口、沟通成本和现场不可控因素。这些当然都难。</p>
 <p>但如果从经营视角往前追一层，很多现场问题并不是现场才产生的。</p>
@@ -119,31 +111,24 @@
 <p>少一次缺件。<br>少一次现场等待。<br>少一次加急采购。<br>少一次图纸版本错用。<br>少一次发货后才发现配套不齐。<br>少一次项目经理靠群消息到处追。<br>少一次利润被隐性损耗吃掉。</p>
 <p>这比任何“智能问答”都更接近我们的核心经营。</p>
 
-      </div>
-    </article>
-
-    <div class="article-end" aria-hidden="true">
-      <span class="rule"></span>
-      <span class="sprout" data-sprout></span>
-      <span class="rule"></span>
     </div>
+  </article>
 
-    <nav class="post-nav" aria-label="文章导航">
-      
-      <a href="../tiangong-fde-delivery-system/" class="prev-nav">
-        <div class="nav-label">上一篇</div>
-        <div>我们需要的 FDE，不是驻场救火的人，而是把合同变成交付系统的能力</div>
-      </a>
-      
-      
-      <a href="../tiangong-ai-project-delivery-chain/" class="next-nav">
-        <div class="nav-label">下一篇</div>
-        <div>我们做 AI，不该先从聊天框开始，而该先从项目交付链开始</div>
-      </a>
-      
-    </nav>
-  </main>
-</div>
+  <nav class="post-nav" aria-label="文章导航">
+    
+    <a href="../tiangong-fde-delivery-system/" class="prev-nav">
+      <div class="nav-label">上一篇</div>
+      <div>我们需要的 FDE，不是驻场救火的人，而是把合同变成交付系统的能力</div>
+    </a>
+    
+    
+    <a href="../tiangong-ai-project-delivery-chain/" class="next-nav">
+      <div class="nav-label">下一篇</div>
+      <div>我们做 AI，不该先从聊天框开始，而该先从项目交付链开始</div>
+    </a>
+    
+  </nav>
+</main>
 
 <footer class="site-footer">
   <p class="cp">© 2026 随想 Random Thoughts</p>
