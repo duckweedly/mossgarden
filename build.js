@@ -180,7 +180,7 @@ function buildPostsList(items) {
       `      <div class="posts-line">\n` +
       `        <span class="posts-date">${fmtArchiveDate(post.date)}</span>\n` +
       `        <span class="posts-title"><a href="posts/${post.slug}/">${escapeHtml(post.title)}</a></span>\n` +
-      `        <span class="posts-categories"><span class="posts-category">${escapeHtml(post.tag)}</span></span>\n` +
+      `        <span class="posts-categories"><span class="posts-category">tegene</span></span>\n` +
       `      </div>`
     ).join('\n');
 
@@ -278,17 +278,19 @@ function buildPageShell({ title, description, slug, prefix = '../', bodyClass = 
 </head>
 <body class="${escapeHtml(bodyClass)}">
 <header class="site-header">
-  <div class="header-brand">
-    <div class="header-title"><a href="${prefix}">Random Thoughts</a></div>
-    <button class="theme-toggle theme-icon" id="theme-toggle" type="button" aria-label="切换主题">🌙</button>
-  </div>
-  <nav class="header-nav" aria-label="站点导航">
-    <div class="nav-group nav-primary">
-      <a class="header-item" href="${prefix}series/">Series</a>
-      <a class="header-item" href="${prefix}projects/">Project</a>
-      <a class="header-item" href="${prefix}about/">About</a>
+  <div class="header-title"><a href="${prefix}">Random Thoughts</a></div>
+  <div class="header-items">
+    <div class="header-item-left">
+      <button class="theme-toggle theme-icon" id="theme-toggle" type="button" aria-label="切换主题"></button>
     </div>
-  </nav>
+    <nav class="header-nav" aria-label="站点导航">
+      <div class="nav-group nav-primary">
+        <a class="header-item" href="${prefix}series/">Series</a>
+        <a class="header-item" href="${prefix}projects/">Project</a>
+        <a class="header-item" href="${prefix}about/">About</a>
+      </div>
+    </nav>
+  </div>
 </header>
 
 ${content}

@@ -15,7 +15,7 @@
   function setTheme(theme) {
     root.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
-    if (themeToggle) themeToggle.textContent = theme === 'dark' ? '☀' : '🌙';
+    themeToggle?.setAttribute('aria-label', theme === 'dark' ? '切换到浅色' : '切换到暗色');
   }
 
   setTheme(currentTheme());

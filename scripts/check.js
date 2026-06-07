@@ -67,6 +67,9 @@ if (existsSync(join(root, 'docs/index.html'))) {
   expect(home.includes('class="site-date-catalog"'), 'home must include year archive headings');
   expect(home.includes('class="posts-line"'), 'home must include yinyang-style post rows');
   expect(home.includes('class="posts-category"'), 'home must include bordered category labels');
+  expect(home.includes('tegene'), 'home post category must render tegene');
+  expect(!home.includes('企业AI') && !home.includes('供应链') && !home.includes('可信链路'), 'home post categories must not render Chinese labels');
+  expect(home.includes('我们做 AI') && home.includes('不能只盯现场'), 'home post titles must keep original Chinese titles');
   expect(!home.includes('id="panel"'), 'home must not include the old preview panel');
 }
 
@@ -138,14 +141,15 @@ if (existsSync(join(root, 'docs/assets/site.css'))) {
   expect(css.includes('Bungee Shade'), 'theme must include yinyang title font');
   expect(css.includes('.site-header {'), 'theme must style yinyang header');
   expect(css.includes('color: var(--link-color);'), 'primary nav color must follow theme link color');
-  expect(css.includes('grid-template-columns: 140px minmax(0, 1fr) 150px'), 'posts must use wide yinyang list columns');
+  expect(css.includes('max-width: 800px'), 'layout must keep the original yinyang 800px column');
+  expect(css.includes('font-size: 2rem'), 'header and year scale must match original yinyang');
+  expect(css.includes('font-size: 1.2rem'), 'post rows must match original yinyang scale');
   expect(css.includes('.posts-category'), 'home must style bordered category labels');
-  expect(css.includes('min-width: 138px'), 'category labels must use fixed yinyang width');
-  expect(css.includes('font-size: clamp(46px, 5.3vw, 68px)'), 'home title must use large yinyang scale');
   expect(css.includes('.posts-line'), 'home must style yinyang post rows');
   expect(css.includes('.article-shell'), 'article pages must use the new reading shell');
   expect(css.includes('.series-detail'), 'theme must style split series detail pages');
   expect(css.includes('.project-tile'), 'theme must style rounded project cards');
+  expect(!css.includes('grid-template-columns: repeat(3'), 'project cards must not use the rough three-column layout');
   expect(css.includes('.about-portrait'), 'theme must style the about portrait');
   expect(css.includes('@media (max-width: 640px)'), 'layout must include responsive archive behavior');
 }
